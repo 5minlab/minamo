@@ -44,9 +44,11 @@ func main() {
 }
 
 func runBuild(c *Config) {
-	output, err := c.Execute()
+	output, buildTime, err := c.Execute()
 	if err != nil {
 		panic(err)
 	}
+
 	fmt.Println(output)
+	fmt.Println("BuildTime :", buildTime)
 }

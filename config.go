@@ -22,8 +22,9 @@ type BuildOptions struct {
 }
 
 type BuildConfig struct {
-	Target  string       `json:"target"`
-	Options BuildOptions `json:"options"`
+	TargetGroup string       `json:"targetGroup"`
+	Target      string       `json:"target"`
+	Options     BuildOptions `json:"options"`
 }
 
 type IdentificationConfig struct {
@@ -34,7 +35,6 @@ type IdentificationConfig struct {
 
 type VRDevicesConfig struct {
 	Enabled bool   `json:"enabled,string"`
-	Target  string `json:"target"`
 	Devices string `json:"devices"`
 }
 
@@ -121,7 +121,9 @@ func (c *Config) UnityFilePath() string {
 	return fp
 }
 
-func (c *Config) Execute() (string, error) {
+func (c *Config) Execute() (string, time.Duration, error) {
+	t1 := time.Now()
+
 	cmd := exec.Command(
 		c.UnityFilePath(),
 		"-quit",
@@ -138,8 +140,11 @@ func (c *Config) Execute() (string, error) {
 	cmd.Env = append(cmd.Env, "OUTPUT_PATH="+c.MakeBuildPath())
 
 	stdoutStderr, err := cmd.CombinedOutput()
+	t2 := time.Now()
+	dt := t2.Sub(t1)
+
 	if err != nil {
-		return "", err
+		return "", dt, err
 	}
-	return string(stdoutStderr), nil
+	return string(stdoutStderr), dt, nil
 }
