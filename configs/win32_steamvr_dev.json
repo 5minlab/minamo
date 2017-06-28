@@ -1,0 +1,29 @@
+{
+  "unityPath": "C:\\Program Files\\Unity-5.6.1p1",
+  "projectPath": "C:\\devel\\minamo\\UnityProject_Standalone",
+
+  "buildBasePath": "c:\\devel\\minamo",
+  "buildPath": "{{.ConfigName}}-{{.Year}}-{{.Month}}-{{.Day}}-{{.Platform}}/{{.ShortRevision}}.exe",
+
+  "method": "Assets.Minamo.Editor.Build.Execute",
+
+  "build": {
+    "targetGroup": "standalone",
+    "target": "windows",
+
+    "options": {
+      "development": true,
+      "allowDebugging": true
+    }
+  },
+
+  "defines": [
+    "HELLO_WORLD",
+    "PLATFORM_WIN32_STEAMVR"
+  ],
+
+  "vrDevices": {
+    "enabled": "true",
+    "devices": "OpenVR"
+  }
+}

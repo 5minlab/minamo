@@ -46,9 +46,11 @@ type KeystoreConfig struct {
 }
 
 type Config struct {
-	UnityPath   string `json:"unityPath"`
+	// absolute path
+	UnityPath string `json:"unityPath"`
+	// absolute path
 	ProjectPath string `json:"projectPath"`
-
+	// absolute path
 	BuildBasePath string `json:"buildBasePath"`
 	BuildPath     string `json:"buildPath"`
 

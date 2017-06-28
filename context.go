@@ -9,18 +9,9 @@ import (
 // reference
 // https://github.com/Chaser324/unity-build/wiki/Parameter-Details#basic-settings
 type OutputContext struct {
-	ConfigName    string
-	Revision      string
-	ShortRevision string
-
-	// yyyy
-	Year string
-	// MM
-	Month string
-	// dd
-	Day string
-	// hhmmss
-	Time string
+	ConfigName string
+	Revision   string
+	now        time.Time
 
 	// android/ios
 	PackageName string
@@ -32,21 +23,40 @@ type OutputContext struct {
 
 func NewOutputContext(c *Config, t time.Time) OutputContext {
 	return OutputContext{
-		ConfigName:    c.FileName,
-		Revision:      c.Revision,
-		ShortRevision: c.Revision[:7],
+		ConfigName: c.FileName,
+		Revision:   c.Revision,
+		now:        t,
 
 		PackageName: c.Identification.PackageName,
 		VersionName: c.Identification.VersionName,
 		VersionCode: c.Identification.VersionCode,
 
-		Year:  t.Format("2006"),
-		Month: t.Format("01"),
-		Day:   t.Format("02"),
-		Time:  t.Format("150405"),
-
 		Platform: c.Build.Target,
 	}
+}
+
+func (c *OutputContext) ShortRevision() string {
+	return c.Revision[:7]
+}
+
+// yyyy
+func (c *OutputContext) Year() string {
+	return c.now.Format("2006")
+}
+
+// MM
+func (c *OutputContext) Month() string {
+	return c.now.Format("01")
+}
+
+// dd
+func (c *OutputContext) Day() string {
+	return c.now.Format("02")
+}
+
+// hhmmss
+func (c *OutputContext) Time() string {
+	return c.now.Format("150405")
 }
 
 func (c *OutputContext) MakeStr(name, text string) string {
