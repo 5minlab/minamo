@@ -9,6 +9,8 @@ namespace Assets.Minamo.Editor {
         public const string KeyVersionName = "versionName";
         public const string KeyVersionCode = "versionCode";
 
+        public BuildTargetGroup targetGroup;
+
         // common
         string packageName;
         string versionName;
@@ -20,7 +22,9 @@ namespace Assets.Minamo.Editor {
         string ios_build;
 
         public IdentificationModifier() { }
-        public IdentificationModifier(IDictionary<string, string> map) {
+        public IdentificationModifier(BuildTargetGroup targetGroup, IDictionary<string, string> map) {
+            this.targetGroup = targetGroup;
+
             if (!map.TryGetValue(KeyPackageName, out packageName)) {
                 Debug.LogFormat("cannot find key : {0}", KeyPackageName);
             }
@@ -40,10 +44,11 @@ namespace Assets.Minamo.Editor {
             }
         }
 
-        public static IdentificationModifier Current() {
+        public static IdentificationModifier Current(BuildTargetGroup targetGroup) {
             return new IdentificationModifier()
             {
-                packageName = PlayerSettings.applicationIdentifier,
+                targetGroup = targetGroup,
+                packageName = PlayerSettings.GetApplicationIdentifier(targetGroup),
                 versionName = PlayerSettings.bundleVersion,
 
                 android_versionCode = PlayerSettings.Android.bundleVersionCode,
@@ -52,7 +57,7 @@ namespace Assets.Minamo.Editor {
         }
 
         public void Apply() {
-            PlayerSettings.applicationIdentifier = packageName;
+            PlayerSettings.SetApplicationIdentifier(targetGroup, packageName);
             PlayerSettings.bundleVersion = versionName;
 
             PlayerSettings.Android.bundleVersionCode = android_versionCode;

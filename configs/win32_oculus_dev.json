@@ -2,7 +2,7 @@
   "unityPath": "C:\\Program Files\\Unity-5.6.1p1",
   "projectPath": "C:\\devel\\minamo\\UnityProject_Standalone",
 
-  "buildBasePath": "c:\\devel\\minamo",
+  "buildBasePath": "c:\\devel\\minamo\\output",
   "buildPath": "{{.ConfigName}}-{{.Year}}-{{.Month}}-{{.Day}}-{{.Platform}}/{{.ShortRevision}}.exe",
 
   "method": "Assets.Minamo.Editor.Build.Execute",

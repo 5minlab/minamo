@@ -1,9 +1,9 @@
 {
   "unityPath": "C:\\Program Files\\Unity-5.6.1p1",
-  "projectPath": "C:\\devel\\minamo\\UnityProject",
+  "projectPath": "C:\\devel\\minamo\\UnityProject_Android",
 
-  "buildBasePath": "c:\\devel\\minamo",
-  "buildPath": "{{.ConfigName}}-{{.Year}}-{{.Month}}-{{.Day}}-{{.Platform}}/{{.ShortRevision}}.exe",
+  "buildBasePath": "c:\\devel\\minamo\\output",
+  "buildPath": "{{.ConfigName}}-{{.Year}}-{{.Month}}-{{.Day}}-{{.ShortRevision}}.apk",
 
   "method": "Assets.Minamo.Editor.Build.Execute",
 
@@ -31,5 +31,12 @@
   "androidSdk": {
     "min": 24,
     "target": 0
+  },
+
+  "keystore": {
+    "keystoreName": "",
+    "keystorePass": "",
+    "keyaliasName": "",
+    "keyaliasPass": ""
   }
 }

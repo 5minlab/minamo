@@ -56,8 +56,8 @@ namespace Assets.Minamo.Editor {
             }
 
             if(config.Identification != null) {
-                var m = new IdentificationModifier(config.Identification);
-                currModifiers.Add(IdentificationModifier.Current());
+                var m = new IdentificationModifier(targetGroup, config.Identification);
+                currModifiers.Add(IdentificationModifier.Current(targetGroup));
                 nextModifiers.Add(m);
             }
 
