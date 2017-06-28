@@ -1,0 +1,11 @@
+keystoreName
+user.keystore
+
+keystorePass
+asdf1234
+
+keyaliasName
+dev
+
+keyaliasPass
+zxcvasdf
