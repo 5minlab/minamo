@@ -1,6 +1,10 @@
 # http://blog.stablekernel.com/continuous-integration-for-unity-5-using-travisci
 
-language: objective-c
+language: go
+
+go:
+  - master
+
 osx_image: xcode8.1
 
 before_install:
@@ -9,7 +13,7 @@ before_install:
   - chmod a+x ./setup_proj.sh
 
 install:
-  - go get -u -v
+  - go get -u github.com/davecgh/go-spew/spew
   - ./scripts/install.sh
 
 script:
