@@ -46,11 +46,8 @@ type KeystoreConfig struct {
 }
 
 type Config struct {
-	// absolute path
-	UnityPath string `json:"unityPath"`
-	// absolute path
-	ProjectPath string `json:"projectPath"`
-	// absolute path
+	UnityPath     string `json:"unityPath"`
+	ProjectPath   string `json:"projectPath"`
 	BuildBasePath string `json:"buildBasePath"`
 	BuildPath     string `json:"buildPath"`
 
@@ -86,12 +83,7 @@ func loadConfig(configFp, logFp string) (Config, error) {
 	}
 
 	s.logFilePath = logFp
-
-	wd, err := os.Getwd()
-	if err != nil {
-		return Config{}, err
-	}
-	s.FilePath = filepath.Clean(filepath.Join(wd, configFp))
+	s.FilePath = makeAbsFilePath(configFp)
 
 	_, filename := filepath.Split(configFp)
 	s.FileName = strings.Split(filename, ".")[0]
@@ -109,22 +101,32 @@ func loadConfig(configFp, logFp string) (Config, error) {
 }
 
 func (c *Config) MakeBuildPath() string {
+	bp := makeAbsFilePath(c.BuildBasePath)
 	ctx := NewOutputContext(c, c.Now)
-	bp := ctx.MakeStr("buildPath", c.BuildPath)
-	return filepath.Join(c.BuildBasePath, bp)
+	fp := ctx.MakeStr("buildPath", c.BuildPath)
+	return filepath.Join(bp, fp)
 }
 
-func (c *Config) UnityFilePath() string {
-	filename := "Unity.exe"
+func (c *Config) MakeUnityPath() string {
+	// https://github.com/golang/go/blob/master/src/go/build/syslist.go
 	switch runtime.GOOS {
 	case "windows":
-		filename = "Unity.exe"
+		dir := makeAbsFilePath(c.UnityPath)
+		return filepath.Join(dir, "Editor", "Unity.exe")
+
+	case "darwin":
+		// /Applications/Unity/Unity.app/Contents/MacOS/Unity
+		// /Applications/Unity/Unity.app + Contents/MacOS/Unity
+		dir := makeAbsFilePath(c.UnityPath)
+		return filepath.Join(dir, "Contents", "MacOS", "Unity")
+
 	default:
 		panic("unknown platform:" + runtime.GOOS)
 	}
+}
 
-	fp := filepath.Join(c.UnityPath, "Editor", filename)
-	return fp
+func (c *Config) MakeProjectPath() string {
+	return makeAbsFilePath(c.ProjectPath)
 }
 
 func (c Config) Args() []string {
@@ -138,7 +140,7 @@ func (c Config) Args() []string {
 		"-nographics",
 		"-silent-crashes",
 		"-projectPath",
-		c.ProjectPath,
+		c.MakeProjectPath(),
 		"-executeMethod",
 		c.Method,
 	}
@@ -151,7 +153,7 @@ func (c Config) Args() []string {
 func (c *Config) Execute() (string, time.Duration, error) {
 	t1 := time.Now()
 	args := c.Args()
-	cmd := exec.Command(c.UnityFilePath(), args...)
+	cmd := exec.Command(c.MakeUnityPath(), args...)
 	cmd.Dir = c.ProjectPath
 
 	cmd.Env = os.Environ()

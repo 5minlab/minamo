@@ -34,6 +34,8 @@ func main() {
 	fmt.Println("BuildPath\t:", config.MakeBuildPath())
 	fmt.Println("ConfigPath\t:", config.FilePath)
 	fmt.Println("LogFilePath\t:", config.LogFilePath())
+	fmt.Println("UnityPath\t:", config.MakeUnityPath())
+	fmt.Println("ProjectPath\t:", config.MakeProjectPath())
 	fmt.Println("Args\t:", config.Args())
 
 	if usePrompt {
