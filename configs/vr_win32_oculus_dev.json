@@ -22,7 +22,7 @@
   ],
 
   "vrDevices": {
-    "enabled": "true",
+    "enabled": true,
     "devices": "Oculus"
   }
 }

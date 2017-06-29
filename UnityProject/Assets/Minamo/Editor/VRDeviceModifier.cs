@@ -1,47 +1,27 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 using UnityEditor;
 using UnityEditorInternal.VR;
-using UnityEngine;
 
 namespace Assets.Minamo.Editor {
     class VRDeviceModifier : IModifier {
-        public const string KeyDevices = "devices";
-        public const string KeyEnabled = "enabled";
-
         public const string DeviceOculus = "Oculus";
         public const string DeviceOpenVR = "OpenVR";
         public const string DeviceDaydream = "daydream";
         public const string DeviceCardboard = "cardboard";
 
+        readonly BuildTargetGroup targetGroup;
         public bool enabled;
-        BuildTargetGroup targetGroup;
         string[] devices = new string[] { };
 
-        public VRDeviceModifier() { }
-        public VRDeviceModifier(BuildTargetGroup targetGroup, IDictionary<string, string> map) {
+        public VRDeviceModifier(BuildTargetGroup targetGroup) {
             this.targetGroup = targetGroup;
+        }
 
-            string enabledStr;
-            if (map.TryGetValue(KeyEnabled, out enabledStr)) {
-                var s = enabledStr.ToLower();
-                if (s == "true") {
-                    enabled = true;
-                } else {
-                    enabled = false;
-                }
-            } else {
-                enabled = false;
-            }
+        public void Reload(AnyDictionary dict) {
+            enabled = dict.GetValue<bool>("enabled");
 
-
-            if (enabled) {
-                string deviceListStr;
-                if (!map.TryGetValue(KeyDevices, out deviceListStr)) {
-                    Debug.LogFormat("cannot find key : {0}", KeyDevices);
-                }
-                this.devices = deviceListStr.Split(',');
-            }
+            var deviceListStr = dict.GetValue<string>("devices");
+            this.devices = deviceListStr.Split(',');
         }
 
         public void Apply() {
@@ -52,9 +32,8 @@ namespace Assets.Minamo.Editor {
         public static VRDeviceModifier Current(BuildTargetGroup g) {
             var devices = VREditor.GetVREnabledDevicesOnTargetGroup(g);
             var enabled = VREditor.GetVREnabledOnTargetGroup(g);
-            return new VRDeviceModifier()
+            return new VRDeviceModifier(g)
             {
-                targetGroup = g,
                 devices = devices,
                 enabled = enabled,
             };

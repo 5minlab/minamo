@@ -1,15 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using UnityEditor;
-using UnityEngine;
 
 namespace Assets.Minamo.Editor {
     class PlayerBuildExecutor {
-        public const string KeyTarget = "target";
-        public const string KeyTargetGroup = "targetGroup";
-        public const string KeyOptions = "options";
-
-
         static BuildOptions GetOptions(Dictionary<string, object> map) {
             var opts = BuildOptions.None;
             foreach (var kv in map) {
@@ -27,32 +21,12 @@ namespace Assets.Minamo.Editor {
         public readonly BuildOptions Options = BuildOptions.None;
         readonly string[] scenes = new string[] { };
 
-        public PlayerBuildExecutor(Dictionary<string, object> map) {
-            if(map.ContainsKey(KeyTarget)) {
-                var s = map[KeyTarget] as string;
-                if (s != null) {
-                    Target = Helper.ToBuildTarget(s);
-                }
-            }
-            if(Target == BuildTarget.NoTarget) {
-                Debug.Log("undefined target?");
-            }
+        public PlayerBuildExecutor(AnyDictionary dict) {
+            Target = Helper.ToBuildTarget(dict.GetValue<string>("target"));
+            TargetGroup = Helper.ToBuildTargetGroup(dict.GetValue<string>("targetGroup"));
 
-
-            if (map.ContainsKey(KeyTargetGroup)) {
-                var s = map[KeyTargetGroup] as string;
-                if (s != null) {
-                    TargetGroup = Helper.ToBuildTargetGroup(s);
-                }
-            }
-
-
-            if (map.ContainsKey(KeyOptions)) {
-                var omap = map[KeyOptions] as Dictionary<string, object>;
-                if(omap != null) {
-                    Options = GetOptions(omap);
-                }
-            }
+            var optionmap = dict.GetDict("options");
+            Options = GetOptions(optionmap);
 
             this.scenes = GetScenes();
         }

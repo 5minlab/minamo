@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using UnityEditor;
-using UnityEngine;
 
 namespace Assets.Minamo.Editor {
     class KeystoreModifier : IModifier {
@@ -11,19 +10,17 @@ namespace Assets.Minamo.Editor {
         string keyaliasPass;
 
         public KeystoreModifier() { }
-        public KeystoreModifier(Dictionary<string, string> map) {
-            if(!map.TryGetValue("keystoreName", out keystoreName)) {
-                Debug.Log("cannot find keystore name");
-            }
-            if(!map.TryGetValue("keystorePass", out keystorePass)) {
-                Debug.Log("cannot find keystore pass");
-            }
-            if(!map.TryGetValue("keyaliasName", out keyaliasName)) {
-                Debug.Log("cannot find keyalias name");
-            }
-            if(!map.TryGetValue("keyaliasPass", out keyaliasPass)) {
-                Debug.Log("cannot find keyalias pass");
-            }
+
+        public void Reload(AnyDictionary dict) {
+            keystoreName = dict.GetValue<string>("keystoreName");
+            keystorePass = dict.GetValue<string>("keystorePass");
+            keyaliasName = dict.GetValue<string>("keyaliasName");
+            keyaliasPass = dict.GetValue<string>("keyaliasPass");
+        }
+
+        public KeystoreModifier(Dictionary<string, object> map) {
+            var dict = new AnyDictionary(map);
+
         }
 
         public static KeystoreModifier Current() {

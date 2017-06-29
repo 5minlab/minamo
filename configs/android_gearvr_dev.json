@@ -18,18 +18,18 @@
   },
 
   "identification": {
-    "packageName": "com.fiveminlab.minamo.daydream",
+    "packageName": "com.fiveminlab.minamo.gearvr",
     "versionName": "0.0.1",
     "versionCode": "1"
   },
 
   "vrDevices": {
-    "enabled": "true",
-    "devices": "daydream"
+    "enabled": true,
+    "devices": "Oculus"
   },
 
   "androidSdk": {
-    "min": 24,
+    "min": 19,
     "target": 0
   },
 

@@ -34,7 +34,7 @@ type IdentificationConfig struct {
 }
 
 type VRDevicesConfig struct {
-	Enabled bool   `json:"enabled,string"`
+	Enabled bool   `json:"enabled"`
 	Devices string `json:"devices"`
 }
 

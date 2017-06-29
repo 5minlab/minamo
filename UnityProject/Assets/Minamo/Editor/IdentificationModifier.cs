@@ -1,15 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 using UnityEditor;
 using UnityEngine;
 
 namespace Assets.Minamo.Editor {
     class IdentificationModifier : IModifier {
-        public const string KeyPackageName = "packageName";
-        public const string KeyVersionName = "versionName";
-        public const string KeyVersionCode = "versionCode";
-
-        public BuildTargetGroup targetGroup;
+        readonly BuildTargetGroup targetGroup;
 
         // common
         string packageName;
@@ -21,21 +16,14 @@ namespace Assets.Minamo.Editor {
         // ios
         string ios_build;
 
-        public IdentificationModifier() { }
-        public IdentificationModifier(BuildTargetGroup targetGroup, IDictionary<string, string> map) {
+        public IdentificationModifier(BuildTargetGroup targetGroup) {
             this.targetGroup = targetGroup;
+        }
 
-            if (!map.TryGetValue(KeyPackageName, out packageName)) {
-                Debug.LogFormat("cannot find key : {0}", KeyPackageName);
-            }
-            if (!map.TryGetValue(KeyVersionName, out versionName)) {
-                Debug.LogFormat("cannot find key : {0}", KeyVersionName);
-            }
-
-            string versionCode;
-            if (!map.TryGetValue(KeyVersionCode, out versionCode)) {
-                Debug.LogFormat("cannot find key : {0}", KeyVersionCode);
-            }
+        public void Reload(AnyDictionary dict) {
+            packageName = dict.GetValue<string>("packageName");
+            versionName = dict.GetValue<string>("versionName");
+            var versionCode = dict.GetValue<string>("versionCode");
 
             ios_build = versionCode;
             if (!int.TryParse(versionCode, out android_versionCode)) {
@@ -45,9 +33,8 @@ namespace Assets.Minamo.Editor {
         }
 
         public static IdentificationModifier Current(BuildTargetGroup targetGroup) {
-            return new IdentificationModifier()
+            return new IdentificationModifier(targetGroup)
             {
-                targetGroup = targetGroup,
                 packageName = PlayerSettings.GetApplicationIdentifier(targetGroup),
                 versionName = PlayerSettings.bundleVersion,
 
@@ -72,5 +59,7 @@ namespace Assets.Minamo.Editor {
             sb.AppendFormat("versionCode={0}, ", ios_build);
             return sb.ToString();
         }
+
+
     }
 }

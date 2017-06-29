@@ -1,13 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 using UnityEditor;
-using UnityEngine;
 
 namespace Assets.Minamo.Editor {
     class AndroidSdkVersionModifier : IModifier {
-        public const string KeyMin = "min";
-        public const string KeyTarget = "target";
-
         AndroidSdkVersions min;
         AndroidSdkVersions target;
 
@@ -16,20 +11,9 @@ namespace Assets.Minamo.Editor {
             PlayerSettings.Android.targetSdkVersion = target;
         }
 
-        public AndroidSdkVersionModifier() { }
-        public AndroidSdkVersionModifier(IDictionary<string, int> map) {
-            int minval;
-            if(!map.TryGetValue(KeyMin, out minval)) {
-                Debug.LogFormat("cannot find : {0}", KeyMin);
-            }
-
-            int targetval;
-            if(!map.TryGetValue(KeyTarget, out targetval)) {
-                Debug.LogFormat("cannot find : {0}", KeyTarget);
-            }
-
-            min = ConvertVersion(minval);
-            target = ConvertVersion(targetval);
+        public void Reload(AnyDictionary dict) {
+            min = ConvertVersion(dict.GetValue<int>("min"));
+            target = ConvertVersion(dict.GetValue<int>("target"));
         }
 
         public static AndroidSdkVersionModifier Current() {

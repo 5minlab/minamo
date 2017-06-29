@@ -1,5 +1,5 @@
 {
-  "unityPath": "/Applications/Unity/Unity.app",
+  "unityPath": "C:\\Program Files\\Unity-5.6.1p1",
   "projectPath": "./UnityProject_Standalone",
 
   "buildBasePath": "./output",
@@ -23,7 +23,7 @@
   ],
 
   "vrDevices": {
-    "enabled": "true",
+    "enabled": true,
     "devices": "OpenVR"
   }
 }

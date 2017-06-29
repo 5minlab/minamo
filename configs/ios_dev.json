@@ -1,9 +1,9 @@
 {
-  "unityPath": "C:\\Program Files\\Unity-5.6.1p1",
+  "unityPath": "/Applications/Unity/Unity.app",
   "projectPath": "./UnityProject_iOS",
 
   "buildBasePath": "./output",
-  "buildPath": "{{.ConfigName}}-{{.Year}}-{{.Month}}-{{.Day}}-{{.ShortRevision}}",
+  "buildPath": "{{.ConfigName}}-{{.Year}}-{{.Month}}-{{.Day}}-{{.ShortRevision}}.ipa",
 
   "method": "Assets.Minamo.Editor.Build.Execute",
 
@@ -24,7 +24,7 @@
   },
 
   "vrDevices": {
-    "enabled": "false",
+    "enabled": false,
     "devices": ""
   }
 }

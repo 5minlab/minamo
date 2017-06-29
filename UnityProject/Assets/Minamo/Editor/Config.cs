@@ -3,128 +3,42 @@ using TinyJson;
 
 namespace Assets.Minamo.Editor {
     public class Config {
-        readonly Dictionary<string, object> root;
-        public Dictionary<string, object> Root { get { return root; } }
+        readonly AnyDictionary root;
+        public AnyDictionary Root { get { return root; } }
 
-        const string Key_AndroidSDK = "androidSdk";
-        const string Key_Identification = "identification";
-        const string Key_VRDevices = "vrDevices";
-        const string Key_Keystore = "keystore";
-        const string Key_Build = "build";
-        const string Key_Defines = "defines";
-
-        public Dictionary<string, int> AndroidSDK
+        public AnyDictionary AndroidSDK
         {
-            get
-            {
-                Dictionary<string, int> dat;
-                TryFindSubRoot(Key_AndroidSDK, out dat);
-                return dat;
-            }
+            get { return new AnyDictionary(root.GetDict("androidSdk")); }
         }
 
-        public Dictionary<string, string> Identification
+        public AnyDictionary Identification
         {
-            get
-            {
-                Dictionary<string, string> dat;
-                TryFindSubRoot(Key_Identification, out dat);
-                return dat;
-            }
+            get { return new AnyDictionary(root.GetDict("identification")); }
         }
 
-        public Dictionary<string, string> VRDevices
+        public AnyDictionary VRDevices
         {
-            get
-            {
-                Dictionary<string, string> dat;
-                TryFindSubRoot(Key_VRDevices, out dat);
-                return dat;
-            }
+            get { return new AnyDictionary(root.GetDict("vrDevices")); }
         }
 
-        public Dictionary<string, string> Keystore
+        public AnyDictionary Keystore
         {
-            get
-            {
-                Dictionary<string, string> dat;
-                TryFindSubRoot(Key_Keystore, out dat);
-                return dat;
-            }
+            get { return new AnyDictionary(root.GetDict("keystore")); }
         }
 
-        public Dictionary<string, object> Build
+        public AnyDictionary Build
         {
-            get
-            {
-                Dictionary<string, object> dat;
-                if(TryFindSubRoot(Key_Build, out dat)) {
-                    return dat;
-                }
-                return new Dictionary<string, object>();
-            }
+            get { return new AnyDictionary(root.GetDict("build")); }
         }
 
-        public string[] Defines
+        public AnyDictionary Defines
         {
-            get
-            {
-                string[] dat;
-                if(TryFindSubRoot(Key_Defines, out dat)) {
-                    return dat;
-                }
-                return null;
-            }
+            get { return new AnyDictionary(root.GetList("defines")); }
         }
 
         public Config(string jsontext) {
-            root = jsontext.FromJson<object>() as Dictionary<string, object>;
-        }
-
-        bool TryFindSubRoot<T>(string key, out Dictionary<string, T> dat) {
-            if(!root.ContainsKey(key)) {
-                dat = null;
-                return false;
-            }
-
-            var dict = root[key] as Dictionary<string, object>;
-            if (dict == null) {
-                dat = null;
-                return false;
-            }
-
-            dat = new Dictionary<string, T>();
-            foreach (var kv in dict) {
-                if(typeof(T).IsAssignableFrom(kv.Value.GetType())) {
-                    dat[kv.Key] = (T)kv.Value;
-                }
-            }
-            return true;
-        }
-
-        bool TryFindSubRoot(string key, out string[] data) {
-            if (!root.ContainsKey(key)) {
-                data = null;
-                return false;
-            }
-
-            var arr = root[key] as List<object>;
-            if (arr == null) {
-                data = null;
-                return false;
-            }
-
-            var list = new List<string>();
-            foreach(var el in arr) {
-                if(el == null) { continue; }
-                if(typeof(string).IsAssignableFrom(el.GetType())) {
-                    list.Add((string)el);
-                }
-            }
-            data = list.ToArray();
-            return true;
+            var d = jsontext.FromJson<object>() as Dictionary<string, object>;
+            root = new AnyDictionary(d);
         }
     }
-
-
 }

@@ -1,5 +1,5 @@
 {
-  "unityPath": "C:\\Program Files\\Unity-5.6.1p1",
+  "unityPath": "/Applications/Unity/Unity.app",
   "projectPath": "./UnityProject_Android",
 
   "buildBasePath": "./output",
@@ -12,8 +12,8 @@
     "target": "android",
 
     "options": {
-      "development": true,
-      "allowDebugging": true
+      "development": false,
+      "allowDebugging": false
     }
   },
 
@@ -24,7 +24,7 @@
   },
 
   "vrDevices": {
-    "enabled": "true",
+    "enabled": true,
     "devices": "Oculus"
   },
 
@@ -34,9 +34,9 @@
   },
 
   "keystore": {
-    "keystoreName": "",
-    "keystorePass": "",
-    "keyaliasName": "",
-    "keyaliasPass": ""
+    "keystoreName": "C:/devel/minamo/UnitySecret/user.keystore",
+    "keystorePass": "asdf1234",
+    "keyaliasName": "dev",
+    "keyaliasPass": "zxcvasdf"
   }
 }

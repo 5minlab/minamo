@@ -49,33 +49,38 @@ namespace Assets.Minamo.Editor {
             var executor = new PlayerBuildExecutor(config.Build);
             var targetGroup = executor.TargetGroup;
 
-            if (config.AndroidSDK != null) {
-                var m = new AndroidSdkVersionModifier(config.AndroidSDK);
+            if (config.AndroidSDK.Count > 0) {
+                var m = new AndroidSdkVersionModifier();
+                m.Reload(config.AndroidSDK);
                 currModifiers.Add(AndroidSdkVersionModifier.Current());
                 nextModifiers.Add(m);
             }
 
-            if(config.Identification != null) {
-                var m = new IdentificationModifier(targetGroup, config.Identification);
+            if(config.Identification.Count > 0) {
+                var m = new IdentificationModifier(targetGroup);
+                m.Reload(config.Identification);
                 currModifiers.Add(IdentificationModifier.Current(targetGroup));
                 nextModifiers.Add(m);
             }
 
 
-            if(config.VRDevices != null) {
-                var m = new VRDeviceModifier(targetGroup, config.VRDevices);
+            if(config.VRDevices.Count > 0) {
+                var m = new VRDeviceModifier(targetGroup);
+                m.Reload(config.VRDevices);
                 currModifiers.Add(VRDeviceModifier.Current(targetGroup));
                 nextModifiers.Add(m);
             }
 
-            if(config.Keystore != null) {
-                var m = new KeystoreModifier(config.Keystore);
+            if(config.Keystore.Count > 0) {
+                var m = new KeystoreModifier();
+                m.Reload(config.Keystore);
                 currModifiers.Add(KeystoreModifier.Current());
                 nextModifiers.Add(m);
             }
 
-            if(config.Defines != null) {
-                var m = new DefineSymbolModifier(targetGroup, config.Defines);
+            if(config.Defines.Count > 0) {
+                var m = new DefineSymbolModifier(targetGroup);
+                m.Reload(config.Defines);
                 currModifiers.Add(DefineSymbolModifier.Current(targetGroup));
                 nextModifiers.Add(m);
             }
