@@ -1,9 +1,9 @@
 #!/bin/bash
 
-$BASE_PROJ_DIR=UnityProject
-$ANDROID_PROJ_DIR=UnityProject_Android
-$IOS_PROJ_DIR=UnityProject_iOS
-$STANDALONE_PROJ_DIR=UnityProject_Standalone
+BASE_PROJ_DIR="UnityProject"
+ANDROID_PROJ_DIR="UnityProject_Android"
+IOS_PROJ_DIR="UnityProject_iOS"
+STANDALONE_PROJ_DIR="UnityProject_Standalone"
 
 mkdir $ANDROID_PROJ_DIR
 ln -s $BASE_PROJ_DIR/Assets $ANDROID_PROJ_DIR/Assets
