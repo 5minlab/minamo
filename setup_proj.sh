@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASE_PROJ_DIR="UnityProject"
+BASE_PROJ_DIR="$(pwd)/UnityProject"
 ANDROID_PROJ_DIR="UnityProject_Android"
 IOS_PROJ_DIR="UnityProject_iOS"
 STANDALONE_PROJ_DIR="UnityProject_Standalone"
