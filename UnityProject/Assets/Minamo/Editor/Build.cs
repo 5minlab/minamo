@@ -29,10 +29,14 @@ namespace Assets.Minamo.Editor {
             CreateModifiers(config, out currModifiers, out nextModifiers);
 
             foreach (var m in nextModifiers) {
+                var tokens = m.GetType().ToString().Split('.');
+                var name = tokens[tokens.Length - 1];
+                Debug.LogFormat("[MinamoLog] {0}: {1}", name, m.GetConfigText());
                 m.Apply();
             }
 
             var executor = new PlayerBuildExecutor(config.Build);
+            Debug.LogFormat("[MinamoLog] {0}: {1}", "PlayerBuildExecutor", executor.GetConfigText());
             executor.Build(outputFilePath);
 
             // restore

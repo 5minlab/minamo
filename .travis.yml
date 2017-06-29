@@ -13,20 +13,20 @@ before_install:
 
 install:
   - go get -u github.com/davecgh/go-spew/spew
-  - cd scripts && ./install_unity.sh || cd -
+  - cd scripts; ./install_unity.sh; cd -
 
 script:
   - go build
   - ./setup_proj.sh
 
   # standalone windows
-  - cd scripts && ./install_standalone_win.sh || cd -
+  - cd scripts; ./install_standalone_win.sh; cd -
   - ./scripts/build_standalone_win_dev.sh
   - ./scripts/build_vr_win32_steamvr_dev.sh
   - ./scripts/build_vr_win32_oculus_dev.sh
 
   # ios
-  - cd scripts && ./install_ios.sh || cd -
+  - cd scripts; ./install_ios.sh; cd -
   - ./scripts/build_ios.sh
 
   # show build output

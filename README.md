@@ -14,7 +14,7 @@ Command-line based unity project build script
 dump configure file
 
 ```sh
-minamo.exe -cmd=dump -config=./configs/win32_steamvr_dev.json
+minamo.exe -cmd=dump -config=./configs_dev/local.json
 ```
 
 ```
@@ -76,7 +76,7 @@ Args    : [-quit -batchmode -nographics -silent-crashes -projectPath C:\Users\ha
 show specific field. for scripting.
 
 ```sh
-minamo.exe -cmd=show -config=./configs/win32_steamvr_dev.json -field=build_path
+minamo.exe -cmd=show -config=./configs_dev/local.json -field=build_path
 ```
 
 ```
@@ -100,7 +100,7 @@ C:\Users\haruna\go\src\github.com\5minlab\minamo\UnityProject_Standalone
 run build
 
 ```sh
-minamo.exe -cmd=build -config=./configs/win32_steamvr_dev.json -prompt=false -log=./unity.log
+minamo.exe -cmd=build -config=./configs_dev/local.json -prompt=false -log=./unity.log
 ```
 
 * parameters
