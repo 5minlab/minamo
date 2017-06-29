@@ -120,3 +120,16 @@ minamo.exe -cmd=build -config=./configs/win32_steamvr_dev.json -prompt=false -lo
 
 ## config file
 see `configs`, `configs_travis-ci`
+
+## Development
+
+use symbolic link to clone project directory.
+[Fast Platform Switching in Unity](http://www.cliffordroche.ca/fast-platform-switching-in-unity/)
+
+```sh
+# windows
+./setup_proj.bat
+
+# osx
+./setup_proj.sh
+```

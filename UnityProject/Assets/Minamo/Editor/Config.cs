@@ -116,6 +116,7 @@ namespace Assets.Minamo.Editor {
 
             var list = new List<string>();
             foreach(var el in arr) {
+                if(el == null) { continue; }
                 if(typeof(string).IsAssignableFrom(el.GetType())) {
                     list.Add((string)el);
                 }
@@ -124,4 +125,6 @@ namespace Assets.Minamo.Editor {
             return true;
         }
     }
+
+
 }
