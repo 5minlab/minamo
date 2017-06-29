@@ -1,13 +1,13 @@
 # http://blog.stablekernel.com/continuous-integration-for-unity-5-using-travisci
+# https://docs.travis-ci.com/user/osx-ci-environment/
 
-language: go
+sudo: required
 
-go:
-  - master
-
-osx_image: xcode8.1
+os: osx
+osx_image: xcode8.3
 
 before_install:
+  - go version
   - chmod a+x ./scripts/install.sh
   - chmod a+x ./scripts/build.sh
   - chmod a+x ./setup_proj.sh
