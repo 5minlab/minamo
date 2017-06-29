@@ -1,0 +1,42 @@
+{
+  "unityPath": "/Applications/Unity/Unity.app",
+  "projectPath": "./UnityProject_Android",
+
+  "buildBasePath": "./output",
+  "buildPath": "{{.ConfigName}}-{{.Year}}-{{.Month}}-{{.Day}}-{{.ShortRevision}}.apk",
+
+  "method": "Assets.Minamo.Editor.Build.Execute",
+
+  "build": {
+    "targetGroup": "android",
+    "target": "android",
+
+    "options": {
+      "development": false,
+      "allowDebugging": false
+    }
+  },
+
+  "identification": {
+    "packageName": "com.fiveminlab.minamo.gearvr",
+    "versionName": "0.0.1",
+    "versionCode": "1"
+  },
+
+  "vrDevices": {
+    "enabled": "true",
+    "devices": "Oculus"
+  },
+
+  "androidSdk": {
+    "min": 19,
+    "target": 0
+  },
+
+  "keystore": {
+    "keystoreName": "C:/devel/minamo/UnitySecret/user.keystore",
+    "keystorePass": "asdf1234",
+    "keyaliasName": "dev",
+    "keyaliasPass": "zxcvasdf"
+  }
+}

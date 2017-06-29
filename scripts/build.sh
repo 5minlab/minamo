@@ -4,8 +4,6 @@
 
 echo 'Builds - standalone'
 ./minamo -cmd=build -config=./config_travis-ci/standalone_win_dev.json -prompt=false -log=./unity.log
-./minamo -cmd=build -config=./config_travis-ci/standalone_osx_dev.json -prompt=false -log=./unity.log
-./minamo -cmd=build -config=./config_travis-ci/standalone_linux_dev.json -prompt=false -log=./unity.log
 
 echo 'Builds - VR win32'
 ./minamo -cmd=build -config=./config_travis-ci/vr_win32_steamvr_dev.json -prompt=false -log=./unity.log

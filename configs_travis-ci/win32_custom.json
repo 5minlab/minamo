@@ -1,0 +1,7 @@
+{
+  "method": "Assets.Editor.BuildScript.CustomBuild",
+
+  "vrDevices": {
+    "enabled": "false"
+  }
+}

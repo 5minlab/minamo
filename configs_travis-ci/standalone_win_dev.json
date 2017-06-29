@@ -1,0 +1,24 @@
+{
+  "unityPath": "/Applications/Unity/Unity.app",
+  "projectPath": "./UnityProject_Standalone",
+
+  "buildBasePath": "./output",
+  "buildPath": "{{.ConfigName}}-{{.Year}}-{{.Month}}-{{.Day}}-{{.Platform}}/{{.ShortRevision}}.exe",
+
+  "method": "Assets.Minamo.Editor.Build.Execute",
+
+  "build": {
+    "targetGroup": "standalone",
+    "target": "windows",
+
+    "options": {
+      "development": true,
+      "allowDebugging": true
+    }
+  },
+
+  "vrDevices": {
+    "enabled": "false",
+    "devices": ""
+  }
+}

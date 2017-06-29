@@ -1,0 +1,30 @@
+{
+  "unityPath": "/Applications/Unity/Unity.app",
+  "projectPath": "./UnityProject_iOS",
+
+  "buildBasePath": "./output",
+  "buildPath": "{{.ConfigName}}-{{.Year}}-{{.Month}}-{{.Day}}-{{.ShortRevision}}.ipa",
+
+  "method": "Assets.Minamo.Editor.Build.Execute",
+
+  "build": {
+    "targetGroup": "ios",
+    "target": "ios",
+
+    "options": {
+      "development": true,
+      "allowDebugging": true
+    }
+  },
+
+  "identification": {
+    "packageName": "com.fiveminlab.minamo.ios",
+    "versionName": "0.0.1",
+    "versionCode": "1"
+  },
+
+  "vrDevices": {
+    "enabled": "false",
+    "devices": ""
+  }
+}
