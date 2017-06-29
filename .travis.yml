@@ -8,18 +8,30 @@ osx_image: xcode8.3
 
 before_install:
   - go version
-  - chmod a+x ./scripts/install.sh
-  - chmod a+x ./scripts/build.sh
+  - chmod a+x ./scripts/*.sh
   - chmod a+x ./setup_proj.sh
 
 install:
   - go get -u github.com/davecgh/go-spew/spew
-  - ./scripts/install.sh
+  - ./scripts/install_unity.sh
 
 script:
   - go build
   - ./setup_proj.sh
-  - ./scripts/build.sh
+
+  # standalone windows
+  - ./scripts/install_standalone_win.sh
+  - ./scripts/build_standalone_win_dev.sh
+  - ./scripts/build_vr_win32_steamvr_dev.sh
+  - ./scripts/build_vr_win32_oculus_dev.sh
+
+  # ios
+  - ./scripts/install_ios.sh
+  - ./scripts/build_ios.sh
+
+  # show build output
+  - ls -al ./output
+
 
 notifications:
   email: false
