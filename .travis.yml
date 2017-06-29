@@ -25,10 +25,6 @@ script:
   - ./scripts/build_vr_win32_steamvr_dev.sh
   - ./scripts/build_vr_win32_oculus_dev.sh
 
-  # ios
-  - cd scripts; ./install_ios.sh; cd -
-  - ./scripts/build_ios.sh
-
   # show build output
   - ls -al ./output
 
