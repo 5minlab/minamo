@@ -12,24 +12,29 @@ import (
 )
 
 var configFilePath string
+var logFilePath string
 var usePrompt bool
 
 func init() {
 	flag.StringVar(&configFilePath, "config", "", "config file path")
+	flag.StringVar(&logFilePath, "log", "", "unity log file path")
 	flag.BoolVar(&usePrompt, "prompt", true, "use prompt")
 }
 
 func main() {
 	flag.Parse()
 
-	config, err := loadConfig(configFilePath)
+	config, err := loadConfig(configFilePath, logFilePath)
 	if err != nil {
 		panic(err)
 	}
+
 	spew.Dump(config)
 	fmt.Println("")
-	fmt.Println("BuildPath :", config.MakeBuildPath())
-	fmt.Println("ConfigPath:", config.FilePath)
+	fmt.Println("BuildPath\t:", config.MakeBuildPath())
+	fmt.Println("ConfigPath\t:", config.FilePath)
+	fmt.Println("LogFilePath\t:", config.LogFilePath())
+	fmt.Println("Args\t:", config.Args())
 
 	if usePrompt {
 		reader := bufio.NewReader(os.Stdin)
@@ -50,5 +55,5 @@ func runBuild(c *Config) {
 	}
 
 	fmt.Println(output)
-	fmt.Println("BuildTime :", buildTime)
+	fmt.Println("BuildTime\t:", buildTime)
 }

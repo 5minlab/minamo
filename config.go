@@ -69,10 +69,12 @@ type Config struct {
 	// git revision
 	Revision string
 	Now      time.Time
+
+	logFilePath string
 }
 
-func loadConfig(fp string) (Config, error) {
-	data, err := ioutil.ReadFile(fp)
+func loadConfig(configFp, logFp string) (Config, error) {
+	data, err := ioutil.ReadFile(configFp)
 	if err != nil {
 		return Config{}, err
 	}
@@ -83,13 +85,15 @@ func loadConfig(fp string) (Config, error) {
 		return Config{}, err
 	}
 
+	s.logFilePath = logFp
+
 	wd, err := os.Getwd()
 	if err != nil {
 		return Config{}, err
 	}
-	s.FilePath = filepath.Clean(filepath.Join(wd, fp))
+	s.FilePath = filepath.Clean(filepath.Join(wd, configFp))
 
-	_, filename := filepath.Split(fp)
+	_, filename := filepath.Split(configFp)
 	s.FileName = strings.Split(filename, ".")[0]
 	s.Now = time.Now()
 
@@ -123,18 +127,31 @@ func (c *Config) UnityFilePath() string {
 	return fp
 }
 
-func (c *Config) Execute() (string, time.Duration, error) {
-	t1 := time.Now()
-
-	cmd := exec.Command(
-		c.UnityFilePath(),
+func (c Config) Args() []string {
+	// Command line arguments document
+	// https://docs.unity3d.com/Manual/CommandLineArguments.html
+	// other doucment
+	// http://blog.stablekernel.com/continuous-integration-for-unity-5-using-travisci
+	args := []string{
 		"-quit",
 		"-batchmode",
+		"-nographics",
+		"-silent-crashes",
 		"-projectPath",
 		c.ProjectPath,
 		"-executeMethod",
 		c.Method,
-	)
+	}
+	if c.logFilePath != "" {
+		args = append(args, "-logFile", c.LogFilePath())
+	}
+	return args
+}
+
+func (c *Config) Execute() (string, time.Duration, error) {
+	t1 := time.Now()
+	args := c.Args()
+	cmd := exec.Command(c.UnityFilePath(), args...)
 	cmd.Dir = c.ProjectPath
 
 	cmd.Env = os.Environ()
@@ -149,4 +166,9 @@ func (c *Config) Execute() (string, time.Duration, error) {
 		return "", dt, err
 	}
 	return string(stdoutStderr), dt, nil
+}
+
+// "unity -logFile" needs absolute path
+func (c *Config) LogFilePath() string {
+	return makeAbsFilePath(c.logFilePath)
 }
