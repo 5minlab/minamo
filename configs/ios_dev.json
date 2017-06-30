@@ -13,7 +13,8 @@
 
     "options": {
       "development": true,
-      "allowDebugging": true
+      "allowDebugging": true,
+      "acceptExternalModificationsToPlayer": true
     }
   },
 

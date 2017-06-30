@@ -17,8 +17,14 @@ type AndroidSDKConfig struct {
 }
 
 type BuildOptions struct {
-	Development    bool `json:"development"`
-	AllowDebugging bool `json:"allowDebugging"`
+	Development                         bool `json:"development"`
+	AllowDebugging                      bool `json:"allowDebugging"`
+	AcceptExternalModificationsToPlayer bool `json:"acceptExternalModificationsToPlayer"`
+	ConnectWithProfiler                 bool `json:"connectWithProfiler"`
+	ShowBuiltPlayer                     bool `json:"showBuiltPlayer"`
+	AutoRunPlayer                       bool `json:"autoRunPlayer"`
+	SymlinkLibraries                    bool `json:"symlinkLibraries"`
+	ForceEnableAssertions               bool `json:"forceEnableAssertions"`
 }
 
 type BuildConfig struct {

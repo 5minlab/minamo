@@ -14,6 +14,12 @@ namespace Assets.Minamo.Editor {
         {
             { "development", BuildOptions.Development },
             { "allowDebugging", BuildOptions.AllowDebugging },
+            { "acceptExternalModificationsToPlayer", BuildOptions.AcceptExternalModificationsToPlayer },
+            { "connectWithProfiler", BuildOptions.ConnectWithProfiler },
+            { "showBuiltPlayer", BuildOptions.ShowBuiltPlayer },
+            { "autoRunPlayer", BuildOptions.AutoRunPlayer },
+            { "symlinkLibraries", BuildOptions.SymlinkLibraries },
+            { "forceEnableAssertions", BuildOptions.ForceEnableAssertions },
         };
 
         static readonly Dictionary<string, BuildTarget> buildTargetTable = new Dictionary<string, BuildTarget>()
