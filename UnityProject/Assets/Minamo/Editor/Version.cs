@@ -4,7 +4,7 @@
         public readonly static int Minor = 0;
         public readonly static int Patch = 0;
 
-        public override string ToString() {
+        internal static string Name() {
             var tokens = new string[]
             {
                 Major.ToString(),

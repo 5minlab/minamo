@@ -55,5 +55,10 @@ namespace Assets.Minamo.Editor {
                 b.Build(output);
             }
         }
+
+        public static void VersionName() {
+            var v = Version.Name();
+            Debug.LogFormat("MinamoVersion={0}", v);
+        }
     }
 }

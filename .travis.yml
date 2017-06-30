@@ -27,28 +27,37 @@ script:
   - go test -v ./...
   - go build
 
-  - ./run_test.sh
-  - ./export_package.sh
+  - ./minamo -cmd=show -config=./configs/standalone_win_dev.json -field=minamo_version
 
+  - ./run_test.sh
+  - cat ./results.xml
+
+  - ./export_package.sh
+  - ls -al ./dist
+
+  # standalne win dev
   - CONFIG=./configs/standalone_win_dev.json
   - ./minamo -cmd=dump -config=$CONFIG
   - ./minamo -cmd=build -config=$CONFIG -log=unity_standalone_win_dev.log
   - cat unity_standalone_win_dev.log | grep "MinamoLog"
+  - ls -al ./output/ | grep standalone_win_dev
 
+  # vr win32 steam dev
   - CONFIG=./configs/vr_win32_steamvr_dev.json
   - ./minamo -cmd=dump -config=$CONFIG
   - ./minamo -cmd=build -config=$CONFIG -log=unity_vr_win32_steamvr_dev.log
   - cat unity_vr_win32_steamvr_dev.log | grep "MinamoLog"
+  - ls -al ./output/ | grep vr_win32_steamvr_dev
 
+  # vr win32 oculus dev
   - CONFIG=./configs/vr_win32_oculus_dev.json
   - ./minamo -cmd=dump -config=$CONFIG
   - ./minamo -cmd=build -config=$CONFIG -log=unity_vr_win32_oculus_dev.log
   - cat unity_vr_win32_oculus_dev.log | grep "MinamoLog"
+  - ls -al ./output/ | grep vr_win32_oculus_dev
 
 after_script:
-  - cat results.xml
-  - ls -al ./output
-  - ls -al ./dist
+  # unity log
   - cat test.log
   - cat export.log
   - cat unity_standalone_win_dev.log

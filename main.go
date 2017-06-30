@@ -5,6 +5,10 @@ import (
 	"fmt"
 	"os"
 
+	"io/ioutil"
+
+	"regexp"
+
 	"github.com/davecgh/go-spew/spew"
 )
 
@@ -64,6 +68,35 @@ func cmdShow(c *Config) {
 		fmt.Print(c.MakeUnityPath())
 	case "project_path":
 		fmt.Print(c.MakeProjectPath())
+	case "minamo_version":
+		tmpfile, err := ioutil.TempFile("", "minamo")
+		if err != nil {
+			panic(err)
+		}
+		fp := tmpfile.Name()
+		defer os.Remove(tmpfile.Name())
+		tmpfile.Close()
+
+		c.logFilePath = tmpfile.Name()
+
+		method := "Assets.Minamo.Editor.EntryPoint.VersionName"
+		_, _, err = c.ExecuteMethod(method)
+		if err != nil {
+			panic(err)
+		}
+
+		data, err := ioutil.ReadFile(fp)
+		if err != nil {
+			panic(err)
+		}
+
+		re := regexp.MustCompile(`MinamoVersion=(\d+.\d+.\d+)`)
+		founds := re.FindAllSubmatch(data, -1)
+		if len(founds) > 0 {
+			f := founds[0][1]
+			v := string(f)
+			fmt.Print(v)
+		}
 	}
 }
 

@@ -147,8 +147,8 @@ func (c Config) Args() []string {
 		"-silent-crashes",
 		"-projectPath",
 		c.MakeProjectPath(),
-		"-executeMethod",
-		c.Method,
+		//"-executeMethod",
+		//c.Method,
 	}
 	if c.logFilePath != "" {
 		args = append(args, "-logFile", c.LogFilePath())
@@ -157,8 +157,17 @@ func (c Config) Args() []string {
 }
 
 func (c *Config) Execute() (string, time.Duration, error) {
-	t1 := time.Now()
+	return c.ExecuteMethod(c.Method)
+}
+
+func (c *Config) ExecuteMethod(method string) (string, time.Duration, error) {
 	args := c.Args()
+	args = append(args, "-executeMethod", method)
+	return c.executeCli(args)
+}
+
+func (c *Config) executeCli(args []string) (string, time.Duration, error) {
+	t1 := time.Now()
 	cmd := exec.Command(c.MakeUnityPath(), args...)
 	cmd.Dir = c.ProjectPath
 
