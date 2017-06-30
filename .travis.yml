@@ -14,27 +14,34 @@ before_install:
   - go version
   - chmod a+x ./scripts/*.sh
   - chmod a+x ./setup_proj.sh
-  - mkdir -r scripts/unity-installers/
+  - mkdir -p scripts/unity-installers/
 
 install:
   - go get -u github.com/davecgh/go-spew/spew
+  # unity editor
   - cd scripts; ./install.sh editor; cd -
-
-script:
-  - go test -v ./...
-  - go build
-
-  - ./setup_proj.sh
-
   # standalone windows
   - cd scripts; ./install.sh windows; cd -
-  - ./scripts/build_standalone_win_dev.sh
-  - ./scripts/build_vr_win32_steamvr_dev.sh
-  - ./scripts/build_vr_win32_oculus_dev.sh
 
-  # show build output
-  - ls -al ./output
-
+jobs:
+  include:
+    - script:
+      - go test -v ./...
+    - script:
+      - go build
+      - ./setup_proj.sh
+      - ./scripts/build_standalone_win_dev.sh
+      - ls -al ./output
+    - script:
+      - go build
+      - ./setup_proj.sh
+      - ./scripts/build_vr_win32_steamvr_dev.sh
+      - ls -al ./output
+    - script:
+      - go build
+      - ./setup_proj.sh
+      - ./scripts/build_vr_win32_oculus_dev.sh
+      - ls -al ./output
 
 notifications:
   email: false
