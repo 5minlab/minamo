@@ -28,6 +28,8 @@ jobs:
     - script:
       - go test -v ./...
     - script:
+      - ./run_test.sh
+    - script:
       - go build
       - ./setup_proj.sh
       - ./scripts/build_standalone_win_dev.sh
