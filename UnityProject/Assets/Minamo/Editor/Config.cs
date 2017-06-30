@@ -1,37 +1,38 @@
 ﻿using System.Collections.Generic;
 using TinyJson;
+using UnityEditor;
 
 namespace Assets.Minamo.Editor {
-    public class Config {
+    internal class Config {
         readonly AnyDictionary root;
-        public AnyDictionary Root { get { return root; } }
+        internal AnyDictionary Root { get { return root; } }
 
-        public AnyDictionary AndroidSDK
+        AnyDictionary AndroidSDK
         {
             get { return new AnyDictionary(root.GetDict("androidSdk")); }
         }
 
-        public AnyDictionary Identification
+        AnyDictionary Identification
         {
             get { return new AnyDictionary(root.GetDict("identification")); }
         }
 
-        public AnyDictionary VRDevices
+        AnyDictionary VRDevices
         {
             get { return new AnyDictionary(root.GetDict("vrDevices")); }
         }
 
-        public AnyDictionary Keystore
+        AnyDictionary Keystore
         {
             get { return new AnyDictionary(root.GetDict("keystore")); }
         }
 
-        public AnyDictionary Build
+        AnyDictionary Build
         {
             get { return new AnyDictionary(root.GetDict("build")); }
         }
 
-        public AnyDictionary Defines
+        AnyDictionary Defines
         {
             get { return new AnyDictionary(root.GetList("defines")); }
         }
@@ -39,6 +40,77 @@ namespace Assets.Minamo.Editor {
         public Config(string jsontext) {
             var d = jsontext.FromJson<object>() as Dictionary<string, object>;
             root = new AnyDictionary(d);
+        }
+
+        internal PlayerBuildExecutor PlayerBuild
+        {
+            get { return new PlayerBuildExecutor(Build); }
+        }
+
+        internal BuildTarget BuildTarget
+        {
+            get { return PlayerBuild.Target; }
+        }
+
+        internal BuildTargetGroup BuildTargetGroup
+        {
+            get { return PlayerBuild.TargetGroup; }
+        }
+
+
+        class ModifierTuple {
+            internal IModifier modifier;
+            internal AnyDictionary data;
+
+            public ModifierTuple(IModifier m, AnyDictionary d) {
+                this.modifier = m;
+                this.data = d;
+            }
+        }
+
+        ModifierTuple[] CreateConfigBased(BuildTargetGroup targetGroup) {
+            return new ModifierTuple[]
+            {
+                new ModifierTuple(new Modifier_AndroidSdkVersion(), AndroidSDK),
+                new ModifierTuple(new Modifier_Identification(targetGroup), Identification),
+                new ModifierTuple(new Modifier_VRDevice(targetGroup), VRDevices),
+                new ModifierTuple(new Modifier_Keystore(), Keystore),
+                new ModifierTuple(new Modifier_DefineSymbol(targetGroup), Defines),
+            };
+        }
+
+        ModifierTuple[] CreateCurrentBased(BuildTargetGroup targetGroup) {
+            return new ModifierTuple[]
+            {
+                new ModifierTuple(Modifier_AndroidSdkVersion.Current(), AndroidSDK),
+                new ModifierTuple(Modifier_Identification.Current(targetGroup), Identification),
+                new ModifierTuple(Modifier_VRDevice.Current(targetGroup), VRDevices),
+                new ModifierTuple(Modifier_Keystore.Current(), Keystore),
+                new ModifierTuple(Modifier_DefineSymbol.Current(targetGroup), Defines),
+            };
+        }
+
+        internal IModifier[] CreateConfigModifiers() {
+            var targetGroup = BuildTargetGroup;
+            var modifiers = new List<IModifier>();
+            foreach(var t in CreateConfigBased(targetGroup)) {
+                if (t.data.Count > 0) {
+                    t.modifier.Reload(t.data);
+                    modifiers.Add(t.modifier);
+                }
+            }
+            return modifiers.ToArray();
+        }
+
+        internal IModifier[] CreateCurrentModifiers() {
+            var targetGroup = BuildTargetGroup;
+            var modifiers = new List<IModifier>();
+            foreach (var t in CreateCurrentBased(targetGroup)) {
+                if (t.data.Count > 0) {
+                    modifiers.Add(t.modifier);
+                }
+            }
+            return modifiers.ToArray();
         }
     }
 }

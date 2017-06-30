@@ -3,11 +3,11 @@ using System.Text;
 using UnityEditor;
 
 namespace Assets.Minamo.Editor {
-    class DefineSymbolModifier : IModifier {
+    class Modifier_DefineSymbol : IModifier {
         readonly BuildTargetGroup targetGroup;
         string defines;
 
-        public DefineSymbolModifier(BuildTargetGroup targetGroup) {
+        public Modifier_DefineSymbol(BuildTargetGroup targetGroup) {
             this.targetGroup = targetGroup;
         }
 
@@ -30,9 +30,9 @@ namespace Assets.Minamo.Editor {
             this.defines = string.Join(";", tokens.ToArray());
         }
 
-        public static DefineSymbolModifier Current(BuildTargetGroup g) {
+        public static Modifier_DefineSymbol Current(BuildTargetGroup g) {
             var defines = PlayerSettings.GetScriptingDefineSymbolsForGroup(g);
-            return new DefineSymbolModifier(g)
+            return new Modifier_DefineSymbol(g)
             {
                 defines = defines,
             };

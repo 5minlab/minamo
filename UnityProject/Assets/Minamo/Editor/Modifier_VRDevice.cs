@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEditorInternal.VR;
 
 namespace Assets.Minamo.Editor {
-    class VRDeviceModifier : IModifier {
+    class Modifier_VRDevice : IModifier {
         public const string DeviceOculus = "Oculus";
         public const string DeviceOpenVR = "OpenVR";
         public const string DeviceDaydream = "daydream";
@@ -13,7 +13,7 @@ namespace Assets.Minamo.Editor {
         public bool enabled;
         string[] devices = new string[] { };
 
-        public VRDeviceModifier(BuildTargetGroup targetGroup) {
+        public Modifier_VRDevice(BuildTargetGroup targetGroup) {
             this.targetGroup = targetGroup;
         }
 
@@ -29,10 +29,10 @@ namespace Assets.Minamo.Editor {
             VREditor.SetVREnabledOnTargetGroup(targetGroup, enabled);
         }
 
-        public static VRDeviceModifier Current(BuildTargetGroup g) {
+        public static Modifier_VRDevice Current(BuildTargetGroup g) {
             var devices = VREditor.GetVREnabledDevicesOnTargetGroup(g);
             var enabled = VREditor.GetVREnabledOnTargetGroup(g);
-            return new VRDeviceModifier(g)
+            return new Modifier_VRDevice(g)
             {
                 devices = devices,
                 enabled = enabled,

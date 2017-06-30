@@ -3,13 +3,13 @@ using System.Text;
 using UnityEditor;
 
 namespace Assets.Minamo.Editor {
-    class KeystoreModifier : IModifier {
+    class Modifier_Keystore : IModifier {
         string keystoreName;
         string keystorePass;
         string keyaliasName;
         string keyaliasPass;
 
-        public KeystoreModifier() { }
+        public Modifier_Keystore() { }
 
         public void Reload(AnyDictionary dict) {
             keystoreName = dict.GetValue<string>("keystoreName");
@@ -18,13 +18,13 @@ namespace Assets.Minamo.Editor {
             keyaliasPass = dict.GetValue<string>("keyaliasPass");
         }
 
-        public KeystoreModifier(Dictionary<string, object> map) {
+        public Modifier_Keystore(Dictionary<string, object> map) {
             var dict = new AnyDictionary(map);
 
         }
 
-        public static KeystoreModifier Current() {
-            return new KeystoreModifier()
+        public static Modifier_Keystore Current() {
+            return new Modifier_Keystore()
             {
                 keystoreName = PlayerSettings.Android.keystoreName,
                 keystorePass = PlayerSettings.Android.keystorePass,

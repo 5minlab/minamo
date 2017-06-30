@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 
 namespace Assets.Minamo.Editor {
@@ -24,9 +23,8 @@ namespace Assets.Minamo.Editor {
             var content = File.ReadAllText(configFilePath);
             var config = new Config(content);
 
-            IModifier[] currModifiers;
-            IModifier[] nextModifiers;
-            CreateModifiers(config, out currModifiers, out nextModifiers);
+            var currModifiers = config.CreateCurrentModifiers();
+            var nextModifiers = config.CreateCurrentModifiers();
 
             foreach (var m in nextModifiers) {
                 var tokens = m.GetType().ToString().Split('.');
@@ -35,7 +33,7 @@ namespace Assets.Minamo.Editor {
                 m.Apply();
             }
 
-            var executor = new PlayerBuildExecutor(config.Build);
+            var executor = config.PlayerBuild;
             Debug.LogFormat("[MinamoLog] {0}: {1}", "PlayerBuildExecutor", executor.GetConfigText());
             executor.Build(outputFilePath);
 
@@ -46,52 +44,6 @@ namespace Assets.Minamo.Editor {
         }
 
 
-        public static void CreateModifiers(Config config, out IModifier[] currs, out IModifier[] nexts) {
-            var currModifiers = new List<IModifier>();
-            var nextModifiers = new List<IModifier>();
 
-            var executor = new PlayerBuildExecutor(config.Build);
-            var targetGroup = executor.TargetGroup;
-
-            if (config.AndroidSDK.Count > 0) {
-                var m = new AndroidSdkVersionModifier();
-                m.Reload(config.AndroidSDK);
-                currModifiers.Add(AndroidSdkVersionModifier.Current());
-                nextModifiers.Add(m);
-            }
-
-            if(config.Identification.Count > 0) {
-                var m = new IdentificationModifier(targetGroup);
-                m.Reload(config.Identification);
-                currModifiers.Add(IdentificationModifier.Current(targetGroup));
-                nextModifiers.Add(m);
-            }
-
-
-            if(config.VRDevices.Count > 0) {
-                var m = new VRDeviceModifier(targetGroup);
-                m.Reload(config.VRDevices);
-                currModifiers.Add(VRDeviceModifier.Current(targetGroup));
-                nextModifiers.Add(m);
-            }
-
-            if(config.Keystore.Count > 0) {
-                var m = new KeystoreModifier();
-                m.Reload(config.Keystore);
-                currModifiers.Add(KeystoreModifier.Current());
-                nextModifiers.Add(m);
-            }
-
-            if(config.Defines.Count > 0) {
-                var m = new DefineSymbolModifier(targetGroup);
-                m.Reload(config.Defines);
-                currModifiers.Add(DefineSymbolModifier.Current(targetGroup));
-                nextModifiers.Add(m);
-            }
-
-
-            currs = currModifiers.ToArray();
-            nexts = nextModifiers.ToArray();
-        }
     }
 }

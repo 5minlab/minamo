@@ -2,7 +2,7 @@
 using UnityEditor;
 
 namespace Assets.Minamo.Editor {
-    class AndroidSdkVersionModifier : IModifier {
+    class Modifier_AndroidSdkVersion : IModifier {
         AndroidSdkVersions min;
         AndroidSdkVersions target;
 
@@ -16,8 +16,8 @@ namespace Assets.Minamo.Editor {
             target = ConvertVersion(dict.GetValue<int>("target"));
         }
 
-        public static AndroidSdkVersionModifier Current() {
-            return new AndroidSdkVersionModifier()
+        public static Modifier_AndroidSdkVersion Current() {
+            return new Modifier_AndroidSdkVersion()
             {
                 min = PlayerSettings.Android.minSdkVersion,
                 target = PlayerSettings.Android.targetSdkVersion,

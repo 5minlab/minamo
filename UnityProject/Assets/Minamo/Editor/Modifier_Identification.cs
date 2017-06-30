@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace Assets.Minamo.Editor {
-    class IdentificationModifier : IModifier {
+    class Modifier_Identification : IModifier {
         readonly BuildTargetGroup targetGroup;
 
         // common
@@ -16,7 +16,7 @@ namespace Assets.Minamo.Editor {
         // ios
         string ios_build;
 
-        public IdentificationModifier(BuildTargetGroup targetGroup) {
+        public Modifier_Identification(BuildTargetGroup targetGroup) {
             this.targetGroup = targetGroup;
         }
 
@@ -32,8 +32,8 @@ namespace Assets.Minamo.Editor {
             }
         }
 
-        public static IdentificationModifier Current(BuildTargetGroup targetGroup) {
-            return new IdentificationModifier(targetGroup)
+        public static Modifier_Identification Current(BuildTargetGroup targetGroup) {
+            return new Modifier_Identification(targetGroup)
             {
                 packageName = PlayerSettings.GetApplicationIdentifier(targetGroup),
                 versionName = PlayerSettings.bundleVersion,
