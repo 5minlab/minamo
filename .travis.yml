@@ -29,12 +29,31 @@ script:
 
   - ./run_test.sh
   - ./export_package.sh
-  - ./scripts/build_standalone_win_dev.sh
-  - ./scripts/build_vr_win32_steamvr_dev.sh
-  - ./scripts/build_vr_win32_oculus_dev.sh
+
+  - CONFIG=./configs/standalone_win_dev.json
+  - ./minamo -cmd=dump -config=$CONFIG
+  - ./minamo -cmd=build -config=$CONFIG -log=unity_standalone_win_dev.log
+  - cat unity_standalone_win_dev.log | grep "MinamoLog"
+
+  - CONFIG=./configs/vr_win32_steamvr_dev.json
+  - ./minamo -cmd=dump -config=$CONFIG
+  - ./minamo -cmd=build -config=$CONFIG -log=unity_vr_win32_steamvr_dev.log
+  - cat unity_vr_win32_steamvr_dev.log | grep "MinamoLog"
+
+  - CONFIG=./configs/vr_win32_oculus_dev.json
+  - ./minamo -cmd=dump -config=$CONFIG
+  - ./minamo -cmd=build -config=$CONFIG -log=unity_vr_win32_oculus_dev.log
+  - cat unity_vr_win32_oculus_dev.log | grep "MinamoLog"
 
 after_script:
+  - cat results.xml
   - ls -al ./output
+  - ls -al ./dist
+  - cat test.log
+  - cat export.log
+  - cat unity_standalone_win_dev.log
+  - cat unity_vr_win32_steamvr_dev.log
+  - cat unity_vr_win32_oculus_dev.log
 
 # jobs:
 #   include:
