@@ -6,13 +6,18 @@ sudo: required
 os: osx
 osx_image: xcode8.3
 
+cache:
+  directories:
+  - scripts/unity-installers/
+
 before_install:
   - go version
   - chmod a+x ./scripts/*.sh
   - chmod a+x ./setup_proj.sh
+  - mkdir -r scripts/unity-installers/
 
 install:
-  - go get -u ./...
+  - go get -u github.com/davecgh/go-spew/spew
   - cd scripts; ./install.sh editor; cd -
 
 script:
