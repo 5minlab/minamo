@@ -23,31 +23,44 @@ install:
   # standalone windows
   - cd scripts; ./install.sh windows; cd -
 
-jobs:
-  include:
-    - stage: Golang unit test
-      script: go test -v ./...
+script:
+  - go test -v ./...
+  - go build
 
-    - stage: Unity3D unit test
-      script: ./run_test.sh
+  - ./run_test.sh
+  - ./export_package.sh
+  - ./scripts/build_standalone_win_dev.sh
+  - ./scripts/build_vr_win32_steamvr_dev.sh
+  - ./scripts/build_vr_win32_oculus_dev.sh
 
-    - stage: Export package
-      script: ./export_package.sh
+after_script:
+  - ls -al ./output
 
-    - stage: Build standalone_win_dev.json
-      before_script: go build
-      script: ./scripts/build_standalone_win_dev.sh
-      after_script: ls -al ./output
+# jobs:
+#   include:
+#     - stage: Golang unit test
+#       script: go test -v ./...
 
-    - stage: Build vr_win32_steamvr_dev.json
-      before_script: go build
-      script: ./scripts/build_vr_win32_steamvr_dev.sh
-      after_script: ls -al ./output
+#     - stage: Unity3D unit test
+#       script: ./run_test.sh
 
-    - stage: Build vr_win32_oculus_dev.json
-      before_script: go build
-      script: ./scripts/build_vr_win32_oculus_dev.sh
-      after_script: ls -al ./output
+#     - stage: Export package
+#       script: ./export_package.sh
+
+#     - stage: Build standalone_win_dev.json
+#       before_script: go build
+#       script: ./scripts/build_standalone_win_dev.sh
+#       after_script: ls -al ./output
+
+#     - stage: Build vr_win32_steamvr_dev.json
+#       before_script: go build
+#       script: ./scripts/build_vr_win32_steamvr_dev.sh
+#       after_script: ls -al ./output
+
+#     - stage: Build vr_win32_oculus_dev.json
+#       before_script: go build
+#       script: ./scripts/build_vr_win32_oculus_dev.sh
+#       after_script: ls -al ./output
 
 notifications:
   email: false
