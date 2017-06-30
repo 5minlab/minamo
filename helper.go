@@ -16,7 +16,12 @@ func makeAbsFilePath(fp string) string {
 		panic(err)
 	}
 
-	if filepath.IsAbs(fp) || strings.HasPrefix(fp, "/") {
+	isAbs := filepath.IsAbs(fp)
+	isAbs = isAbs || strings.HasPrefix(fp, "/")
+	isAbs = isAbs || strings.HasPrefix(strings.ToLower(fp), `c:\`)
+	isAbs = isAbs || strings.HasPrefix(strings.ToLower(fp), `c:/`)
+
+	if isAbs {
 		return filepath.Clean(fp)
 	}
 

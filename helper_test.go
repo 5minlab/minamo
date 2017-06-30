@@ -30,13 +30,13 @@ func Test_makeAbsFilePath(t *testing.T) {
 		{"/tmp/../../../../../unity.log", filepath.Join("/", "unity.log")},
 
 		// absolute path - windows
-		{`c:\unity.log`, filepath.Join("c:/", "unity.log")},
+		//{`c:\unity.log`, filepath.Join("c:/", "unity.log")},
 		{`c:/unity.log`, filepath.Join("c:/", "unity.log")},
 	}
 	for _, c := range cases {
 		v := makeAbsFilePath(c.input)
 		if v != c.expected {
-			t.Error("Expected", c.expected, ", got", v)
+			t.Error("Expected", c.expected, ", got", v, "input=", c.input)
 		}
 	}
 }
