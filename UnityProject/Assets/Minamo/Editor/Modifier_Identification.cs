@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using UnityEditor;
-using UnityEngine;
 
 namespace Assets.Minamo.Editor {
     class Modifier_Identification : IModifier {
@@ -9,37 +8,36 @@ namespace Assets.Minamo.Editor {
         // common
         string packageName;
         string versionName;
+        // android = version code
+        // ios : build number
+        int versionCode;
 
-        // android
-        int android_versionCode;
-
-        // ios
-        string ios_build;
-
-        public Modifier_Identification(BuildTargetGroup targetGroup) {
+        internal Modifier_Identification(BuildTargetGroup targetGroup) {
             this.targetGroup = targetGroup;
         }
 
         public void Reload(AnyDictionary dict) {
             packageName = dict.GetValue<string>("packageName");
             versionName = dict.GetValue<string>("versionName");
-            var versionCode = dict.GetValue<string>("versionCode");
-
-            ios_build = versionCode;
-            if (!int.TryParse(versionCode, out android_versionCode)) {
-                Debug.LogFormat("cannot parse version code to android version code : {0}", versionCode);
-                android_versionCode = 0;
-            }
+            versionCode = dict.GetValue<int>("versionCode");
         }
 
-        public static Modifier_Identification Current(BuildTargetGroup targetGroup) {
+        internal static Modifier_Identification Current(BuildTargetGroup targetGroup) {
+            int versionCode = 0;
+            if(targetGroup == BuildTargetGroup.Android) {
+                versionCode = PlayerSettings.Android.bundleVersionCode;
+
+            } else if(targetGroup == BuildTargetGroup.iOS) {
+                if(!int.TryParse(PlayerSettings.iOS.buildNumber, out versionCode)) {
+                    versionCode = 0;
+                }
+            }
+
             return new Modifier_Identification(targetGroup)
             {
                 packageName = PlayerSettings.GetApplicationIdentifier(targetGroup),
                 versionName = PlayerSettings.bundleVersion,
-
-                android_versionCode = PlayerSettings.Android.bundleVersionCode,
-                ios_build = PlayerSettings.iOS.buildNumber,
+                versionCode = versionCode,
             };
         }
 
@@ -47,16 +45,18 @@ namespace Assets.Minamo.Editor {
             PlayerSettings.SetApplicationIdentifier(targetGroup, packageName);
             PlayerSettings.bundleVersion = versionName;
 
-            PlayerSettings.Android.bundleVersionCode = android_versionCode;
-
-            PlayerSettings.iOS.buildNumber = ios_build;
+            if(targetGroup == BuildTargetGroup.Android) {
+                PlayerSettings.Android.bundleVersionCode = versionCode;
+            } else if(targetGroup == BuildTargetGroup.iOS) {
+                PlayerSettings.iOS.buildNumber = versionCode.ToString();
+            }
         }
 
         public string GetConfigText() {
             var sb = new StringBuilder();
             sb.AppendFormat("packageName={0}, ", packageName);
             sb.AppendFormat("versionName={0}, ", versionName);
-            sb.AppendFormat("versionCode={0}, ", ios_build);
+            sb.AppendFormat("versionCode={0}, ", versionCode);
             return sb.ToString();
         }
 

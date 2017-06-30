@@ -16,12 +16,12 @@ namespace Assets.Minamo.Editor {
             return opts;
         }
 
-        public readonly BuildTarget Target = BuildTarget.NoTarget;
-        public readonly BuildTargetGroup TargetGroup;
-        public readonly BuildOptions Options = BuildOptions.None;
+        internal readonly BuildTarget Target = BuildTarget.NoTarget;
+        internal readonly BuildTargetGroup TargetGroup;
+        readonly BuildOptions Options = BuildOptions.None;
         readonly string[] scenes = new string[] { };
 
-        public PlayerBuildExecutor(AnyDictionary dict) {
+        internal PlayerBuildExecutor(AnyDictionary dict) {
             Target = Helper.ToBuildTarget(dict.GetValue<string>("target"));
             TargetGroup = Helper.ToBuildTargetGroup(dict.GetValue<string>("targetGroup"));
 
@@ -31,7 +31,7 @@ namespace Assets.Minamo.Editor {
             this.scenes = GetScenes();
         }
 
-        public string GetConfigText() {
+        internal string GetConfigText() {
             var sb = new StringBuilder();
             sb.AppendFormat("buildTarget={0}, ", Target);
             sb.AppendFormat("buildTargetGroup={0}, ", TargetGroup);
@@ -50,7 +50,7 @@ namespace Assets.Minamo.Editor {
             return scenes.ToArray();
         }
 
-        public void Build(string locationPathName) {
+        internal void Build(string locationPathName) {
             BuildPipeline.BuildPlayer(scenes, locationPathName, Target, Options);
         }
     }

@@ -34,7 +34,7 @@ namespace Assets.Minamo.Editor {
             { "linux", BuildTarget.StandaloneLinuxUniversal },
         };
 
-        public static BuildTargetGroup ToBuildTargetGroup(string s) {
+        internal static BuildTargetGroup ToBuildTargetGroup(string s) {
             BuildTargetGroup g;
             if(buildtargetTable.TryGetValue(s, out g)) {
                 return g;
@@ -42,7 +42,7 @@ namespace Assets.Minamo.Editor {
             return BuildTargetGroup.Standalone;
         }
 
-        public static BuildTarget ToBuildTarget(string s) {
+        internal static BuildTarget ToBuildTarget(string s) {
             BuildTarget found;
             if (buildTargetTable.TryGetValue(s, out found)) {
                 return found;
@@ -50,7 +50,7 @@ namespace Assets.Minamo.Editor {
             return BuildTarget.NoTarget;
         }
 
-        public static BuildOptions ToBuildOptions(string s) {
+        internal static BuildOptions ToBuildOptions(string s) {
             BuildOptions found;
             if (buildOptionTable.TryGetValue(s, out found)) {
                 return found;
@@ -59,7 +59,7 @@ namespace Assets.Minamo.Editor {
         }
 
 
-        public static List<T> Convert<T>(List<object> l) {
+        internal static List<T> Convert<T>(List<object> l) {
             var retval = new List<T>();
             foreach(var el in l) {
                 if(el == null) { continue; }

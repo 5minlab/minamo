@@ -7,7 +7,7 @@ namespace Assets.Minamo.Editor {
         readonly BuildTargetGroup targetGroup;
         string defines;
 
-        public Modifier_DefineSymbol(BuildTargetGroup targetGroup) {
+        internal Modifier_DefineSymbol(BuildTargetGroup targetGroup) {
             this.targetGroup = targetGroup;
         }
 
@@ -30,7 +30,7 @@ namespace Assets.Minamo.Editor {
             this.defines = string.Join(";", tokens.ToArray());
         }
 
-        public static Modifier_DefineSymbol Current(BuildTargetGroup g) {
+        internal static Modifier_DefineSymbol Current(BuildTargetGroup g) {
             var defines = PlayerSettings.GetScriptingDefineSymbolsForGroup(g);
             return new Modifier_DefineSymbol(g)
             {

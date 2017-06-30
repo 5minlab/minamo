@@ -30,7 +30,7 @@ namespace Assets.Minamo.Editor {
                 return;
             }
 
-            Build.ExecuteCommon(configFilePath, fp);
+            EntryPoint.BuildCommon(configFilePath, fp);
         }
     }
 }

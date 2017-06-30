@@ -12,15 +12,17 @@ before_install:
   - chmod a+x ./setup_proj.sh
 
 install:
-  - go get -u github.com/davecgh/go-spew/spew
-  - cd scripts; ./install_unity.sh; cd -
+  - go get -u ./...
+  - cd scripts; ./install.sh editor; cd -
 
 script:
+  - go test -v ./...
   - go build
+
   - ./setup_proj.sh
 
   # standalone windows
-  - cd scripts; ./install_standalone_win.sh; cd -
+  - cd scripts; ./install.sh windows; cd -
   - ./scripts/build_standalone_win_dev.sh
   - ./scripts/build_vr_win32_steamvr_dev.sh
   - ./scripts/build_vr_win32_oculus_dev.sh
@@ -31,3 +33,8 @@ script:
 
 notifications:
   email: false
+
+# https://docs.travis-ci.com/user/customizing-the-build#Building-Specific-Branches
+branches:
+  only:
+  - master

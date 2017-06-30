@@ -9,7 +9,7 @@ namespace Assets.Minamo.Editor {
         string keyaliasName;
         string keyaliasPass;
 
-        public Modifier_Keystore() { }
+        internal Modifier_Keystore() { }
 
         public void Reload(AnyDictionary dict) {
             keystoreName = dict.GetValue<string>("keystoreName");
@@ -18,12 +18,12 @@ namespace Assets.Minamo.Editor {
             keyaliasPass = dict.GetValue<string>("keyaliasPass");
         }
 
-        public Modifier_Keystore(Dictionary<string, object> map) {
+        Modifier_Keystore(Dictionary<string, object> map) {
             var dict = new AnyDictionary(map);
 
         }
 
-        public static Modifier_Keystore Current() {
+        internal static Modifier_Keystore Current() {
             return new Modifier_Keystore()
             {
                 keystoreName = PlayerSettings.Android.keystoreName,

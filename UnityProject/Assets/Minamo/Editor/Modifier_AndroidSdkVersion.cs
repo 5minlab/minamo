@@ -16,7 +16,7 @@ namespace Assets.Minamo.Editor {
             target = ConvertVersion(dict.GetValue<int>("target"));
         }
 
-        public static Modifier_AndroidSdkVersion Current() {
+        internal static Modifier_AndroidSdkVersion Current() {
             return new Modifier_AndroidSdkVersion()
             {
                 min = PlayerSettings.Android.minSdkVersion,

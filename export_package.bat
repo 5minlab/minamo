@@ -4,6 +4,6 @@
 @set PROJ_PATH=%CURR_DIR%\UnityProject
 @set EXPORT_DIR=%CURR_DIR%\dist
 @set EXPORT_PATH=%EXPORT_DIR%\%PACKAGE_NAME%
-@set METHOD=Assets.Minamo.Editor.PackageBuilder.Export
+@set METHOD=Assets.Minamo.Editor.EntryPoint.ExportPackage
 
 %UNITY_PATH% -quit -batchmode -nographics -silent-crashes -projectPath %PROJ_PATH% -executeMethod %METHOD% -logFile export.log

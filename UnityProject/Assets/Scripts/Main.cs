@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Main : MonoBehaviour {
+class Main : MonoBehaviour {
     void Start () {
 #if PLATFORM_WIN32_STEAMVR
         Debug.LogError("current platform is PLATFORM_WIN32_STEAMVR");

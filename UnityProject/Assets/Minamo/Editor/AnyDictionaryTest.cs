@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace Assets.Minamo.Editor {
-    public class AnyDictionaryTest {
+    class AnyDictionaryTest {
         AnyDictionary CreateDict() {
             var dict = new Dictionary<string, object>()
             {
@@ -16,7 +16,7 @@ namespace Assets.Minamo.Editor {
         }
 
         [Test]
-        public void Test_Count_Dict() {
+        void Test_Count_Dict() {
             var d = new Dictionary<string, object>()
             {
                 {"str", "hello" },
@@ -28,7 +28,7 @@ namespace Assets.Minamo.Editor {
         }
 
         [Test]
-        public void Test_Count_List() {
+        void Test_Count_List() {
             var l = new List<object>
             {
                 "hello",
@@ -41,7 +41,7 @@ namespace Assets.Minamo.Editor {
         }
 
         [Test]
-        public void Test_TryGetValue_NotExist() {
+        void Test_TryGetValue_NotExist() {
             var dict = CreateDict();
             string found;
             var ok = dict.TryGetValue("not-exist", out found);
@@ -50,7 +50,7 @@ namespace Assets.Minamo.Editor {
         }
 
         [Test]
-        public void Test_TryGetValue_DiffType() {
+        void Test_TryGetValue_DiffType() {
             var dict = CreateDict();
             string found;
             var ok = dict.TryGetValue("int", out found);
@@ -59,7 +59,7 @@ namespace Assets.Minamo.Editor {
         }
 
         [Test]
-        public void Test_TryGetValue_Success() {
+        void Test_TryGetValue_Success() {
             var dict = CreateDict();
             string found;
             var ok = dict.TryGetValue("str", out found);
@@ -68,7 +68,7 @@ namespace Assets.Minamo.Editor {
         }
 
         [Test]
-        public void Test_GetValue_string() {
+        void Test_GetValue_string() {
             var dict = CreateDict();
             var invalidKeys = new string[]
             {
@@ -81,7 +81,7 @@ namespace Assets.Minamo.Editor {
         }
 
         [Test]
-        public void Test_GetValue_int() {
+        void Test_GetValue_int() {
             var dict = CreateDict();
             var invalidKeys = new string[]
             {
@@ -94,7 +94,7 @@ namespace Assets.Minamo.Editor {
         }
 
         [Test]
-        public void Test_GetValue_bool() {
+        void Test_GetValue_bool() {
             var dict = CreateDict();
             var invalidKeys = new string[]
             {
@@ -107,7 +107,7 @@ namespace Assets.Minamo.Editor {
         }
 
         [Test]
-        public void Test_GetDict() {
+        void Test_GetDict() {
             var dict = CreateDict();
             var invalidKeys = new string[]
             {
@@ -120,7 +120,7 @@ namespace Assets.Minamo.Editor {
         }
 
         [Test]
-        public void Test_GetList() {
+        void Test_GetList() {
             var dict = CreateDict();
             var invalidKeys = new string[]
             {
@@ -133,7 +133,7 @@ namespace Assets.Minamo.Editor {
         }
 
         [Test]
-        public void Test_GetAt() {
+        void Test_GetAt() {
             var l = new List<object>
             {
                 "hello",

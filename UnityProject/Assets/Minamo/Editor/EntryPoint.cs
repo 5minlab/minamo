@@ -2,24 +2,28 @@
 using UnityEngine;
 
 namespace Assets.Minamo.Editor {
-    public class Build {
-        public static void Execute() {
+
+    /// <summary>
+    /// cli entry point
+    /// </summary>
+    public class EntryPoint {
+        public static void Build() {
             string configFilePath;
-            if(!EnvironmentReader.TryRead("CONFIG_PATH", out configFilePath)) {
+            if (!EnvironmentReader.TryRead("CONFIG_PATH", out configFilePath)) {
                 Debug.Log("cannot find CONFIG_PATH");
                 return;
             }
 
             string outputFilePath;
-            if(!EnvironmentReader.TryRead("OUTPUT_PATH", out outputFilePath)) {
+            if (!EnvironmentReader.TryRead("OUTPUT_PATH", out outputFilePath)) {
                 Debug.Log("cannot find OUTPUT_PATH");
                 return;
             }
 
-            ExecuteCommon(configFilePath, outputFilePath);
+            BuildCommon(configFilePath, outputFilePath);
         }
 
-        public static void ExecuteCommon(string configFilePath, string outputFilePath) {
+        internal static void BuildCommon(string configFilePath, string outputFilePath) {
             var content = File.ReadAllText(configFilePath);
             var config = new Config(content);
 
@@ -43,7 +47,13 @@ namespace Assets.Minamo.Editor {
             }
         }
 
-
-
+        public static void ExportPackage() {
+            string output;
+            if (EnvironmentReader.TryRead("EXPORT_PATH", out output)) {
+                Debug.LogFormat("export package : {0}", output);
+                var b = new PackageBuilder();
+                b.Build(output);
+            }
+        }
     }
 }

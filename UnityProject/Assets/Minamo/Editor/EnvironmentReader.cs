@@ -2,8 +2,8 @@
 using UnityEngine;
 
 namespace Assets.Minamo.Editor {
-    public class EnvironmentReader {
-        public static bool TryRead(string key, out string val) {
+    class EnvironmentReader {
+        internal static bool TryRead(string key, out string val) {
             var parser = new Parser_String();
             try {
                 var s = Environment.GetEnvironmentVariable(key);

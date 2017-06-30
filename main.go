@@ -1,19 +1,15 @@
 package main
 
 import (
-	"bufio"
 	"flag"
 	"fmt"
 	"os"
-
-	"strings"
 
 	"github.com/davecgh/go-spew/spew"
 )
 
 var configFilePath string
 var logFilePath string
-var usePrompt bool
 var cmd string
 var field string
 
@@ -22,7 +18,6 @@ func init() {
 	flag.StringVar(&logFilePath, "log", "", "unity log file path")
 	flag.StringVar(&cmd, "cmd", "dump", "command")
 	flag.StringVar(&field, "field", "", "field to show")
-	flag.BoolVar(&usePrompt, "prompt", true, "use prompt")
 }
 
 func main() {
@@ -57,21 +52,6 @@ func cmdDump(c *Config) {
 	fmt.Println("Args\t:", c.Args())
 }
 
-func cmdBuild(c *Config) {
-	cmdDump(c)
-
-	if usePrompt {
-		reader := bufio.NewReader(os.Stdin)
-		fmt.Print("Continue build? (Y/other): ")
-		text, _ := reader.ReadString('\n')
-		if strings.TrimRight(text, "\n\r") != "Y" {
-			return
-		}
-	}
-
-	runBuild(c)
-}
-
 func cmdShow(c *Config) {
 	switch field {
 	case "build_path":
@@ -87,7 +67,7 @@ func cmdShow(c *Config) {
 	}
 }
 
-func runBuild(c *Config) {
+func cmdBuild(c *Config) {
 	output, buildTime, err := c.Execute()
 	if err != nil {
 		panic(err)

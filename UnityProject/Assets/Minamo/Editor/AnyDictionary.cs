@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Minamo.Editor {
-    public class AnyDictionary {
+    class AnyDictionary {
         readonly Dictionary<string, object> dict;
         readonly List<object> list;
 
-        public AnyDictionary(object obj) {
+        internal AnyDictionary(object obj) {
             if(obj == null) {
                 dict = new Dictionary<string, object>();
                 list = new List<object>();
@@ -25,7 +25,7 @@ namespace Assets.Minamo.Editor {
             }
         }
 
-        public int Count
+        internal int Count
         {
             get
             {
@@ -39,7 +39,7 @@ namespace Assets.Minamo.Editor {
             }
         }
 
-        public T GetAt<T>(int idx) {
+        internal T GetAt<T>(int idx) {
             if(list == null) {
                 return default(T);
             }
@@ -53,11 +53,11 @@ namespace Assets.Minamo.Editor {
             return (T)Convert.ChangeType(obj, typeof(T));
         }
 
-        public bool ContainsKey(string k) {
+        internal bool ContainsKey(string k) {
             return dict.ContainsKey(k);
         }
 
-        public bool TryGetValue<T>(string key, out T val) {
+        internal bool TryGetValue<T>(string key, out T val) {
             if(dict == null) {
                 val = default(T);
                 return false;
@@ -74,7 +74,7 @@ namespace Assets.Minamo.Editor {
             return false;
         }
 
-        public T GetValue<T>(string key) {
+        internal T GetValue<T>(string key) {
             if(typeof(T) == typeof(string)) {
                 return (T)Convert.ChangeType(GetString(key), typeof(string));
             }
@@ -114,13 +114,13 @@ namespace Assets.Minamo.Editor {
             return v;
         }
 
-        public Dictionary<string, object> GetDict(string key) {
+        internal Dictionary<string, object> GetDict(string key) {
             Dictionary<string, object> d;
             TryGetValue(key, out d);
             return d;
         }
 
-        public List<object> GetList(string key) {
+        internal List<object> GetList(string key) {
             List<object> l;
             TryGetValue(key, out l);
             return l;

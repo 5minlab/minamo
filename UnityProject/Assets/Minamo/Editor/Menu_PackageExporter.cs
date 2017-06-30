@@ -3,42 +3,37 @@ using UnityEditor;
 using UnityEngine;
 
 namespace Assets.Minamo.Editor {
-    class PackageBuilder {
-        public static void Export() {
-            var b = new PackageBuilder();
-            var assets = b.GetAssetPaths();
+    interface IAssetFinder {
+        string[] GetList();
+    }
 
-            string output;
-            if (EnvironmentReader.TryRead("EXPORT_PATH", out output)) {
-                Debug.LogFormat("export package : {0}", output);
-                AssetDatabase.ExportPackage(assets, output);
-            }
-        }
-
-        interface IAssetFinder {
-            string[] GetList();
-        }
-
-        class MinamoAssetFinder : IAssetFinder {
-            public string[] GetList() {
-                var dirs = new string[] {
+    class MinamoAssetFinder : IAssetFinder {
+        public string[] GetList() {
+            var dirs = new string[] {
                     "Assets/Minamo"
                 };
-                var set = new HashSet<string>();
-                var founds = AssetDatabase.FindAssets("", dirs);
-                foreach (var guid in founds) {
-                    var assetPath = AssetDatabase.GUIDToAssetPath(guid);
-                    if (assetPath.EndsWith(".cs")) {
-                        set.Add(assetPath);
-                    }
+            var set = new HashSet<string>();
+            var founds = AssetDatabase.FindAssets("", dirs);
+            foreach (var guid in founds) {
+                var assetPath = AssetDatabase.GUIDToAssetPath(guid);
+                if (assetPath.EndsWith(".cs")) {
+                    set.Add(assetPath);
                 }
-
-                var list = new List<string>(set);
-                return list.ToArray();
             }
+
+            var list = new List<string>(set);
+            return list.ToArray();
+        }
+    }
+
+    class PackageBuilder {
+        internal bool Build(string output) {
+            var assets = GetAssetPaths();
+            AssetDatabase.ExportPackage(assets, output);
+            return true;
         }
 
-        public string[] GetAssetPaths() {
+        internal string[] GetAssetPaths() {
             var finders = new IAssetFinder[] {
                 new MinamoAssetFinder(),
             };

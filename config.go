@@ -36,7 +36,7 @@ type BuildConfig struct {
 type IdentificationConfig struct {
 	PackageName string `json:"packageName"`
 	VersionName string `json:"versionName"`
-	VersionCode string `json:"versionCode"`
+	VersionCode int    `json:"versionCode"`
 }
 
 type VRDevicesConfig struct {

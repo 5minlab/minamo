@@ -5,7 +5,7 @@
   "buildBasePath": "./output",
   "buildPath": "{{.ConfigName}}-{{.Year}}-{{.Month}}-{{.Day}}-{{.ShortRevision}}.apk",
 
-  "method": "Assets.Minamo.Editor.Build.Execute",
+  "method": "Assets.Minamo.Editor.EntryPoint.Build",
 
   "build": {
     "targetGroup": "android",
@@ -20,7 +20,7 @@
   "identification": {
     "packageName": "com.fiveminlab.minamo.daydream",
     "versionName": "0.0.1",
-    "versionCode": "1"
+    "versionCode": 1
   },
 
   "vrDevices": {

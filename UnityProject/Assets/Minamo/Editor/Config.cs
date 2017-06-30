@@ -37,7 +37,7 @@ namespace Assets.Minamo.Editor {
             get { return new AnyDictionary(root.GetList("defines")); }
         }
 
-        public Config(string jsontext) {
+        internal Config(string jsontext) {
             var d = jsontext.FromJson<object>() as Dictionary<string, object>;
             root = new AnyDictionary(d);
         }
@@ -58,11 +58,11 @@ namespace Assets.Minamo.Editor {
         }
 
 
-        class ModifierTuple {
+        internal class ModifierTuple {
             internal IModifier modifier;
             internal AnyDictionary data;
 
-            public ModifierTuple(IModifier m, AnyDictionary d) {
+            internal ModifierTuple(IModifier m, AnyDictionary d) {
                 this.modifier = m;
                 this.data = d;
             }
