@@ -1,6 +1,6 @@
 {
   "unityPath": "/Applications/Unity/Unity.app",
-  "projectPath": "./UnityProject_Android",
+  "projectPath": "./UnityProject",
 
   "buildBasePath": "./output",
   "buildPath": "{{.ConfigName}}-{{.Year}}-{{.Month}}-{{.Day}}-{{.ShortRevision}}.apk",

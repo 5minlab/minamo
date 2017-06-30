@@ -1,6 +1,6 @@
 {
   "unityPath": "C:\\Program Files\\Unity-5.6.1p1",
-  "projectPath": "./UnityProject_Standalone",
+  "projectPath": "./UnityProject",
 
   "buildBasePath": "./output",
   "buildPath": "{{.ConfigName}}-{{.Year}}-{{.Month}}-{{.Day}}-{{.Platform}}/{{.ShortRevision}}.exe",

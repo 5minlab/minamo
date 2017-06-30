@@ -1,6 +1,6 @@
 {
   "unityPath": "/Applications/Unity/Unity.app",
-  "projectPath": "./UnityProject_iOS",
+  "projectPath": "./UnityProject",
 
   "buildBasePath": "./output",
   "buildPath": "{{.ConfigName}}-{{.Year}}-{{.Month}}-{{.Day}}-{{.ShortRevision}}.ipa",

@@ -12,8 +12,8 @@ cache:
 
 before_install:
   - go version
+  - chmod a+x ./*.sh
   - chmod a+x ./scripts/*.sh
-  - chmod a+x ./setup_proj.sh
   - mkdir -p scripts/unity-installers/
 
 install:
@@ -25,25 +25,29 @@ install:
 
 jobs:
   include:
-    - script:
-      - go test -v ./...
-    - script:
-      - ./run_test.sh
-    - script:
-      - go build
-      - ./setup_proj.sh
-      - ./scripts/build_standalone_win_dev.sh
-      - ls -al ./output
-    - script:
-      - go build
-      - ./setup_proj.sh
-      - ./scripts/build_vr_win32_steamvr_dev.sh
-      - ls -al ./output
-    - script:
-      - go build
-      - ./setup_proj.sh
-      - ./scripts/build_vr_win32_oculus_dev.sh
-      - ls -al ./output
+    - stage: Golang unit test
+      script: go test -v ./...
+
+    - stage: Unity3D unit test
+      script: ./run_test.sh
+
+    - stage: Export package
+      script: ./export_package.sh
+
+    - stage: Build standalone_win_dev.json
+      before_script: go build
+      script: ./scripts/build_standalone_win_dev.sh
+      after_script: ls -al ./output
+
+    - stage: Build vr_win32_steamvr_dev.json
+      before_script: go build
+      script: ./scripts/build_vr_win32_steamvr_dev.sh
+      after_script: ls -al ./output
+
+    - stage: Build vr_win32_oculus_dev.json
+      before_script: go build
+      script: ./scripts/build_vr_win32_oculus_dev.sh
+      after_script: ls -al ./output
 
 notifications:
   email: false
