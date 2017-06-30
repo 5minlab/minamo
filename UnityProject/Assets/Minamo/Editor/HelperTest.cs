@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Assets.Minamo.Editor {
     class HelperTest {
         [Test]
-        void TestConvert() {
+        public void TestConvert() {
             var o = new List<object>()
             {
                 1, "a", null,
