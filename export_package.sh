@@ -14,3 +14,4 @@ export EXPORT_PATH=$EXPORT_DIR/$PACKAGE_NAME
 LOG_FILE=export.log
 
 $UNITY_PATH -quit -batchmode -nographics -silent-crashes -projectPath $PROJ_PATH -executeMethod $METHOD -logFile $LOG_FILE
+cp $EXPORT_PATH $EXPORT_DIR/minamo.unitypackage

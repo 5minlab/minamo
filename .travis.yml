@@ -64,6 +64,15 @@ after_script:
   - cat unity_vr_win32_steamvr_dev.log
   - cat unity_vr_win32_oculus_dev.log
 
+deploy:
+  provider: releases
+  api_key:
+    secure: gutLcLAJmDlsDhsrNebGh4EUHLC8uaOaDtG+Bsk/1TFqV1U9DcTfEzb6r1ajZVb1Wm2MZe0tyjTGVOQbLblsHqrDt+FkJIYCeCeA/sBpQZ4gSjVUtAaG3dA8amoYhqH4oBHKe/EjOKled5VUXQhniSfhDKjVgKgl3+IQ4htBYtggKG+gCfSqZA7XNscUYkL9DmkAc0lhKTJsmZ6uTxNa7mhAzmY2fW/vRmGIUhCAJFfBM5iD4I53ekgOmLsOtqoy+EnFQ+e2qsKNdTOGJLCwmJlE+6tw1zlu2tTYZtX1fUJICBySS0j/hahSK982kNzUEtd0PxCpIAIJsJEcVU0nkvZtr+fvXbh92foxKSPmmNWfAzEyFPzXiX78zuJ+dg7NwAP27PLSg/VkFQQSgIByoy66W73DIX9fLBuxxsm+EzHfE88g5u9LihqDAN2xNW5ym8AnxdCQJGUKjk22Rn8oQxCiPDURf779r9lls1KbNIh9mPqx3ngNQDjuKUbZizNpn2Yw8baiMeJi+IVNQWcVhguAsfBxNxyNvtZXv8G7h8jxJO2d1TTM6Z/ihytc/vXb1fDOlAGe6+Hv0T4F9W9r1JnLJq9V1QFB1rHcfRnTDY9s4QVA8wFCrrp78WSVCsoXCOASioVyMAoqMV5LqRMOoKUGmfgmR3B30BKAY4PNtXk=
+  file: dist/minamo.unitypackage
+  skip_cleanup: true
+  on:
+    tags: true
+
 # jobs:
 #   include:
 #     - stage: Golang unit test
