@@ -3,10 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
-	"os"
-
 	"io/ioutil"
-
+	"log"
+	"os"
 	"regexp"
 
 	"github.com/davecgh/go-spew/spew"
@@ -29,7 +28,7 @@ func main() {
 
 	config, err := loadConfig(configFilePath, logFilePath)
 	if err != nil {
-		panic(err)
+		log.Fatalf("Failed to load config: %s", err)
 	}
 
 	switch cmd {
@@ -40,8 +39,7 @@ func main() {
 	case "build":
 		cmdBuild(&config)
 	default:
-		fmt.Println("unknown command:", cmd)
-		os.Exit(-1)
+		log.Fatalf("Unknown command: %s", cmd)
 	}
 }
 
@@ -59,15 +57,15 @@ func cmdDump(c *Config) {
 func cmdShow(c *Config) {
 	switch field {
 	case "build_path":
-		fmt.Print(c.MakeProjectPath())
+		fmt.Println(c.MakeBuildPath())
 	case "config_path":
-		fmt.Print(c.FilePath)
+		fmt.Println(c.FilePath)
 	case "log_file_path":
-		fmt.Print(c.LogFilePath())
+		fmt.Println(c.LogFilePath())
 	case "unity_path":
-		fmt.Print(c.MakeUnityPath())
+		fmt.Println(c.MakeUnityPath())
 	case "project_path":
-		fmt.Print(c.MakeProjectPath())
+		fmt.Println(c.MakeProjectPath())
 	case "minamo_version":
 		tmpfile, err := ioutil.TempFile("", "minamo")
 		if err != nil {
@@ -95,8 +93,10 @@ func cmdShow(c *Config) {
 		if len(founds) > 0 {
 			f := founds[0][1]
 			v := string(f)
-			fmt.Print(v)
+			fmt.Println(v)
 		}
+	default:
+		log.Fatalf("unknown field: %s", field)
 	}
 }
 
