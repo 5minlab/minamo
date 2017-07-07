@@ -10,6 +10,11 @@ namespace Assets.Minamo.Editor {
                 if (kv.Value.GetType() != typeof(bool)) {
                     continue;
                 }
+                var val = (bool)kv.Value;
+                if(!val) {
+                    continue;
+                }
+
                 var mask = Helper.ToBuildOptions(kv.Key);
                 opts = opts | mask;
             }
