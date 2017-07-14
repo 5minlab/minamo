@@ -12,7 +12,7 @@
     "target": "windows",
 
     "options": {
-      "development": true,
+      "development": false,
       "allowDebugging": true
     }
   },
@@ -25,5 +25,9 @@
   "vrDevices": {
     "enabled": true,
     "devices": "OpenVR"
+  },
+  
+  "stereoRenderingPath": {
+    "stereoRenderingPath": "single-pass"
   }
 }

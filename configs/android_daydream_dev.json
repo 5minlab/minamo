@@ -32,6 +32,10 @@
     "min": 24,
     "target": 0
   },
+  
+  "stereoRenderingPath": {
+    "stereoRenderingPath": "single-pass"
+  },
 
   "keystore": {
     "keystoreName": "",

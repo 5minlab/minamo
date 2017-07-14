@@ -32,6 +32,10 @@
     "min": 19,
     "target": 0
   },
+  
+  "stereoRenderingPath": {
+    "stereoRenderingPath": "single-pass"
+  },
 
   "keystore": {
     "keystoreName": "C:/devel/minamo/UnitySecret/user.keystore",
