@@ -44,6 +44,10 @@ type VRDevicesConfig struct {
 	Devices string `json:"devices"`
 }
 
+type StereoRenderingPathConfig struct {
+	stereoRenderingPath string `json:"stereoRenderingPath"`
+}
+
 type KeystoreConfig struct {
 	KeystoreName string `json:"keystoreName"`
 	KeystorePass string `json:"keystorePass"`
@@ -59,11 +63,12 @@ type Config struct {
 
 	Method string `json:"method"`
 
-	Build          BuildConfig          `json:"build"`
-	Identification IdentificationConfig `json:"identification"`
-	VRDevices      VRDevicesConfig      `json:"vrDevices"`
-	AndroidSDK     AndroidSDKConfig     `json:"androidSdk"`
-	Keystore       KeystoreConfig       `json:"keystore"`
+	Build               BuildConfig               `json:"build"`
+	Identification      IdentificationConfig      `json:"identification"`
+	VRDevices           VRDevicesConfig           `json:"vrDevices"`
+	AndroidSDK          AndroidSDKConfig          `json:"androidSdk"`
+	Keystore            KeystoreConfig            `json:"keystore"`
+	StereoRenderingPath StereoRenderingPathConfig `json:"stereoRenderingPath"`
 
 	// extra field
 	FileName string
