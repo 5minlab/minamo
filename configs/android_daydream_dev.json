@@ -25,16 +25,13 @@
 
   "vrDevices": {
     "enabled": true,
-    "devices": "daydream"
+    "devices": "daydream",
+    "stereoRenderingPath": "single-pass"
   },
 
   "androidSdk": {
     "min": 24,
     "target": 0
-  },
-  
-  "stereoRenderingPath": {
-    "stereoRenderingPath": "single-pass"
   },
 
   "keystore": {

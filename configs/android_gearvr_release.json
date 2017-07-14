@@ -25,16 +25,13 @@
 
   "vrDevices": {
     "enabled": true,
-    "devices": "Oculus"
+    "devices": "Oculus",
+    "stereoRenderingPath": "single-pass"
   },
 
   "androidSdk": {
     "min": 19,
     "target": 0
-  },
-  
-  "stereoRenderingPath": {
-    "stereoRenderingPath": "single-pass"
   },
 
   "keystore": {

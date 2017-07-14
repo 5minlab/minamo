@@ -12,6 +12,7 @@ namespace Assets.Minamo.Editor {
         readonly BuildTargetGroup targetGroup;
         bool enabled;
         string[] devices = new string[] { };
+        StereoRenderingPath stereoRenderingPath;
 
         internal Modifier_VRDevice(BuildTargetGroup targetGroup) {
             this.targetGroup = targetGroup;
@@ -22,11 +23,15 @@ namespace Assets.Minamo.Editor {
 
             var deviceListStr = dict.GetValue<string>("devices");
             this.devices = deviceListStr.Split(',');
+
+            var table = StringEnumConverter.Get<StereoRenderingPath>();
+            stereoRenderingPath = table[dict.GetValue<string>("stereoRenderingPath")];
         }
 
         public void Apply() {
             VREditor.SetVREnabledDevicesOnTargetGroup(targetGroup, devices);
             VREditor.SetVREnabledOnTargetGroup(targetGroup, enabled);
+            PlayerSettings.stereoRenderingPath = stereoRenderingPath;
         }
 
         internal static Modifier_VRDevice Current(BuildTargetGroup g) {
@@ -36,13 +41,15 @@ namespace Assets.Minamo.Editor {
             {
                 devices = devices,
                 enabled = enabled,
+                stereoRenderingPath = PlayerSettings.stereoRenderingPath,
             };
         }
 
         public string GetConfigText() {
             var sb = new StringBuilder();
             sb.AppendFormat("enabled={0}, ", enabled);
-            sb.AppendFormat("devices={0}", string.Join(",", devices));
+            sb.AppendFormat("devices={0}, ", string.Join(",", devices));
+            sb.AppendFormat("stereoRenderingPath={0}", stereoRenderingPath);
             return sb.ToString();
         }
     }

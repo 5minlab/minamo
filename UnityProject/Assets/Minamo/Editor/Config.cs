@@ -37,11 +37,6 @@ namespace Assets.Minamo.Editor {
             get { return new AnyDictionary(root.GetList("defines")); }
         }
 
-        AnyDictionary StereoRenderingPath
-        {
-            get { return new AnyDictionary(root.GetDict("stereoRenderingPath")); }
-        }
-
         internal Config(string jsontext) {
             var d = jsontext.FromJson<object>() as Dictionary<string, object>;
             root = new AnyDictionary(d);
@@ -81,7 +76,6 @@ namespace Assets.Minamo.Editor {
                 new ModifierTuple(new Modifier_VRDevice(targetGroup), VRDevices),
                 new ModifierTuple(new Modifier_Keystore(), Keystore),
                 new ModifierTuple(new Modifier_DefineSymbol(targetGroup), Defines),
-                new ModifierTuple(new Modifier_StereoRenderingPath(), StereoRenderingPath),
             };
         }
 
@@ -93,7 +87,6 @@ namespace Assets.Minamo.Editor {
                 new ModifierTuple(Modifier_VRDevice.Current(targetGroup), VRDevices),
                 new ModifierTuple(Modifier_Keystore.Current(), Keystore),
                 new ModifierTuple(Modifier_DefineSymbol.Current(targetGroup), Defines),
-                new ModifierTuple(Modifier_StereoRenderingPath.Current(), StereoRenderingPath),
             };
         }
 
