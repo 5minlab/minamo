@@ -6,6 +6,7 @@ namespace Assets.Minamo.Editor {
     class PlayerBuildExecutor {
         static BuildOptions GetOptions(Dictionary<string, object> map) {
             var opts = BuildOptions.None;
+            var table = StringEnumConverter.Get<BuildOptions>();
             foreach (var kv in map) {
                 if (kv.Value.GetType() != typeof(bool)) {
                     continue;
@@ -15,7 +16,7 @@ namespace Assets.Minamo.Editor {
                     continue;
                 }
 
-                var mask = Helper.ToBuildOptions(kv.Key);
+                var mask = table[kv.Key];
                 opts = opts | mask;
             }
             return opts;
@@ -27,8 +28,8 @@ namespace Assets.Minamo.Editor {
         readonly string[] scenes = new string[] { };
 
         internal PlayerBuildExecutor(AnyDictionary dict) {
-            Target = Helper.ToBuildTarget(dict.GetValue<string>("target"));
-            TargetGroup = Helper.ToBuildTargetGroup(dict.GetValue<string>("targetGroup"));
+            Target = StringEnumConverter.Get<BuildTarget>()[dict.GetValue<string>("target")];
+            TargetGroup = StringEnumConverter.Get<BuildTargetGroup>()[dict.GetValue<string>("targetGroup")];
 
             var optionmap = dict.GetDict("options");
             Options = GetOptions(optionmap);
