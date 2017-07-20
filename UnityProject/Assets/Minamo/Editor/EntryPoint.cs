@@ -28,7 +28,7 @@ namespace Assets.Minamo.Editor {
             var config = new Config(content);
 
             var currModifiers = config.CreateCurrentModifiers();
-            var nextModifiers = config.CreateCurrentModifiers();
+            var nextModifiers = config.CreateConfigModifiers();
 
             foreach (var m in nextModifiers) {
                 var tokens = m.GetType().ToString().Split('.');
