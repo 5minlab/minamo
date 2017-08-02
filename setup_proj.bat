@@ -1,6 +1,6 @@
 @set BIN_DIR=%~dp0
 @set BASE_DIR=%BIN_DIR%\
-@set BASE_PROJ_DIR=%BASE_DIR%\UnityProject
+@set BASE_PROJ_DIR=%BASE_DIR%\UnityProject_Minamo
 @set ANDROID_PROJ_DIR=%BASE_DIR%\UnityProject_Android
 @set IOS_PROJ_DIR=%BASE_DIR%\UnityProject_iOS
 @set STANDALONE_PROJ_DIR=%BASE_DIR%\UnityProject_Standalone

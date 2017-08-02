@@ -2,7 +2,7 @@
 
 BASE_DIR=`pwd`
 UNITY_PATH="/Applications/Unity/Unity.app/Contents/MacOS/Unity"
-PROJ_PATH=$BASE_DIR/UnityProject
+PROJ_PATH=$BASE_DIR/UnityProject_Minamo
 TEST_RESULT=$BASE_DIR/results.xml
 LOG_FILE=test.log
 

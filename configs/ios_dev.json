@@ -1,6 +1,6 @@
 {
   "unityPath": "/Applications/Unity/Unity.app",
-  "projectPath": "./UnityProject",
+  "projectPath": "./UnityProject_Minamo",
 
   "buildBasePath": "./output",
   "buildPath": "{{.ConfigName}}-{{.Year}}-{{.Month}}-{{.Day}}-{{.ShortRevision}}.ipa",

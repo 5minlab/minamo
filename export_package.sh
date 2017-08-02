@@ -2,7 +2,7 @@
 
 CURR_DIR=`pwd`
 UNITY_PATH="/Applications/Unity/Unity.app/Contents/MacOS/Unity"
-PROJ_PATH=$CURR_DIR/UnityProject
+PROJ_PATH=$CURR_DIR/UnityProject_Minamo
 EXPORT_DIR=$CURR_DIR/dist
 METHOD=Assets.Minamo.Editor.EntryPoint.ExportPackage
 CONFIG_PATH=$CURR_DIR/configs/standalone_win_dev.json
