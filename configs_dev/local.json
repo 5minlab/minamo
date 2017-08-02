@@ -12,7 +12,7 @@
     "target": "windows",
 
     "options": {
-      "development": false,
+      "development": true,
       "allowDebugging": true
     }
   },
@@ -24,10 +24,29 @@
 
   "vrDevices": {
     "enabled": true,
-    "devices": "OpenVR"
-  },
-  
-  "stereoRenderingPath": {
+    "devices": "OpenVR",
     "stereoRenderingPath": "single-pass"
+  },
+
+  "identification": {
+    "packageName": "com.fiveminlab.minamo.localdev",
+    "versionName": "0.0.1",
+    "versionCode": 1
+  },
+
+  "androidSdk": {
+    "min": 24,
+    "target": 0
+  },
+
+  "keystore": {
+    "keystoreName": "",
+    "keystorePass": "",
+    "keyaliasName": "",
+    "keyaliasPass": ""
+  },
+
+  "publishing": {
+    "useApkExpansion": true
   }
 }

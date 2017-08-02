@@ -52,6 +52,10 @@ type KeystoreConfig struct {
 	KeyaliasPass string `json:"keyaliasPass"`
 }
 
+type PublishingConfig struct {
+	UseApkExpansion bool `json:"useApkExpansion"`
+}
+
 type Config struct {
 	UnityPath     string `json:"unityPath"`
 	ProjectPath   string `json:"projectPath"`
@@ -65,6 +69,7 @@ type Config struct {
 	VRDevices      VRDevicesConfig      `json:"vrDevices"`
 	AndroidSDK     AndroidSDKConfig     `json:"androidSdk"`
 	Keystore       KeystoreConfig       `json:"keystore"`
+	Publishing     PublishingConfig     `json:"publishing"`
 
 	// extra field
 	FileName string

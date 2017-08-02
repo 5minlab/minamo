@@ -1,24 +1,24 @@
 package main
 
 import "testing"
-import "path/filepath"
 
 func Test_loadConfig(t *testing.T) {
 	cases := []struct {
-		filename string
+		filepath string
 	}{
-		{"android_daydream_dev.json"},
-		{"android_gearvr_dev.json"},
-		{"android_gearvr_release.json"},
-		{"ios_dev.json"},
-		{"standalone_win_dev.json"},
-		{"vr_win32_oculus_dev.json"},
-		{"vr_win32_steamvr_dev.json"},
-		{"win32_custom.json"},
+		{"configs/android_daydream_dev.json"},
+		{"configs/android_gearvr_dev.json"},
+		{"configs/android_gearvr_release.json"},
+		{"configs/ios_dev.json"},
+		{"configs/standalone_win_dev.json"},
+		{"configs/vr_win32_oculus_dev.json"},
+		{"configs/vr_win32_steamvr_dev.json"},
+		{"configs/win32_custom.json"},
+
+		{"configs_dev/local.json"},
 	}
 	for _, c := range cases {
-		fp := filepath.Join("configs", c.filename)
-		_, err := loadConfig(fp, "")
+		_, err := loadConfig(c.filepath, "")
 		if err != nil {
 			t.Fatalf("loadConfig[%s]: %v, ", c, err)
 		}
