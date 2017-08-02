@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"regexp"
+	"strconv"
 
 	"github.com/davecgh/go-spew/spew"
 )
@@ -55,17 +56,20 @@ func cmdDump(c *Config) {
 }
 
 func cmdShow(c *Config) {
+	fmt.Println(getShowString(c))
+}
+func getShowString(c *Config) string {
 	switch field {
 	case "build_path":
-		fmt.Println(c.MakeBuildPath())
+		return c.MakeBuildPath()
 	case "config_path":
-		fmt.Println(c.FilePath)
+		return c.FilePath
 	case "log_file_path":
-		fmt.Println(c.LogFilePath())
+		return c.LogFilePath()
 	case "unity_path":
-		fmt.Println(c.MakeUnityPath())
+		return c.MakeUnityPath()
 	case "project_path":
-		fmt.Println(c.MakeProjectPath())
+		return c.MakeProjectPath()
 	case "minamo_version":
 		tmpfile, err := ioutil.TempFile("", "minamo")
 		if err != nil {
@@ -93,10 +97,20 @@ func cmdShow(c *Config) {
 		if len(founds) > 0 {
 			f := founds[0][1]
 			v := string(f)
-			fmt.Println(v)
+			return v
 		}
+
+		return ""
+	case "version_code":
+		code := NewOutputContext(c, c.Now).VersionCode
+		return strconv.Itoa(code)
+	case "version_name":
+		return NewOutputContext(c, c.Now).VersionName
+	case "package_name":
+		return NewOutputContext(c, c.Now).PackageName
 	default:
 		log.Fatalf("unknown field: %s", field)
+		return ""
 	}
 }
 
