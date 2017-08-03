@@ -24,5 +24,13 @@ namespace Assets.Minamo.Editor {
                 return defaultValue;
             }
         }
+
+        internal bool MustGetValue(string key, out T val) {
+            if (table.TryGetValue(key, out val)) {
+                return true;
+            }
+            val = defaultValue;
+            return false;
+        }
     }
 }

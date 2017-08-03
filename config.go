@@ -56,6 +56,11 @@ type PublishingConfig struct {
 	UseApkExpansion bool `json:"useApkExpansion"`
 }
 
+type ScriptingConfig struct {
+	ApiCompatibilityLevel string `json:"apiCompatibilityLevel"`
+	Backend               string `json:"backend"`
+}
+
 type Config struct {
 	UnityPath     string `json:"unityPath"`
 	ProjectPath   string `json:"projectPath"`
@@ -70,6 +75,7 @@ type Config struct {
 	AndroidSDK     AndroidSDKConfig     `json:"androidSdk"`
 	Keystore       KeystoreConfig       `json:"keystore"`
 	Publishing     PublishingConfig     `json:"publishing"`
+	Scripting      ScriptingConfig      `json:"scripting"`
 
 	// extra field
 	FileName string

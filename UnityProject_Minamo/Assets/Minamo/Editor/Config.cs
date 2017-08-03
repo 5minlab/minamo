@@ -42,6 +42,11 @@ namespace Assets.Minamo.Editor {
             get { return new AnyDictionary(root.GetDict("publishing")); }
         }
 
+        AnyDictionary Scripting
+        {
+            get { return new AnyDictionary(root.GetDict("scripting")); }
+        }
+
         internal Config(string jsontext) {
             var d = jsontext.FromJson<object>() as Dictionary<string, object>;
             root = new AnyDictionary(d);
@@ -82,6 +87,7 @@ namespace Assets.Minamo.Editor {
                 new ModifierTuple(new Modifier_Keystore(), Keystore),
                 new ModifierTuple(new Modifier_DefineSymbol(targetGroup), Defines),
                 new ModifierTuple(new Modifier_Publishing(), Publishing),
+                new ModifierTuple(new Modifier_Scripting(targetGroup), Scripting),
             };
         }
 
@@ -94,6 +100,7 @@ namespace Assets.Minamo.Editor {
                 new ModifierTuple(Modifier_Keystore.Current(), Keystore),
                 new ModifierTuple(Modifier_DefineSymbol.Current(targetGroup), Defines),
                 new ModifierTuple(Modifier_Publishing.Current(), Publishing),
+                new ModifierTuple(Modifier_Scripting.Current(targetGroup), Scripting),
             };
         }
 

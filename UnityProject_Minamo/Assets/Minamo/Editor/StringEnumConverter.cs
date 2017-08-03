@@ -14,6 +14,8 @@ namespace Assets.Minamo.Editor {
                 { typeof(BuildTargetGroup), ForBuildTargetGroup() },
                 { typeof(BuildOptions), ForBuildOptions() },
                 { typeof(StereoRenderingPath), ForStereoRenderingPath() },
+                { typeof(ApiCompatibilityLevel), ForApiCompatibilityLevel() },
+                { typeof(ScriptingImplementation), ForScriptingImplementation() },
             };
         }
 
@@ -73,6 +75,28 @@ namespace Assets.Minamo.Editor {
                 { "forceEnableAssertions", BuildOptions.ForceEnableAssertions },
             };
             return new StringEnumDictionary<BuildOptions>(dict, BuildOptions.None);
+        }
+
+        static StringEnumDictionary<ApiCompatibilityLevel> ForApiCompatibilityLevel() {
+            var dict = new Dictionary<string, ApiCompatibilityLevel>()
+            {
+                { "NET_2_0", ApiCompatibilityLevel.NET_2_0 },
+                { "NET_2_0_Subset", ApiCompatibilityLevel.NET_2_0_Subset },
+                { "NET_4_6", ApiCompatibilityLevel.NET_4_6 },
+                { "NET_Web", ApiCompatibilityLevel.NET_Web },
+                { "NET_Micro", ApiCompatibilityLevel.NET_Micro },
+            };
+            return new StringEnumDictionary<ApiCompatibilityLevel>(dict, ApiCompatibilityLevel.NET_2_0);
+        }
+
+        static StringEnumDictionary<ScriptingImplementation> ForScriptingImplementation() {
+            var dict = new Dictionary<string, ScriptingImplementation>()
+            {
+                { "Mono2x", ScriptingImplementation.Mono2x },
+                { "IL2CPP", ScriptingImplementation.IL2CPP },
+                { "WinRTDotNET", ScriptingImplementation.WinRTDotNET },
+            };
+            return new StringEnumDictionary<ScriptingImplementation>(dict, ScriptingImplementation.Mono2x);
         }
     }
 }
