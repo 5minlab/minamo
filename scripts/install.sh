@@ -1,7 +1,13 @@
 #!/bin/sh
 
 # view-source:https://store.unity.com/kr/download/thank-you?thank-you=personal&os=osx&nid=325
-BASE_URL=http://netstorage.unity3d.com/unity
+
+# stable release
+# BASE_URL=http://netstorage.unity3d.com/unity
+
+# patch release
+BASE_URL=http://beta.unity3d.com/download
+
 HASH=892c0f8d8f8a
 VERSION=2017.1.0p4
 CACHE_DIR=unity-installers
