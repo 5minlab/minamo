@@ -44,16 +44,28 @@ namespace Assets.Minamo.Editor {
         }
 
         static StringEnumDictionary<BuildTarget> ForBuildTarget() {
+            // order = build target group
             var dict = new Dictionary<string, BuildTarget>()
             {
+                // mobile
                 { "android", BuildTarget.Android },
                 { "ios", BuildTarget.iOS },
 
+                // standalone
                 { "windows", BuildTarget.StandaloneWindows },
                 { "windows64", BuildTarget.StandaloneWindows64 },
-
                 { "osx", BuildTarget.StandaloneOSXUniversal },
                 { "linux", BuildTarget.StandaloneLinuxUniversal },
+
+                { "tvos", BuildTarget.tvOS },
+                { "tizen", BuildTarget.Tizen },
+
+                // console
+                { "xboxone", BuildTarget.XboxOne },
+                { "ps4", BuildTarget.PS4 },
+
+                { "webgl", BuildTarget.WebGL },
+                { "wsa", BuildTarget.WSAPlayer },
             };
             return new StringEnumDictionary<BuildTarget>(dict, BuildTarget.NoTarget);
         }
