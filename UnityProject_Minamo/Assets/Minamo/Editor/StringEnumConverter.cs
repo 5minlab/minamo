@@ -33,6 +33,12 @@ namespace Assets.Minamo.Editor {
                 { "android", BuildTargetGroup.Android },
                 { "ios", BuildTargetGroup.iOS },
                 { "standalone", BuildTargetGroup.Standalone },
+                { "tvos", BuildTargetGroup.tvOS },
+                { "tizen", BuildTargetGroup.Tizen },
+                { "xboxone", BuildTargetGroup.XboxOne },
+                { "ps4", BuildTargetGroup.PS4 },
+                { "webgl", BuildTargetGroup.WebGL },
+                { "wsa", BuildTargetGroup.WSA },
             };
             return new StringEnumDictionary<BuildTargetGroup>(dict, BuildTargetGroup.Standalone);
         }

@@ -2,8 +2,8 @@
 
 # view-source:https://store.unity.com/kr/download/thank-you?thank-you=personal&os=osx&nid=325
 BASE_URL=http://netstorage.unity3d.com/unity
-HASH=a2913c821e27
-VERSION=5.6.2f1
+HASH=892c0f8d8f8a
+VERSION=2017.1.0p4
 CACHE_DIR=unity-installers
 
 download() {
