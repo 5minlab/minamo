@@ -23,6 +23,7 @@
 
   "vrDevices": {
     "enabled": false,
-    "devices": ""
+    "devices": "",
+	"stereoRenderingPath": "multi-pass"
   }
 }

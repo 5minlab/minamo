@@ -27,6 +27,7 @@
 
   "vrDevices": {
     "enabled": true,
-    "devices": "Oculus"
+    "devices": "Oculus",
+	"stereoRenderingPath": "multi-pass"
   }
 }
