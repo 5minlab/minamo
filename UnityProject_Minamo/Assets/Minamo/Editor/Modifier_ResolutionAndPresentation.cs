@@ -8,6 +8,7 @@ namespace Assets.Minamo.Editor {
     class Modifier_ResolutionAndPresentation : IModifier {
         // resolution
         bool runInBackground;
+        bool runInBackground_use;
 
         // standalone player
 
@@ -23,7 +24,9 @@ namespace Assets.Minamo.Editor {
         }
 
         public void Apply() {
-            Application.runInBackground = runInBackground;
+            if (runInBackground_use) {
+                Application.runInBackground = runInBackground;
+            }
         }
 
         internal static Modifier_ResolutionAndPresentation Current() {
@@ -35,12 +38,14 @@ namespace Assets.Minamo.Editor {
 
         public string GetConfigText() {
             var sb = new StringBuilder();
-            sb.AppendFormat("RunInBackground={0}, ", runInBackground);
+            if (runInBackground_use) {
+                sb.AppendFormat("RunInBackground={0}, ", runInBackground);
+            }
             return sb.ToString();
         }
 
         public void Reload(AnyDictionary dict) {
-            runInBackground = dict.GetValue<bool>("runInBackground", false);
+            runInBackground_use = dict.TryGetValue<bool>("runInBackground", out runInBackground);
         }
     }
 }
