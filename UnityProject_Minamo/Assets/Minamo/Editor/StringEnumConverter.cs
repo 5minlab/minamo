@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -16,6 +16,7 @@ namespace Assets.Minamo.Editor {
                 { typeof(StereoRenderingPath), ForStereoRenderingPath() },
                 { typeof(ApiCompatibilityLevel), ForApiCompatibilityLevel() },
                 { typeof(ScriptingImplementation), ForScriptingImplementation() },
+                { typeof(ScriptingRuntimeVersion), ForScriptingRuntimeVersion() },
             };
         }
 
@@ -115,6 +116,15 @@ namespace Assets.Minamo.Editor {
                 { "WinRTDotNET", ScriptingImplementation.WinRTDotNET },
             };
             return new StringEnumDictionary<ScriptingImplementation>(dict, ScriptingImplementation.Mono2x);
+        }
+
+        static StringEnumDictionary<ScriptingRuntimeVersion> ForScriptingRuntimeVersion() {
+            var dict = new Dictionary<string, ScriptingRuntimeVersion>()
+            {
+                { "latest", ScriptingRuntimeVersion.Latest },
+                { "legacy", ScriptingRuntimeVersion.Legacy },
+            };
+            return new StringEnumDictionary<ScriptingRuntimeVersion>(dict, ScriptingRuntimeVersion.Legacy);
         }
     }
 }

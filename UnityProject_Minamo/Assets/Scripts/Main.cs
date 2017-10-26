@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +20,9 @@ class Main : MonoBehaviour {
         sb.AppendLine("current platform is PLATFORM_WIN32_OCULUS");
 #endif
 
+#if PLATFORM_UWP
+        sb.AppendLine("currnet platform is PLATFORM_UWP");
+#endif
 
 #if HELLO_WORLD
         sb.AppendLine("hello world!");

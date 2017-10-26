@@ -8,8 +8,8 @@
   "method": "Assets.Minamo.Editor.EntryPoint.Build",
 
   "build": {
-    "targetGroup": "standalone",
-    "target": "windows",
+    "targetGroup": "wsa",
+    "target": "wsa",
 
     "options": {
       "development": true,
@@ -19,13 +19,13 @@
 
   "defines": [
     "HELLO_WORLD",
-    "PLATFORM_WIN32_STEAMVR"
+    "PLATFORM_UWP"
   ],
 
   "vrDevices": {
     "enabled": true,
-    "devices": "OpenVR",
-    "stereoRenderingPath": "single-pass"
+    "devices": "WindowsMR",
+    "stereoRenderingPath": "instancing"
   },
 
   "identification": {
@@ -52,11 +52,11 @@
   
   "scripting": {
     "backend": "Mono2x",
-	"scriptingRuntimeVersion": "legacy",
-    "apiCompatibilityLevel": "NET_2_0"
+	"scriptingRuntimeVersion": "latest",
+    "apiCompatibilityLevel": "NET_4_6"
   },
   
   "resolutionAndPresentation": {
-    "runInBackground": true
+    "runInBackground": false
   }
 }
