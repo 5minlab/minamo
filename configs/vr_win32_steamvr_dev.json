@@ -21,6 +21,10 @@
     "HELLO_WORLD",
     "PLATFORM_WIN32_STEAMVR"
   ],
+  
+  "resolutionAndPresentation": {
+    "runInBackground": true
+  },
 
   "vrDevices": {
     "enabled": true,

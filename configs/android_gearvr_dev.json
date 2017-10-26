@@ -22,6 +22,10 @@
     "versionName": "0.0.1",
     "versionCode": 1
   },
+  
+  "resolutionAndPresentation": {
+    "runInBackground": true
+  },
 
   "vrDevices": {
     "enabled": true,

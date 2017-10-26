@@ -33,6 +33,10 @@
     "min": 24,
     "target": 0
   },
+  
+  "resolutionAndPresentation": {
+    "runInBackground": true
+  },
 
   "keystore": {
     "keystoreName": "",

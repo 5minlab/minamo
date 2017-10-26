@@ -53,5 +53,9 @@
   "scripting": {
     "backend": "Mono2x",
     "apiCompatibilityLevel": "NET_2_0"
+  },
+  
+  "resolutionAndPresentation": {
+    "runInBackground": true
   }
 }

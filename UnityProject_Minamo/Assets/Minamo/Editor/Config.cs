@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using TinyJson;
 using UnityEditor;
 
@@ -47,6 +47,11 @@ namespace Assets.Minamo.Editor {
             get { return new AnyDictionary(root.GetDict("scripting")); }
         }
 
+        AnyDictionary ResolutionAndPresentation
+        {
+            get { return new AnyDictionary(root.GetDict("resolutionAndPresentation")); }
+        }
+
         internal Config(string jsontext) {
             var d = jsontext.FromJson<object>() as Dictionary<string, object>;
             root = new AnyDictionary(d);
@@ -88,6 +93,7 @@ namespace Assets.Minamo.Editor {
                 new ModifierTuple(new Modifier_DefineSymbol(targetGroup), Defines),
                 new ModifierTuple(new Modifier_Publishing(), Publishing),
                 new ModifierTuple(new Modifier_Scripting(targetGroup), Scripting),
+                new ModifierTuple(new Modifier_ResolutionAndPresentation(), ResolutionAndPresentation),
             };
         }
 
@@ -101,6 +107,7 @@ namespace Assets.Minamo.Editor {
                 new ModifierTuple(Modifier_DefineSymbol.Current(targetGroup), Defines),
                 new ModifierTuple(Modifier_Publishing.Current(), Publishing),
                 new ModifierTuple(Modifier_Scripting.Current(targetGroup), Scripting),
+                new ModifierTuple(Modifier_ResolutionAndPresentation.Current(), ResolutionAndPresentation),
             };
         }
 

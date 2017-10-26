@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace Assets.Minamo.Editor {
@@ -31,7 +31,7 @@ namespace Assets.Minamo.Editor {
                     val = int.Parse(s);
                     return true;
 
-                } catch (FormatException e) {
+                } catch (FormatException) {
                     val = 0;
                     return false;
                 }

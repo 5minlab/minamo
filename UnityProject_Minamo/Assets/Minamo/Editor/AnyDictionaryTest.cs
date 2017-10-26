@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using System.Collections.Generic;
 
 namespace Assets.Minamo.Editor {
@@ -75,7 +75,7 @@ namespace Assets.Minamo.Editor {
                 "int", "bool", "dict", "list",
             };
             foreach(var k in invalidKeys) {
-                Assert.AreEqual("", dict.GetValue<string>(k));
+                Assert.AreEqual(null, dict.GetValue<string>(k));
             }
             Assert.AreEqual("hello", dict.GetValue<string>("str"));
         }

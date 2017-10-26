@@ -1,5 +1,9 @@
 {
   "method": "Assets.Editor.BuildScript.CustomBuild",
+  
+  "resolutionAndPresentation": {
+    "runInBackground": true
+  },
 
   "vrDevices": {
     "enabled": false

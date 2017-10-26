@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -57,9 +57,9 @@ namespace Assets.Minamo.Editor {
             return dict.ContainsKey(k);
         }
 
-        internal bool TryGetValue<T>(string key, out T val) {
+        internal bool TryGetValue<T>(string key, out T val, T defaultVal = default(T)) {
             if(dict == null) {
-                val = default(T);
+                val = defaultVal;
                 return false;
             }
 
@@ -70,22 +70,24 @@ namespace Assets.Minamo.Editor {
                     return (val != null);
                 }
             }
-            val = default(T);
+            val = defaultVal;
             return false;
         }
 
-        internal T GetValue<T>(string key) {
+        internal T GetValue<T>(string key, T defaultVal = default(T)) {
             if(typeof(T) == typeof(string)) {
-                return (T)Convert.ChangeType(GetString(key), typeof(string));
+                var v = (string)Convert.ChangeType(defaultVal, typeof(string));
+                return (T)Convert.ChangeType(GetString(key, v), typeof(string));
             }
             if(typeof(T) == typeof(bool)) {
-                return (T)Convert.ChangeType(GetBool(key), typeof(bool));
+                var v = (bool)Convert.ChangeType(defaultVal, typeof(bool));
+                return (T)Convert.ChangeType(GetBool(key, v), typeof(bool));
             }
             if(typeof(T) == typeof(int)) {
-                return (T)Convert.ChangeType(GetInt(key), typeof(int));
+                var v = (int)Convert.ChangeType(defaultVal, typeof(int));
+                return (T)Convert.ChangeType(GetInt(key, v), typeof(int));
             }
-
-            return default(T);
+            return defaultVal;
         }
 
         /// <summary>
@@ -93,24 +95,33 @@ namespace Assets.Minamo.Editor {
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        string GetString(string key) {
+        string GetString(string key, string defaultVal) {
             string s;
-            TryGetValue(key, out s);
+            var ok = TryGetValue(key, out s);
+            if(!ok) {
+                return defaultVal;
+            }
             if(s == null) {
                 return "";
             }
             return s;
         }
 
-        int GetInt(string key) {
+        int GetInt(string key, int defaultVal) {
             int v;
-            TryGetValue(key, out v);
+            var ok = TryGetValue(key, out v);
+            if(!ok) {
+                return defaultVal;
+            }
             return v;
         }
 
-        bool GetBool(string key) {
+        bool GetBool(string key, bool defaultVal) {
             bool v;
-            TryGetValue(key, out v);
+            var ok = TryGetValue(key, out v);
+            if(!ok) {
+                return defaultVal;
+            }
             return v;
         }
 

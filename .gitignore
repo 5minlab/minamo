@@ -60,3 +60,5 @@ sysinfo.txt
 output/
 *.log
 results.xml
+
+.vs

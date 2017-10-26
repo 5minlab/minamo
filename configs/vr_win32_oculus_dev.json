@@ -20,6 +20,10 @@
   "defines": [
     "PLATFORM_WIN32_OCULUS"
   ],
+  
+  "resolutionAndPresentation": {
+    "runInBackground": true
+  },
 
   "vrDevices": {
     "enabled": true,
