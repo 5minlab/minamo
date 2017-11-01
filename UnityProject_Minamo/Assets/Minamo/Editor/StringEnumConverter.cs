@@ -17,6 +17,7 @@ namespace Assets.Minamo.Editor {
                 { typeof(ApiCompatibilityLevel), ForApiCompatibilityLevel() },
                 { typeof(ScriptingImplementation), ForScriptingImplementation() },
                 { typeof(ScriptingRuntimeVersion), ForScriptingRuntimeVersion() },
+                { typeof(PlayerSettings.WSACapability), ForWSACapability() },
             };
         }
 
@@ -125,6 +126,38 @@ namespace Assets.Minamo.Editor {
                 { "legacy", ScriptingRuntimeVersion.Legacy },
             };
             return new StringEnumDictionary<ScriptingRuntimeVersion>(dict, ScriptingRuntimeVersion.Legacy);
+        }
+
+        static StringEnumDictionary<PlayerSettings.WSACapability> ForWSACapability() {
+            var dict = new Dictionary<string, PlayerSettings.WSACapability>()
+            {
+                { "EnterpriseAuthentication", PlayerSettings.WSACapability.EnterpriseAuthentication },
+                { "InternetClient", PlayerSettings.WSACapability.InternetClient},
+                { "InternetClientServer", PlayerSettings.WSACapability.InternetClientServer},
+                { "MusicLibrary",  PlayerSettings.WSACapability.MusicLibrary },
+                { "PicturesLibrary",  PlayerSettings.WSACapability.PicturesLibrary },
+                { "PrivateNetworkClientServer", PlayerSettings.WSACapability.PrivateNetworkClientServer },
+                { "RemovableStorage", PlayerSettings.WSACapability.RemovableStorage },
+                { "SharedUserCertificates", PlayerSettings.WSACapability.SharedUserCertificates },
+                { "VideosLibrary", PlayerSettings.WSACapability.VideosLibrary },
+                { "WebCam", PlayerSettings.WSACapability.WebCam },
+                { "Proximity", PlayerSettings.WSACapability.Proximity },
+                { "Microphone", PlayerSettings.WSACapability.Microphone },
+                { "Location", PlayerSettings.WSACapability.Location },
+                { "HumanInterfaceDevice", PlayerSettings.WSACapability.HumanInterfaceDevice },
+                { "AllJoyn", PlayerSettings.WSACapability.AllJoyn },
+                { "BlockedChatMessages", PlayerSettings.WSACapability.BlockedChatMessages },
+                { "Chat", PlayerSettings.WSACapability.Chat },
+                { "CodeGeneration", PlayerSettings.WSACapability.CodeGeneration },
+                { "Objects3D", PlayerSettings.WSACapability.Objects3D },
+                { "PhoneCall", PlayerSettings.WSACapability.PhoneCall },
+                { "UserAccountInformation", PlayerSettings.WSACapability.UserAccountInformation },
+                { "VoipCall", PlayerSettings.WSACapability.VoipCall },
+                { "Bluetooth", PlayerSettings.WSACapability.Bluetooth },
+                { "SpatialPerception", PlayerSettings.WSACapability.SpatialPerception },
+                { "InputInjectionBrokered", PlayerSettings.WSACapability.InputInjectionBrokered },
+            };
+            return new StringEnumDictionary<PlayerSettings.WSACapability>(dict, (PlayerSettings.WSACapability)0);
         }
     }
 }

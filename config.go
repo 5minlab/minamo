@@ -53,7 +53,8 @@ type KeystoreConfig struct {
 }
 
 type PublishingConfig struct {
-	UseApkExpansion bool `json:"useApkExpansion"`
+	UseApkExpansion bool     `json:"useApkExpansion"`
+	UwpCapability   []string `json:"uwpCapability"`
 }
 
 type ScriptingConfig struct {

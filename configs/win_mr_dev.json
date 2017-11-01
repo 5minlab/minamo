@@ -1,5 +1,5 @@
 {
-  "unityPath": "C:\\Program Files\\Unity 2017.2.0f3",
+  "unityPath": "/Applications/Unity/Unity.app",
   "projectPath": "./UnityProject_Minamo",
 
   "buildBasePath": "./output",
@@ -21,6 +21,10 @@
     "HELLO_WORLD",
     "PLATFORM_UWP"
   ],
+  
+  "resolutionAndPresentation": {
+    "runInBackground": false
+  },
 
   "xr": {
     "enabled": true,
@@ -30,39 +34,9 @@
     "stereoRenderingPath": "instancing"
   },
 
-  "identification": {
-    "packageName": "com.fiveminlab.minamo.localdev",
-    "versionName": "0.0.1",
-    "versionCode": 1
-  },
-
-  "androidSdk": {
-    "min": 24,
-    "target": 0
-  },
-
-  "keystore": {
-    "keystoreName": "",
-    "keystorePass": "",
-    "keyaliasName": "",
-    "keyaliasPass": ""
-  },
-
-  "publishing": {
-    "useApkExpansion": true,
-    "uwpCapability": [
-      "SpatialPerception",
-      "WebCam"
-    ]
-  },
-  
   "scripting": {
     "backend": "Mono2x",
     "scriptingRuntimeVersion": "latest",
     "apiCompatibilityLevel": "NET_4_6"
-  },
-  
-  "resolutionAndPresentation": {
-    "runInBackground": false
   }
 }

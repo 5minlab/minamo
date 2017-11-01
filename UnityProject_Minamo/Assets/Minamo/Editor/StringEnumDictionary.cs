@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Assets.Minamo.Editor {
     /// <summary>
     /// dictionary(key=string, value=enum) + default value
     /// </summary>
-    class StringEnumDictionary<T> {
+    class StringEnumDictionary<T> : IEnumerable<KeyValuePair<string, T>> {
         readonly Dictionary<string, T> table;
         readonly T defaultValue;
 
@@ -25,12 +26,20 @@ namespace Assets.Minamo.Editor {
             }
         }
 
+        public IEnumerator<KeyValuePair<string, T>> GetEnumerator() {
+            return table.GetEnumerator();
+        }
+
         internal bool MustGetValue(string key, out T val) {
             if (table.TryGetValue(key, out val)) {
                 return true;
             }
             val = defaultValue;
             return false;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return table.GetEnumerator();
         }
     }
 }
