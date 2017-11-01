@@ -21,5 +21,9 @@ namespace Assets.Minamo.Editor {
         public override string ToString() {
             return Value.ToString();
         }
+
+        public static implicit operator T(AssignableType<T> v) {
+            return v.Value;
+        }
     }
 }

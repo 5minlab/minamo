@@ -8,41 +8,35 @@ namespace Assets.Minamo.Editor {
     class Modifier_Scripting : IModifier {
         readonly BuildTargetGroup buildTargetGroup;
 
-        bool flag_backend = false;
-        ScriptingImplementation backend;
-
-
-        bool flag_apiCompatibilityLevel = false;
-        ApiCompatibilityLevel apiCompatibilityLevel;
-
-        bool flag_scriptingRuntimeVersion = false;
-        ScriptingRuntimeVersion scriptingRuntimeVersion;
+        AssignableType<ScriptingImplementation> backend;
+        AssignableType<ApiCompatibilityLevel> apiCompatibilityLevel;
+        AssignableType<ScriptingRuntimeVersion> scriptingRuntimeVersion;
 
         internal Modifier_Scripting(BuildTargetGroup targetGroup) {
             this.buildTargetGroup = targetGroup;
         }
 
         public void Apply() {
-            if(flag_backend) {
+            if(backend.Flag) {
                 PlayerSettings.SetScriptingBackend(buildTargetGroup, backend);
             }
-            if(flag_apiCompatibilityLevel) {
+            if(apiCompatibilityLevel.Flag) {
                 PlayerSettings.SetApiCompatibilityLevel(buildTargetGroup, apiCompatibilityLevel);
             }
-            if(flag_scriptingRuntimeVersion) {
+            if(scriptingRuntimeVersion.Flag) {
                 PlayerSettings.scriptingRuntimeVersion = scriptingRuntimeVersion;
             }
         }
 
         public string GetConfigText() {
             var sb = new StringBuilder();
-            if(flag_backend) {
+            if(backend.Flag) {
                 sb.AppendFormat("Scripting Backend: {0}, ", backend);
             }
-            if(flag_apiCompatibilityLevel) {
+            if(apiCompatibilityLevel.Flag) {
                 sb.AppendFormat("Api Compatible Level: {0}, ", apiCompatibilityLevel);
             }
-            if(flag_scriptingRuntimeVersion) {
+            if(scriptingRuntimeVersion.Flag) {
                 sb.AppendFormat("Scripting Runtime Version: {0}, ", scriptingRuntimeVersion);
             }
             return sb.ToString();
@@ -52,26 +46,19 @@ namespace Assets.Minamo.Editor {
             var apiStr = dict.GetValue<string>("apiCompatibilityLevel");
             if(apiStr != null) {
                 var apiDict = StringEnumConverter.Get<ApiCompatibilityLevel>();
-                flag_apiCompatibilityLevel = apiDict.MustGetValue(apiStr, out apiCompatibilityLevel);
-            } else {
-                flag_scriptingRuntimeVersion = false;
+                apiCompatibilityLevel = AssignableType<ApiCompatibilityLevel>.Create(apiDict[apiStr]);
             }
             
-
             var backendStr = dict.GetValue<string>("backend");
             if (backendStr != null) {
                 var backendDict = StringEnumConverter.Get<ScriptingImplementation>();
-                flag_backend = backendDict.MustGetValue(backendStr, out backend);
-            } else {
-                flag_backend = false;
+                backend = AssignableType<ScriptingImplementation>.Create(backendDict[backendStr]);
             }
 
             var versionStr = dict.GetValue<string>("scriptingRuntimeVersion");
             if (versionStr != null) {
                 var versionDict = StringEnumConverter.Get<ScriptingRuntimeVersion>();
-                flag_scriptingRuntimeVersion = versionDict.MustGetValue(versionStr, out scriptingRuntimeVersion);
-            } else {
-                flag_scriptingRuntimeVersion = false;
+                scriptingRuntimeVersion = AssignableType<ScriptingRuntimeVersion>.Create(versionDict[versionStr]);
             }
         }
 
@@ -81,14 +68,9 @@ namespace Assets.Minamo.Editor {
             var version = PlayerSettings.scriptingRuntimeVersion;
             return new Modifier_Scripting(g)
             {
-                flag_backend = true,
-                backend = backend,
-
-                flag_apiCompatibilityLevel = true,
-                apiCompatibilityLevel = api,
-
-                flag_scriptingRuntimeVersion = true,
-                scriptingRuntimeVersion = version,
+                backend = AssignableType<ScriptingImplementation>.Create(backend),
+                apiCompatibilityLevel = AssignableType<ApiCompatibilityLevel>.Create(api),
+                scriptingRuntimeVersion = AssignableType<ScriptingRuntimeVersion>.Create(version),
             };
         }
     }
