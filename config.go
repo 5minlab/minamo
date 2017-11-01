@@ -39,10 +39,10 @@ type IdentificationConfig struct {
 	VersionCode int    `json:"versionCode"`
 }
 
-type VRDevicesConfig struct {
-	Enabled             bool   `json:"enabled"`
-	Devices             string `json:"devices"`
-	StereoRenderingPath string `json:"stereoRenderingPath"`
+type XRConfig struct {
+	Enabled             bool     `json:"enabled"`
+	Devices             []string `json:"devices"`
+	StereoRenderingPath string   `json:"stereoRenderingPath"`
 }
 
 type KeystoreConfig struct {
@@ -59,6 +59,11 @@ type PublishingConfig struct {
 type ScriptingConfig struct {
 	ApiCompatibilityLevel string `json:"apiCompatibilityLevel"`
 	Backend               string `json:"backend"`
+	RuntimeVersion        string `json:"scriptingRuntimeVersion"`
+}
+
+type ResolutionAndPresentationConfig struct {
+	RunInBackground bool `json:"runInBackground"`
 }
 
 type Config struct {
@@ -69,13 +74,15 @@ type Config struct {
 
 	Method string `json:"method"`
 
-	Build          BuildConfig          `json:"build"`
-	Identification IdentificationConfig `json:"identification"`
-	VRDevices      VRDevicesConfig      `json:"vrDevices"`
-	AndroidSDK     AndroidSDKConfig     `json:"androidSdk"`
-	Keystore       KeystoreConfig       `json:"keystore"`
-	Publishing     PublishingConfig     `json:"publishing"`
-	Scripting      ScriptingConfig      `json:"scripting"`
+	Build                     BuildConfig                     `json:"build"`
+	Identification            IdentificationConfig            `json:"identification"`
+	XR                        XRConfig                        `json:"xr"`
+	AndroidSDK                AndroidSDKConfig                `json:"androidSdk"`
+	Keystore                  KeystoreConfig                  `json:"keystore"`
+	Publishing                PublishingConfig                `json:"publishing"`
+	Scripting                 ScriptingConfig                 `json:"scripting"`
+	ResolutionAndPresentation ResolutionAndPresentationConfig `json:"resolutionAndPresentation"`
+	Defines                   []string                        `json:"defines"`
 
 	// extra field
 	FileName string

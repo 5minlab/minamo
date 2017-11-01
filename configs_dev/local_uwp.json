@@ -22,7 +22,7 @@
     "PLATFORM_UWP"
   ],
 
-  "vrDevices": {
+  "xr": {
     "enabled": true,
     "devices": "WindowsMR",
     "stereoRenderingPath": "instancing"
@@ -52,7 +52,7 @@
   
   "scripting": {
     "backend": "Mono2x",
-	"scriptingRuntimeVersion": "latest",
+    "scriptingRuntimeVersion": "latest",
     "apiCompatibilityLevel": "NET_4_6"
   },
   

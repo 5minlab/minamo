@@ -25,9 +25,11 @@
     "runInBackground": true
   },
 
-  "vrDevices": {
+  "xr": {
     "enabled": true,
-    "devices": "Oculus",
-	"stereoRenderingPath": "multi-pass"
+    "devices": [
+      "Oculus"
+    ],
+    "stereoRenderingPath": "multi-pass"
   }
 }

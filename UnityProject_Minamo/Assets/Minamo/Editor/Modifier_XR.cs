@@ -1,28 +1,37 @@
-﻿using System.Text;
+using System.Collections.Generic;
+using System.Text;
 using UnityEditor;
 using UnityEditorInternal.VR;
 
 namespace Assets.Minamo.Editor {
-    class Modifier_VRDevice : IModifier {
+    class Modifier_XR : IModifier {
         const string DeviceOculus = "Oculus";
         const string DeviceOpenVR = "OpenVR";
         const string DeviceDaydream = "daydream";
         const string DeviceCardboard = "cardboard";
+        const string DeviceWindowsMR = "WindowsMR";
 
         readonly BuildTargetGroup targetGroup;
         bool enabled;
         string[] devices = new string[] { };
         StereoRenderingPath stereoRenderingPath;
 
-        internal Modifier_VRDevice(BuildTargetGroup targetGroup) {
+        internal Modifier_XR(BuildTargetGroup targetGroup) {
             this.targetGroup = targetGroup;
         }
 
         public void Reload(AnyDictionary dict) {
             enabled = dict.GetValue<bool>("enabled");
 
-            var deviceListStr = dict.GetValue<string>("devices");
-            this.devices = deviceListStr.Split(',');
+            var rawDeviceList = dict.GetList("devices");
+            var deviceList = new List<string>();
+            for(var i = 0; i < rawDeviceList.Count;i++) {
+                var el = rawDeviceList[i] as string;
+                if(el != null) {
+                    deviceList.Add(el);
+                }
+            }
+            this.devices = deviceList.ToArray();
 
             var table = StringEnumConverter.Get<StereoRenderingPath>();
             stereoRenderingPath = table[dict.GetValue<string>("stereoRenderingPath")];
@@ -34,10 +43,10 @@ namespace Assets.Minamo.Editor {
             PlayerSettings.stereoRenderingPath = stereoRenderingPath;
         }
 
-        internal static Modifier_VRDevice Current(BuildTargetGroup g) {
+        internal static Modifier_XR Current(BuildTargetGroup g) {
             var devices = VREditor.GetVREnabledDevicesOnTargetGroup(g);
             var enabled = VREditor.GetVREnabledOnTargetGroup(g);
-            return new Modifier_VRDevice(g)
+            return new Modifier_XR(g)
             {
                 devices = devices,
                 enabled = enabled,

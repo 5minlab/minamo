@@ -28,8 +28,8 @@
     "runInBackground": true
   },
 
-  "vrDevices": {
+  "xr": {
     "enabled": false,
-    "devices": ""
+    "devices": []
   }
 }

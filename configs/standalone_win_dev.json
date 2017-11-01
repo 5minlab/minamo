@@ -21,9 +21,9 @@
     "runInBackground": true
   },
 
-  "vrDevices": {
+  "xr": {
     "enabled": false,
-    "devices": "",
-	"stereoRenderingPath": "multi-pass"
+    "devices": [],
+    "stereoRenderingPath": "multi-pass"
   }
 }

@@ -22,9 +22,11 @@
     "PLATFORM_WIN32_STEAMVR"
   ],
 
-  "vrDevices": {
+  "xr": {
     "enabled": true,
-    "devices": "OpenVR",
+    "devices": [
+      "OpenVR"
+    ],
     "stereoRenderingPath": "single-pass"
   },
 
@@ -52,7 +54,7 @@
   
   "scripting": {
     "backend": "Mono2x",
-	"scriptingRuntimeVersion": "legacy",
+    "scriptingRuntimeVersion": "legacy",
     "apiCompatibilityLevel": "NET_2_0"
   },
   

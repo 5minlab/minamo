@@ -23,9 +23,11 @@
     "versionCode": 1
   },
 
-  "vrDevices": {
+  "xr": {
     "enabled": true,
-    "devices": "daydream",
+    "devices": [
+      "daydream"
+    ],
     "stereoRenderingPath": "single-pass"
   },
 

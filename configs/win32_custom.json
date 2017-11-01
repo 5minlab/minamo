@@ -5,7 +5,7 @@
     "runInBackground": true
   },
 
-  "vrDevices": {
+  "xr": {
     "enabled": false
   }
 }
