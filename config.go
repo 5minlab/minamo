@@ -70,7 +70,11 @@ type ResolutionAndPresentationConfig struct {
 // class : EditorUserBuildSettings
 // https://github.com/MattRix/UnityDecompiled/blob/master/UnityEditor/UnityEditor/EditorUserBuildSettings.cs
 type EditorUserBuildConfig struct {
-	WsaGenerateReferenceProjects bool `json:"wsaGenerateReferenceProjects"`
+	WsaSubtarget                 string `json:"wsaSubtarget"`
+	WsaUWPBuildType              string `json:"wsaUWPBuildType"`
+	WsaUWPSDK                    string `json:"wsaUWPSDK"`
+	WsaBuildAndRunDeployTarget   string `json:"wsaBuildAndRunDeployTarget"`
+	WsaGenerateReferenceProjects bool   `json:"wsaGenerateReferenceProjects"`
 }
 
 type Config struct {

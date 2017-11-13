@@ -18,6 +18,9 @@ namespace Assets.Minamo.Editor {
                 { typeof(ScriptingImplementation), ForScriptingImplementation() },
                 { typeof(ScriptingRuntimeVersion), ForScriptingRuntimeVersion() },
                 { typeof(PlayerSettings.WSACapability), ForWSACapability() },
+                { typeof(WSASubtarget), ForStringEnumDictionary() },
+                { typeof(WSAUWPBuildType), ForWSAUWPBuildType() },
+                { typeof(WSABuildAndRunDeployTarget), ForWSABuildAndRunDeployTarget() },
             };
         }
 
@@ -126,6 +129,36 @@ namespace Assets.Minamo.Editor {
                 { "legacy", ScriptingRuntimeVersion.Legacy },
             };
             return new StringEnumDictionary<ScriptingRuntimeVersion>(dict, ScriptingRuntimeVersion.Legacy);
+        }
+
+        static StringEnumDictionary<WSASubtarget> ForStringEnumDictionary() {
+            var dict = new Dictionary<string, WSASubtarget>()
+            {
+                { "AnyDevice", WSASubtarget.AnyDevice },
+                { "PC", WSASubtarget.PC },
+                { "Mobile", WSASubtarget.Mobile },
+                { "HoloLens", WSASubtarget.HoloLens },
+            };
+            return new StringEnumDictionary<WSASubtarget>(dict, WSASubtarget.AnyDevice);
+        }
+
+        static StringEnumDictionary<WSAUWPBuildType> ForWSAUWPBuildType() {
+            var dict = new Dictionary<string, WSAUWPBuildType>()
+            {
+                { "XAML", WSAUWPBuildType.XAML },
+                { "D3D", WSAUWPBuildType.D3D },
+            };
+            return new StringEnumDictionary<WSAUWPBuildType>(dict, WSAUWPBuildType.D3D);
+        }
+
+        static StringEnumDictionary<WSABuildAndRunDeployTarget> ForWSABuildAndRunDeployTarget() {
+            var dict = new Dictionary<string, WSABuildAndRunDeployTarget>()
+            {
+                { "LocalMachine", WSABuildAndRunDeployTarget.LocalMachine },
+                { "WindowsPhone", WSABuildAndRunDeployTarget.WindowsPhone },
+                { "LocalMachineAndWindowsPhone", WSABuildAndRunDeployTarget.LocalMachineAndWindowsPhone },
+            };
+            return new StringEnumDictionary<WSABuildAndRunDeployTarget>(dict, WSABuildAndRunDeployTarget.LocalMachine);
         }
 
         static StringEnumDictionary<PlayerSettings.WSACapability> ForWSACapability() {
