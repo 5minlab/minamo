@@ -7,8 +7,7 @@ using UnityEngine;
 namespace Assets.Minamo.Editor {
     class Modifier_ResolutionAndPresentation : IModifier {
         // resolution
-        bool runInBackground;
-        bool runInBackground_use;
+        AssignableType<bool> runInBackground;
 
         // standalone player
 
@@ -24,7 +23,7 @@ namespace Assets.Minamo.Editor {
         }
 
         public void Apply() {
-            if (runInBackground_use) {
+            if (runInBackground.Flag) {
                 Application.runInBackground = runInBackground;
             }
         }
@@ -32,20 +31,20 @@ namespace Assets.Minamo.Editor {
         internal static Modifier_ResolutionAndPresentation Current() {
             return new Modifier_ResolutionAndPresentation()
             {
-                runInBackground = Application.runInBackground,
+                runInBackground = AssignableType<bool>.Create(Application.runInBackground),
             };
         }
 
         public string GetConfigText() {
             var sb = new StringBuilder();
-            if (runInBackground_use) {
+            if (runInBackground.Flag) {
                 sb.AppendFormat("RunInBackground={0}, ", runInBackground);
             }
             return sb.ToString();
         }
 
         public void Reload(AnyDictionary dict) {
-            runInBackground_use = dict.TryGetValue<bool>("runInBackground", out runInBackground);
+            runInBackground = AssignableType<bool>.FromDict(dict, "runInBackground");
         }
     }
 }
