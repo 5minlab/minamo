@@ -51,6 +51,11 @@ namespace Assets.Minamo.Editor {
         {
             get { return new AnyDictionary(root.GetDict("resolutionAndPresentation")); }
         }
+
+        AnyDictionary EditorUserBuild
+        {
+            get { return new AnyDictionary(root.GetDict("editorUserBuild")); }
+        }
         
         internal Config(string jsontext) {
             var d = jsontext.FromJson<object>() as Dictionary<string, object>;
@@ -94,6 +99,7 @@ namespace Assets.Minamo.Editor {
                 new ModifierTuple(new Modifier_Publishing(), Publishing),
                 new ModifierTuple(new Modifier_Scripting(targetGroup), Scripting),
                 new ModifierTuple(new Modifier_ResolutionAndPresentation(), ResolutionAndPresentation),
+                new ModifierTuple(new Modifier_EditorUserBuild(), EditorUserBuild),
             };
         }
 
@@ -108,6 +114,7 @@ namespace Assets.Minamo.Editor {
                 new ModifierTuple(Modifier_Publishing.Current(), Publishing),
                 new ModifierTuple(Modifier_Scripting.Current(targetGroup), Scripting),
                 new ModifierTuple(Modifier_ResolutionAndPresentation.Current(), ResolutionAndPresentation),
+                new ModifierTuple(Modifier_EditorUserBuild.Current(), EditorUserBuild),
             };
         }
 

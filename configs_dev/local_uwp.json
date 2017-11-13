@@ -61,6 +61,10 @@
     "scriptingRuntimeVersion": "latest",
     "apiCompatibilityLevel": "NET_4_6"
   },
+
+  "editorUserBuild": {
+    "wsaGenerateReferenceProjects": false
+  },
   
   "resolutionAndPresentation": {
     "runInBackground": false

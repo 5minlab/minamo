@@ -67,6 +67,12 @@ type ResolutionAndPresentationConfig struct {
 	RunInBackground bool `json:"runInBackground"`
 }
 
+// class : EditorUserBuildSettings
+// https://github.com/MattRix/UnityDecompiled/blob/master/UnityEditor/UnityEditor/EditorUserBuildSettings.cs
+type EditorUserBuildConfig struct {
+	WsaGenerateReferenceProjects bool `json:"wsaGenerateReferenceProjects"`
+}
+
 type Config struct {
 	UnityPath     string `json:"unityPath"`
 	ProjectPath   string `json:"projectPath"`
@@ -83,6 +89,7 @@ type Config struct {
 	Publishing                PublishingConfig                `json:"publishing"`
 	Scripting                 ScriptingConfig                 `json:"scripting"`
 	ResolutionAndPresentation ResolutionAndPresentationConfig `json:"resolutionAndPresentation"`
+	EditorUserBuild           EditorUserBuildConfig           `json:"editorUserBuild"`
 	Defines                   []string                        `json:"defines"`
 
 	// extra field
