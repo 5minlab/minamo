@@ -175,7 +175,8 @@ func (c Config) Args() []string {
 		"-quit",
 		"-batchmode",
 		"-nographics",
-		"-silent-crashes",
+		// Don’t display a crash dialog.
+		// "-silent-crashes",
 		"-projectPath",
 		c.MakeProjectPath(),
 		//"-executeMethod",
