@@ -117,6 +117,9 @@ func getShowString(c *Config) string {
 func cmdBuild(c *Config) {
 	output, buildTime, err := c.Execute()
 	if err != nil {
+		fmt.Println("ERROR!")
+		fmt.Println("BuildTime\t:", buildTime)
+		fmt.Println(output)
 		panic(err)
 	}
 
