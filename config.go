@@ -182,7 +182,7 @@ func (c Config) Args() []string {
 		//"-executeMethod",
 		//c.Method,
 	}
-	if c.logFilePath != "" {
+	if c.logFilePath != defaultLogFile {
 		args = append(args, "-logFile", c.LogFilePath())
 	}
 	return args
@@ -219,5 +219,10 @@ func (c *Config) executeCli(args []string) (string, time.Duration, error) {
 
 // "unity -logFile" needs absolute path
 func (c *Config) LogFilePath() string {
+	if c.logFilePath == "" {
+		return ""
+	} else if c.logFilePath == defaultLogFile {
+		return defaultLogFile
+	}
 	return makeAbsFilePath(c.logFilePath)
 }

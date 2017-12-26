@@ -17,9 +17,17 @@ var logFilePath string
 var cmd string
 var field string
 
+// -logFile의 인자로는 3가지가 가능하다
+// -logFile 없음 : 유니티 기본 로그 파일
+// -logFile이 있지만 공백 : stdout, https://answers.unity.com/answers/1139749/view.html
+// -logFile이 있음 : 로그 파일 경로
+// golang에서는 string에 nil할당이 불가능하고
+// 그렇다고 옵션을 뜯어고치긴 귀찮아서 임의의 파일명을 기본값으로 사용
+const defaultLogFile = "_DEFAULT_LOG_"
+
 func init() {
 	flag.StringVar(&configFilePath, "config", "", "config file path")
-	flag.StringVar(&logFilePath, "log", "", "unity log file path")
+	flag.StringVar(&logFilePath, "log", defaultLogFile, "unity log file path")
 	flag.StringVar(&cmd, "cmd", "dump", "command")
 	flag.StringVar(&field, "field", "", "field to show")
 }
@@ -30,6 +38,7 @@ func main() {
 	config, err := loadConfig(configFilePath, logFilePath)
 	if err != nil {
 		log.Fatalf("Failed to load config: %s", err)
+		return
 	}
 
 	switch cmd {
@@ -117,8 +126,6 @@ func getShowString(c *Config) string {
 func cmdBuild(c *Config) {
 	output, buildTime, err := c.Execute()
 	if err != nil {
-		fmt.Println("ERROR!")
-		fmt.Println("BuildTime\t:", buildTime)
 		fmt.Println(output)
 		panic(err)
 	}
