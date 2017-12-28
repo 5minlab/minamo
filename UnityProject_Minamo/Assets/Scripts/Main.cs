@@ -24,11 +24,15 @@ class Main : MonoBehaviour {
         sb.AppendLine("currnet platform is PLATFORM_UWP");
 #endif
 
+#if PLATFORM_PS4
+        sb.AppendLine("currnet platform is PLATFORM_PS4");
+#endif
+
 #if HELLO_WORLD
         sb.AppendLine("hello world!");
 #endif
 
-        if(Debug.isDebugBuild) {
+        if (Debug.isDebugBuild) {
             sb.AppendLine("this is debug build");
         } else {
             sb.AppendLine("this is release build");

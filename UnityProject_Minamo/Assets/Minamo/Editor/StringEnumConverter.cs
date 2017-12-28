@@ -21,6 +21,8 @@ namespace Assets.Minamo.Editor {
                 { typeof(WSASubtarget), ForStringEnumDictionary() },
                 { typeof(WSAUWPBuildType), ForWSAUWPBuildType() },
                 { typeof(WSABuildAndRunDeployTarget), ForWSABuildAndRunDeployTarget() },
+                { typeof(PS4BuildSubtarget), ForPS4BuildSubtarget() },
+                { typeof(PS4HardwareTarget), ForPS4HardwareTarget() },
             };
         }
 
@@ -100,6 +102,7 @@ namespace Assets.Minamo.Editor {
                 { "autoRunPlayer", BuildOptions.AutoRunPlayer },
                 { "symlinkLibraries", BuildOptions.SymlinkLibraries },
                 { "forceEnableAssertions", BuildOptions.ForceEnableAssertions },
+                { "buildScriptsOnly",  BuildOptions.BuildScriptsOnly },
             };
             return new StringEnumDictionary<BuildOptions>(dict, BuildOptions.None);
         }
@@ -195,6 +198,25 @@ namespace Assets.Minamo.Editor {
                 { "InputInjectionBrokered", PlayerSettings.WSACapability.InputInjectionBrokered },
             };
             return new StringEnumDictionary<PlayerSettings.WSACapability>(dict, (PlayerSettings.WSACapability)0);
+        }
+
+        static StringEnumDictionary<PS4BuildSubtarget> ForPS4BuildSubtarget() {
+            var dict = new Dictionary<string, PS4BuildSubtarget>()
+            {
+                { "PCHosted", PS4BuildSubtarget.PCHosted },
+                { "Package", PS4BuildSubtarget.Package },
+                { "ISO", PS4BuildSubtarget.Iso },
+            };
+            return new StringEnumDictionary<PS4BuildSubtarget>(dict, PS4BuildSubtarget.PCHosted);
+        }
+
+        static StringEnumDictionary<PS4HardwareTarget> ForPS4HardwareTarget() {
+            var dict = new Dictionary<string, PS4HardwareTarget>()
+            {
+                { "BaseOnly", PS4HardwareTarget.BaseOnly },
+                { "NeoAndBase", PS4HardwareTarget.NeoAndBase },
+            };
+            return new StringEnumDictionary<PS4HardwareTarget>(dict, PS4HardwareTarget.BaseOnly);
         }
     }
 }

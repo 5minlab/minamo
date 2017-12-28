@@ -10,6 +10,7 @@ namespace Assets.Minamo.Editor {
         const string DeviceDaydream = "daydream";
         const string DeviceCardboard = "cardboard";
         const string DeviceWindowsMR = "WindowsMR";
+        const string DevicePlayStationVR = "PlayStationVR";
 
         readonly BuildTargetGroup targetGroup;
         bool enabled;

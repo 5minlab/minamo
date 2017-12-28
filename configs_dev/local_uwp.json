@@ -65,8 +65,8 @@
   "editorUserBuild": {
     "wsaSubtarget": "HoloLens",
     "wsaUWPBuildType": "XAML",
-	"wsaUWPSDK": "",
-	"wsaBuildAndRunDeployTarget": "LocalMachine",
+    "wsaUWPSDK": "",
+    "wsaBuildAndRunDeployTarget": "LocalMachine",
     "wsaGenerateReferenceProjects": false
   },
   

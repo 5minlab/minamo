@@ -1,0 +1,43 @@
+{
+  "unityPath": "C:\\Program Files\\Unity 2017.3.0f3",
+  "projectPath": "./UnityProject_Minamo",
+
+  "buildBasePath": "./output",
+  "buildPath": "{{.ConfigName}}-{{.Year}}-{{.Month}}-{{.Day}}-{{.Platform}}",
+
+  "method": "Assets.Minamo.Editor.EntryPoint.Build",
+
+  "build": {
+    "targetGroup": "ps4",
+    "target": "ps4",
+
+    "options": {
+      "development": true,
+      "allowDebugging": false
+    }
+  },
+
+  "defines": [
+    "HELLO_WORLD",
+    "PLATFORM_PS4"
+  ],
+
+  "xr": {
+    "enabled": true,
+    "devices": [
+      "PlayStationVR"
+    ],
+    "stereoRenderingPath": "single-pass"
+  },
+  
+  "editorUserBuild": {
+    "ps4BuildSubtarget": "PCHosted",
+    "ps4HardwareTarget": "NeoAndBase"
+  },
+
+  "scripting": {
+    "backend": "IL2CPP",
+    "scriptingRuntimeVersion": "latest",
+    "apiCompatibilityLevel": "NET_4_6"
+  }
+}
