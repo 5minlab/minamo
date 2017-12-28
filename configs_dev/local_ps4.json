@@ -12,8 +12,7 @@
     "target": "ps4",
 
     "options": {
-      "development": true,
-      "allowDebugging": false
+      "development": true
     }
   },
 
@@ -36,8 +35,8 @@
   },
 
   "scripting": {
-    "backend": "IL2CPP",
-    "scriptingRuntimeVersion": "latest",
-    "apiCompatibilityLevel": "NET_4_6"
+    "backend": "Mono2X",
+    "scriptingRuntimeVersion": "legacy",
+    "apiCompatibilityLevel": "NET_2_0"
   }
 }
