@@ -1,5 +1,5 @@
 @set CURR_DIR=%~dp0
-@set UNITY_PATH="C:\\Program Files\\Unity 2017.2.0f3\\Editor\\Unity.exe"
+@set UNITY_PATH="C:\\Program Files\\Unity 2017.3.0f3\\Editor\\Unity.exe"
 @set PROJ_PATH=%CURR_DIR%\UnityProject_Minamo
 @set EXPORT_DIR=%CURR_DIR%\dist
 @set METHOD=Assets.Minamo.Editor.EntryPoint.ExportPackage
