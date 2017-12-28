@@ -59,7 +59,11 @@ namespace Assets.Minamo.Editor {
                 // standalone
                 { "windows", BuildTarget.StandaloneWindows },
                 { "windows64", BuildTarget.StandaloneWindows64 },
+#if UNITY_2017_3_OR_NEWER
+                { "osx", BuildTarget.StandaloneOSX },
+#else
                 { "osx", BuildTarget.StandaloneOSXUniversal },
+#endif
                 { "linux", BuildTarget.StandaloneLinuxUniversal },
 
                 { "tvos", BuildTarget.tvOS },
