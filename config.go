@@ -53,8 +53,9 @@ type KeystoreConfig struct {
 }
 
 type PublishingConfig struct {
-	UseApkExpansion bool     `json:"useApkExpansion"`
-	UwpCapability   []string `json:"uwpCapability"`
+	UseApkExpansion      bool     `json:"useApkExpansion"`
+	UwpCapability        []string `json:"uwpCapability"`
+	Ps4AttribExclusiveVR bool     `json:"ps4AttribExclusiveVR"`
 }
 
 type ScriptingConfig struct {
