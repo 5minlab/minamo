@@ -23,6 +23,8 @@ namespace Assets.Minamo.Editor {
                 { typeof(WSABuildAndRunDeployTarget), ForWSABuildAndRunDeployTarget() },
                 { typeof(PS4BuildSubtarget), ForPS4BuildSubtarget() },
                 { typeof(PS4HardwareTarget), ForPS4HardwareTarget() },
+                { typeof(PlayerSettings.PS4.PS4AppCategory), ForPS4AppCategory() },
+                { typeof(PlayerSettings.PS4.PS4EnterButtonAssignment), ForPS4EnterButtonAssignment() }
             };
         }
 
@@ -217,6 +219,24 @@ namespace Assets.Minamo.Editor {
                 { "NeoAndBase", PS4HardwareTarget.NeoAndBase },
             };
             return new StringEnumDictionary<PS4HardwareTarget>(dict, PS4HardwareTarget.BaseOnly);
+        }
+
+        static StringEnumDictionary<PlayerSettings.PS4.PS4AppCategory> ForPS4AppCategory() {
+            var dict = new Dictionary<string, PlayerSettings.PS4.PS4AppCategory>()
+            {
+                { "Application", PlayerSettings.PS4.PS4AppCategory.Application },
+                { "Patch", PlayerSettings.PS4.PS4AppCategory.Patch },
+                { "Remaster", PlayerSettings.PS4.PS4AppCategory.Remaster },
+            };
+            return new StringEnumDictionary<PlayerSettings.PS4.PS4AppCategory>(dict, PlayerSettings.PS4.PS4AppCategory.Application);
+        }
+        static StringEnumDictionary<PlayerSettings.PS4.PS4EnterButtonAssignment> ForPS4EnterButtonAssignment() {
+            var dict = new Dictionary<string, PlayerSettings.PS4.PS4EnterButtonAssignment>()
+            {
+                { "CircleButton", PlayerSettings.PS4.PS4EnterButtonAssignment.CircleButton },
+                { "CrossButton", PlayerSettings.PS4.PS4EnterButtonAssignment.CrossButton },
+            };
+            return new StringEnumDictionary<PlayerSettings.PS4.PS4EnterButtonAssignment>(dict, PlayerSettings.PS4.PS4EnterButtonAssignment.CircleButton);
         }
     }
 }
