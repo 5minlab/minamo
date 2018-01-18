@@ -24,7 +24,8 @@ namespace Assets.Minamo.Editor {
                 { typeof(PS4BuildSubtarget), ForPS4BuildSubtarget() },
                 { typeof(PS4HardwareTarget), ForPS4HardwareTarget() },
                 { typeof(PlayerSettings.PS4.PS4AppCategory), ForPS4AppCategory() },
-                { typeof(PlayerSettings.PS4.PS4EnterButtonAssignment), ForPS4EnterButtonAssignment() }
+                { typeof(PlayerSettings.PS4.PS4EnterButtonAssignment), ForPS4EnterButtonAssignment() },
+                { typeof(AndroidBuildSystem), ForAndroidBuildSystem() },
             };
         }
 
@@ -237,6 +238,15 @@ namespace Assets.Minamo.Editor {
                 { "CrossButton", PlayerSettings.PS4.PS4EnterButtonAssignment.CrossButton },
             };
             return new StringEnumDictionary<PlayerSettings.PS4.PS4EnterButtonAssignment>(dict, PlayerSettings.PS4.PS4EnterButtonAssignment.CircleButton);
+        }
+
+        static StringEnumDictionary<AndroidBuildSystem> ForAndroidBuildSystem() {
+            var dict = new Dictionary<string, AndroidBuildSystem>()
+            {
+                { "internal", AndroidBuildSystem.Internal },
+                { "gradle", AndroidBuildSystem.Gradle },
+            };
+            return new StringEnumDictionary<AndroidBuildSystem>(dict, AndroidBuildSystem.Internal);
         }
     }
 }
