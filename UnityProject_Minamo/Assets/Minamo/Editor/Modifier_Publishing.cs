@@ -6,9 +6,9 @@ using System.Linq;
 namespace Assets.Minamo.Editor {
     class Modifier_Publishing : IModifier {
         // android
-        AssignableType<bool> useApkExpansion;
+        AssignableType<bool> android_useApkExpansion;
 
-        string[] uwpCapability;
+        string[] uwp_capability;
 
         // ps4
         AssignableType<bool> ps4_attribExclusiveVR;
@@ -25,11 +25,11 @@ namespace Assets.Minamo.Editor {
 
 
         public void Apply() {
-            if (useApkExpansion.Flag) {
-                PlayerSettings.Android.useAPKExpansionFiles = useApkExpansion;
+            if (android_useApkExpansion.Flag) {
+                PlayerSettings.Android.useAPKExpansionFiles = android_useApkExpansion;
             }
 
-            var capabilityList = uwpCapability.ToList();
+            var capabilityList = uwp_capability.ToList();
             var table = StringEnumConverter.Get<PlayerSettings.WSACapability>();
             foreach(var kv in table) {
                 var flag = capabilityList.Contains(kv.Key);
@@ -74,8 +74,8 @@ namespace Assets.Minamo.Editor {
         public void Reload(AnyDictionary dict) {
             {
                 bool outval = false;
-                if(dict.TryGetValue<bool>("useApkExpansion", out outval)) {
-                    useApkExpansion = AssignableType<bool>.Create(outval);
+                if(dict.TryGetValue<bool>("android_useApkExpansion", out outval)) {
+                    android_useApkExpansion = AssignableType<bool>.Create(outval);
                 }
             }
             
@@ -88,7 +88,7 @@ namespace Assets.Minamo.Editor {
                     list.Add(v);
                 }
             }
-            this.uwpCapability = list.ToArray();
+            this.uwp_capability = list.ToArray();
 
             {
                 bool outval = false;
@@ -172,8 +172,8 @@ namespace Assets.Minamo.Editor {
 
             return new Modifier_Publishing()
             {
-                useApkExpansion = AssignableType<bool>.Create(PlayerSettings.Android.useAPKExpansionFiles),
-                uwpCapability = capabilityList.ToArray(),
+                android_useApkExpansion = AssignableType<bool>.Create(PlayerSettings.Android.useAPKExpansionFiles),
+                uwp_capability = capabilityList.ToArray(),
 
                 ps4_attribExclusiveVR = AssignableType<bool>.Create(PlayerSettings.PS4.attribExclusiveVR),
                 ps4_attribShareSupport = AssignableType<bool>.Create(PlayerSettings.PS4.attribShareSupport),
@@ -193,50 +193,34 @@ namespace Assets.Minamo.Editor {
             sb.AppendFormat("{0}={1}, ", key, value);
         }
 
-        public string GetConfigText() {
-            var sb = new StringBuilder();
-            if (useApkExpansion.Flag) {
-                AppendConfigKeyValue(sb, "useApkExpansion", useApkExpansion);
-            }
+        void AppendConfigKeyValue<T>(StringBuilder sb, string key, AssignableType<T> value) {
+            if (value.Flag) {
+                sb.AppendFormat("{0}={1}, ", key, value);
+            };
+        }
 
-            AppendConfigKeyValue(sb, "uwpCapability", string.Join("|", uwpCapability));
+        public string GetConfigText() {
+            var cb = new ConfigTextBuilder();
+
+            // android
+            cb.Append("android_useApkExpansion", android_useApkExpansion);
+
+            cb.Append("uwp_capability", string.Join("|", uwp_capability));
 
             // ps4 attributes
+            cb.Append("ps4_attribExclusiveVR", ps4_attribExclusiveVR);
+            cb.Append("ps4_attribShareSupport", ps4_attribShareSupport);
+            cb.Append("ps4_attribMoveSupport", ps4_attribMoveSupport);
+            cb.Append("ps4_category", ps4_category);
+            cb.Append("ps4_masterVersion", ps4_masterVersion);
+            cb.Append("ps4_contentID", ps4_contentID);
+            cb.Append("ps4_applicationParameter1", ps4_applicationParameter1);
+            cb.Append("ps4_applicationParameter2", ps4_applicationParameter2);
+            cb.Append("ps4_applicationParameter3", ps4_applicationParameter3);
+            cb.Append("ps4_applicationParameter4", ps4_applicationParameter4);
+            cb.Append("ps4_enterButtonAssignment", ps4_enterButtonAssignment);
 
-            if(ps4_attribExclusiveVR.Flag) {
-                AppendConfigKeyValue(sb, "ps4_attribExclusiveVR", ps4_attribExclusiveVR);
-            };
-            if (ps4_attribShareSupport.Flag) {
-                AppendConfigKeyValue(sb, "ps4_attribShareSupport", ps4_attribShareSupport);
-            }
-            if (ps4_attribMoveSupport.Flag) {
-                AppendConfigKeyValue(sb, "ps4_attribMoveSupport", ps4_attribMoveSupport);
-            }
-            if (ps4_category.Flag) {
-                AppendConfigKeyValue(sb, "ps4_category", ps4_category);
-            }
-            if (ps4_masterVersion.Flag) {
-                AppendConfigKeyValue(sb, "ps4_masterVersion", ps4_masterVersion);
-            }
-            if (ps4_contentID.Flag) {
-                AppendConfigKeyValue(sb, "ps4_contentID", ps4_contentID);
-            }
-            if (ps4_applicationParameter1.Flag) {
-                AppendConfigKeyValue(sb, "ps4_applicationParameter1", ps4_applicationParameter1);
-            }
-            if (ps4_applicationParameter2.Flag) {
-                AppendConfigKeyValue(sb, "ps4_applicationParameter2", ps4_applicationParameter2);
-            }
-            if (ps4_applicationParameter3.Flag) {
-                AppendConfigKeyValue(sb, "ps4_applicationParameter3", ps4_applicationParameter3);
-            }
-            if (ps4_applicationParameter4.Flag) {
-                AppendConfigKeyValue(sb, "ps4_applicationParameter4", ps4_applicationParameter4);
-            }
-            if (ps4_enterButtonAssignment.Flag) {
-                AppendConfigKeyValue(sb, "ps4_enterButtonAssignment", ps4_enterButtonAssignment);
-            }
-            return sb.ToString();
+            return cb.ToString();
         }
     }
 }

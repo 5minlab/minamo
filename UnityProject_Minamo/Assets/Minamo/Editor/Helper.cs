@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Assets.Minamo.Editor {
     class Helper {
@@ -11,6 +12,24 @@ namespace Assets.Minamo.Editor {
                 }
             }
             return retval;
+        }
+    }
+
+    class ConfigTextBuilder {
+        readonly StringBuilder sb = new StringBuilder();
+
+        public void Append(string key, object value) {
+            sb.AppendFormat("{0}={1}, ", key, value);
+        }
+
+        public void Append<T>(string key, AssignableType<T> value) {
+            if (value.Flag) {
+                sb.AppendFormat("{0}={1}, ", key, value);
+            };
+        }
+
+        public override string ToString() {
+            return sb.ToString();
         }
     }
 }
