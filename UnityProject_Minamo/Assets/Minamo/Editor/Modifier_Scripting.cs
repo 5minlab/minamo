@@ -29,48 +29,25 @@ namespace Assets.Minamo.Editor {
         }
 
         public string GetConfigText() {
-            var sb = new StringBuilder();
-            if(backend.Flag) {
-                sb.AppendFormat("Scripting Backend: {0}, ", backend);
-            }
-            if(apiCompatibilityLevel.Flag) {
-                sb.AppendFormat("Api Compatible Level: {0}, ", apiCompatibilityLevel);
-            }
-            if(scriptingRuntimeVersion.Flag) {
-                sb.AppendFormat("Scripting Runtime Version: {0}, ", scriptingRuntimeVersion);
-            }
-            return sb.ToString();
+            var cb = new ConfigTextBuilder();
+            cb.Append("Scripting Backend", backend);
+            cb.Append("Api Compatible Level", apiCompatibilityLevel);
+            cb.Append("Scripting Runtime Version", scriptingRuntimeVersion);
+            return cb.ToString();
         }
 
         public void Reload(AnyDictionary dict) {
-            var apiStr = dict.GetValue<string>("apiCompatibilityLevel");
-            if(apiStr != null) {
-                var apiDict = StringEnumConverter.Get<ApiCompatibilityLevel>();
-                apiCompatibilityLevel = AssignableType<ApiCompatibilityLevel>.Create(apiDict[apiStr]);
-            }
-            
-            var backendStr = dict.GetValue<string>("backend");
-            if (backendStr != null) {
-                var backendDict = StringEnumConverter.Get<ScriptingImplementation>();
-                backend = AssignableType<ScriptingImplementation>.Create(backendDict[backendStr]);
-            }
-
-            var versionStr = dict.GetValue<string>("scriptingRuntimeVersion");
-            if (versionStr != null) {
-                var versionDict = StringEnumConverter.Get<ScriptingRuntimeVersion>();
-                scriptingRuntimeVersion = AssignableType<ScriptingRuntimeVersion>.Create(versionDict[versionStr]);
-            }
+            apiCompatibilityLevel = AssignableType<ApiCompatibilityLevel>.FromEnumDict(dict, "apiCompatibilityLevel");
+            backend = AssignableType<ScriptingImplementation>.FromEnumDict(dict, "backend");
+            scriptingRuntimeVersion = AssignableType<ScriptingRuntimeVersion>.FromEnumDict(dict, "scriptingRuntimeVersion");
         }
 
         internal static Modifier_Scripting Current(BuildTargetGroup g) {
-            var backend = PlayerSettings.GetScriptingBackend(g);
-            var api = PlayerSettings.GetApiCompatibilityLevel(g);
-            var version = PlayerSettings.scriptingRuntimeVersion;
             return new Modifier_Scripting(g)
             {
-                backend = AssignableType<ScriptingImplementation>.Create(backend),
-                apiCompatibilityLevel = AssignableType<ApiCompatibilityLevel>.Create(api),
-                scriptingRuntimeVersion = AssignableType<ScriptingRuntimeVersion>.Create(version),
+                backend = AssignableType<ScriptingImplementation>.Create(PlayerSettings.GetScriptingBackend(g)),
+                apiCompatibilityLevel = AssignableType<ApiCompatibilityLevel>.Create(PlayerSettings.GetApiCompatibilityLevel(g)),
+                scriptingRuntimeVersion = AssignableType<ScriptingRuntimeVersion>.Create(PlayerSettings.scriptingRuntimeVersion),
             };
         }
     }

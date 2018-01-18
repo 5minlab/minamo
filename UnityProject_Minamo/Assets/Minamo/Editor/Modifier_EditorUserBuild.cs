@@ -60,82 +60,34 @@ namespace Assets.Minamo.Editor {
         }
 
         public string GetConfigText() {
-            var sb = new StringBuilder();
-            if(wsaSubtarget.Flag) {
-                sb.AppendFormat("wsaSubtarget: {0}, ", wsaSubtarget);
-            }
-            if(wsaUWPBuildType.Flag) {
-                sb.AppendFormat("wsaUWPBuildType: {0}, ", wsaUWPBuildType);
-            }
-            if(wsaUWPSDK.Flag) {
-                sb.AppendFormat("wsaUWPSDK: {0}, ", wsaUWPSDK);
-            }
-            if(wsaBuildAndRunDeployTarget.Flag) {
-                sb.AppendFormat("wsaBuildAndRunDeployTarget: {0}, ", wsaBuildAndRunDeployTarget);
-            }
-            if(wsaGenerateReferenceProjects.Flag) {
-                sb.AppendFormat("wsaGenerateReferenceProjects: {0}, ", wsaGenerateReferenceProjects);
-            }
+            var cb = new ConfigTextBuilder();
+            
+            cb.Append("wsaSubtarget", wsaSubtarget);
+            cb.Append("wsaUWPBuildType", wsaUWPBuildType);
+            cb.Append("wsaUWPSDK", wsaUWPSDK);
+            cb.Append("wsaBuildAndRunDeployTarget", wsaBuildAndRunDeployTarget);
+            cb.Append("wsaGenerateReferenceProjects", wsaGenerateReferenceProjects);
 
-            if(ps4BuildSubtarget.Flag) {
-                sb.AppendFormat("ps4BuildSubtarget: {0}", ps4BuildSubtarget);
-            }
-            if(ps4HardwareTarget.Flag) {
-                sb.AppendFormat("ps4HardwareTarget: {0}", ps4HardwareTarget);
-            }
+            cb.Append("ps4BuildSubtarget", ps4BuildSubtarget);
+            cb.Append("ps4HardwareTarget", ps4HardwareTarget);
 
-            if(compressWithPsArc.Flag) {
-                sb.AppendFormat("compressWithPsArc: {0}", compressWithPsArc);
-            }
-            if(compressFilesInPackage.Flag) {
-                sb.AppendFormat("compressFilesInPackage: {0}", compressFilesInPackage);
-            }
-            if(explicitNullChecks.Flag) {
-                sb.AppendFormat("explicitNullChecks: {0}", explicitNullChecks);
-            }
-            if(explicitDivideByZeroChecks.Flag) {
-                sb.AppendFormat("explicitDivideByZeroChecks: {0}", explicitDivideByZeroChecks);
-            }
-            return sb.ToString();
+            cb.Append("compressWithPsArc", compressWithPsArc);
+            cb.Append("compressFilesInPackage", compressFilesInPackage);
+            cb.Append("explicitNullChecks", explicitNullChecks);
+            cb.Append("explicitDivideByZeroChecks", explicitDivideByZeroChecks);
+
+            return cb.ToString();
         }
 
         public void Reload(AnyDictionary dict) {
-            var wsaSubtargetStr = dict.GetValue<string>("wsaSubtarget");
-            if(wsaSubtargetStr != null) {
-                var d = StringEnumConverter.Get<WSASubtarget>();
-                wsaSubtarget = AssignableType<WSASubtarget>.Create(d[wsaSubtargetStr]);
-            }
-
-            var wsaUWPBuildTypeStr = dict.GetValue<string>("wsaUWPBuildType");
-            if (wsaUWPBuildTypeStr != null) {
-                var d = StringEnumConverter.Get<WSAUWPBuildType>();
-                wsaUWPBuildType = AssignableType<WSAUWPBuildType>.Create(d[wsaUWPBuildTypeStr]);
-            }
-
-            var wsaUWPSDKStr = dict.GetValue<string>("wsaUWPSDK");
-            if (wsaUWPSDKStr != null) {
-                wsaUWPSDK = AssignableType<string>.Create(wsaUWPSDKStr);
-            }
-
-            var wsaBuildAndRunDeployTargetStr = dict.GetValue<string>("wsaBuildAndRunDeployTarget");
-            if(wsaBuildAndRunDeployTargetStr != null) {
-                var d = StringEnumConverter.Get<WSABuildAndRunDeployTarget>();
-                wsaBuildAndRunDeployTarget = AssignableType<WSABuildAndRunDeployTarget>.Create(d[wsaBuildAndRunDeployTargetStr]);
-            }
-
+            wsaSubtarget = AssignableType<WSASubtarget>.FromEnumDict(dict, "compressWithPsArc");
+            wsaUWPBuildType = AssignableType<WSAUWPBuildType>.FromEnumDict(dict, "wsaUWPBuildType");
+            wsaUWPSDK = AssignableType<string>.FromDict(dict, "wsaUWPSDK");
+            wsaBuildAndRunDeployTarget = AssignableType<WSABuildAndRunDeployTarget>.FromEnumDict(dict, "wsaBuildAndRunDeployTarget");
             wsaGenerateReferenceProjects = AssignableType<bool>.FromDict(dict, "wsaGenerateReferenceProjects");
 
-            var ps4BuildSubtargetStr = dict.GetValue<string>("ps4BuildSubtarget");
-            if(ps4BuildSubtargetStr != null) {
-                var d = StringEnumConverter.Get<PS4BuildSubtarget>();
-                ps4BuildSubtarget = AssignableType<PS4BuildSubtarget>.Create(d[ps4BuildSubtargetStr]);
-            }
-
-            var ps4HardwareTargetStr = dict.GetValue<string>("ps4HardwareTarget");
-            if (ps4HardwareTargetStr != null) {
-                var d = StringEnumConverter.Get<PS4HardwareTarget>();
-                ps4HardwareTarget = AssignableType<PS4HardwareTarget>.Create(d[ps4HardwareTargetStr]);
-            }
+            ps4BuildSubtarget = AssignableType<PS4BuildSubtarget>.FromEnumDict(dict, "ps4BuildSubtarget");
+            ps4HardwareTarget = AssignableType<PS4HardwareTarget>.FromEnumDict(dict, "ps4HardwareTarget");
 
             compressWithPsArc = AssignableType<bool>.FromDict(dict, "compressWithPsArc");
             compressFilesInPackage = AssignableType<bool>.FromDict(dict, "compressFilesInPackage");
@@ -144,19 +96,13 @@ namespace Assets.Minamo.Editor {
         }
 
         internal static Modifier_EditorUserBuild Current() {
-            var wsaSubtarget = EditorUserBuildSettings.wsaSubtarget;
-            var wsaUWPBuildType = EditorUserBuildSettings.wsaUWPBuildType;
-            var wsaUWPSDK = EditorUserBuildSettings.wsaUWPSDK;
-            var wsaBuildAndRunDeployTarget = EditorUserBuildSettings.wsaBuildAndRunDeployTarget;
-            var wsaGenerateReferenceProjects = EditorUserBuildSettings.wsaGenerateReferenceProjects;
-
             return new Modifier_EditorUserBuild()
             {
-                wsaSubtarget = AssignableType<WSASubtarget>.Create(wsaSubtarget),
-                wsaUWPBuildType = AssignableType<WSAUWPBuildType>.Create(wsaUWPBuildType),
-                wsaUWPSDK = AssignableType<string>.Create(wsaUWPSDK),
-                wsaBuildAndRunDeployTarget = AssignableType<WSABuildAndRunDeployTarget>.Create(wsaBuildAndRunDeployTarget),
-                wsaGenerateReferenceProjects = AssignableType<bool>.Create(wsaGenerateReferenceProjects),
+                wsaSubtarget = AssignableType<WSASubtarget>.Create(EditorUserBuildSettings.wsaSubtarget),
+                wsaUWPBuildType = AssignableType<WSAUWPBuildType>.Create(EditorUserBuildSettings.wsaUWPBuildType),
+                wsaUWPSDK = AssignableType<string>.Create(EditorUserBuildSettings.wsaUWPSDK),
+                wsaBuildAndRunDeployTarget = AssignableType<WSABuildAndRunDeployTarget>.Create(EditorUserBuildSettings.wsaBuildAndRunDeployTarget),
+                wsaGenerateReferenceProjects = AssignableType<bool>.Create(EditorUserBuildSettings.wsaGenerateReferenceProjects),
 
                 ps4BuildSubtarget = AssignableType<PS4BuildSubtarget>.Create(EditorUserBuildSettings.ps4BuildSubtarget),
                 ps4HardwareTarget = AssignableType<PS4HardwareTarget>.Create(EditorUserBuildSettings.ps4HardwareTarget),

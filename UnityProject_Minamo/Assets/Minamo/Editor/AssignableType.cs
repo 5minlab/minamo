@@ -14,6 +14,16 @@ namespace Assets.Minamo.Editor {
             return new AssignableType<T>(val, flag);
         }
 
+        public static AssignableType<T> FromEnumDict(AnyDictionary dict, string key, T defaultVal = default(T)) {
+            var str = dict.GetValue<string>(key);
+            if (str != null) {
+                var d = StringEnumConverter.Get<T>();
+                return AssignableType<T>.Create(d[str]);
+            }
+            // else..
+            return new AssignableType<T>(defaultVal, false);
+        }
+
         public static AssignableType<T> Create(T val) {
             return new AssignableType<T>(val, true);
         }

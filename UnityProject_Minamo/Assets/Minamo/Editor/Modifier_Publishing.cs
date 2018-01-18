@@ -72,13 +72,7 @@ namespace Assets.Minamo.Editor {
         }
 
         public void Reload(AnyDictionary dict) {
-            {
-                bool outval = false;
-                if(dict.TryGetValue<bool>("android_useApkExpansion", out outval)) {
-                    android_useApkExpansion = AssignableType<bool>.Create(outval);
-                }
-            }
-            
+            android_useApkExpansion = AssignableType<bool>.FromDict(dict, "android_useApkExpansion");
 
             var l = dict.GetList("uwpCapability");
             var list = new List<string>();
@@ -90,74 +84,17 @@ namespace Assets.Minamo.Editor {
             }
             this.uwp_capability = list.ToArray();
 
-            {
-                bool outval = false;
-                if(dict.TryGetValue<bool>("ps4_attribExclusiveVR", out outval)) {
-                    ps4_attribExclusiveVR = AssignableType<bool>.Create(outval);
-                }
-            }
-            {
-                bool outval = false;
-                if(dict.TryGetValue<bool>("ps4_attribShareSupport", out outval)) {
-                    ps4_attribShareSupport = AssignableType<bool>.Create(outval);
-                }
-            }
-            {
-                bool outval = false;
-                if(dict.TryGetValue("ps4_attribMoveSupport", out outval)) {
-                    ps4_attribMoveSupport = AssignableType<bool>.Create(outval);
-                }
-            }
-            {
-                var str = dict.GetValue<string>("ps4_category");
-                if(str != null) {
-                    var d = StringEnumConverter.Get<PlayerSettings.PS4.PS4AppCategory>();
-                    ps4_category = AssignableType<PlayerSettings.PS4.PS4AppCategory>.Create(d[str]);
-                }
-            }
-            {
-                string outval = "";
-                if(dict.TryGetValue("ps4_masterVersion", out outval)) {
-                    ps4_masterVersion = AssignableType<string>.Create(outval);
-                }
-            }
-            {
-                string outval = "";
-                if(dict.TryGetValue("ps4_contentID", out outval)) {
-                    ps4_contentID = AssignableType<string>.Create(outval);
-                }
-            }
-            {
-                int outval = 0;
-                if (dict.TryGetValue("ps4_applicationParameter1", out outval)) {
-                    ps4_applicationParameter1 = AssignableType<int>.Create(outval);
-                }
-            }
-            {
-                int outval = 0;
-                if (dict.TryGetValue("ps4_applicationParameter2", out outval)) {
-                    ps4_applicationParameter2 = AssignableType<int>.Create(outval);
-                }
-            }
-            {
-                int outval = 0;
-                if (dict.TryGetValue("ps4_applicationParameter3", out outval)) {
-                    ps4_applicationParameter3 = AssignableType<int>.Create(outval);
-                }
-            }
-            {
-                int outval = 0;
-                if (dict.TryGetValue("ps4_applicationParameter4", out outval)) {
-                    ps4_applicationParameter4 = AssignableType<int>.Create(outval);
-                }
-            }
-            {
-                var str = dict.GetValue<string>("ps4_category");
-                if (str != null) {
-                    var d = StringEnumConverter.Get<PlayerSettings.PS4.PS4EnterButtonAssignment>();
-                    ps4_enterButtonAssignment = AssignableType<PlayerSettings.PS4.PS4EnterButtonAssignment>.Create(d[str]);
-                }
-            }
+            ps4_attribExclusiveVR = AssignableType<bool>.FromDict(dict, "ps4_attribExclusiveVR");
+            ps4_attribShareSupport = AssignableType<bool>.FromDict(dict, "ps4_attribShareSupport");
+            ps4_attribMoveSupport = AssignableType<bool>.FromDict(dict, "ps4_attribMoveSupport");
+            ps4_category = AssignableType<PlayerSettings.PS4.PS4AppCategory>.FromEnumDict(dict, "ps4_category");
+            ps4_masterVersion = AssignableType<string>.FromDict(dict, "ps4_masterVersion");
+            ps4_contentID = AssignableType<string>.FromDict(dict, "ps4_contentID");
+            ps4_applicationParameter1 = AssignableType<int>.FromDict(dict, "ps4_applicationParameter1");
+            ps4_applicationParameter2 = AssignableType<int>.FromDict(dict, "ps4_applicationParameter2");
+            ps4_applicationParameter3 = AssignableType<int>.FromDict(dict, "ps4_applicationParameter3");
+            ps4_applicationParameter4 = AssignableType<int>.FromDict(dict, "ps4_applicationParameter4");
+            ps4_enterButtonAssignment = AssignableType<PlayerSettings.PS4.PS4EnterButtonAssignment>.FromEnumDict(dict, "ps4_enterButtonAssignment");
         }
 
         internal static Modifier_Publishing Current() {
@@ -173,6 +110,7 @@ namespace Assets.Minamo.Editor {
             return new Modifier_Publishing()
             {
                 android_useApkExpansion = AssignableType<bool>.Create(PlayerSettings.Android.useAPKExpansionFiles),
+
                 uwp_capability = capabilityList.ToArray(),
 
                 ps4_attribExclusiveVR = AssignableType<bool>.Create(PlayerSettings.PS4.attribExclusiveVR),
@@ -186,16 +124,6 @@ namespace Assets.Minamo.Editor {
                 ps4_applicationParameter3 = AssignableType<int>.Create(PlayerSettings.PS4.applicationParameter3),
                 ps4_applicationParameter4 = AssignableType<int>.Create(PlayerSettings.PS4.applicationParameter4),
                 ps4_enterButtonAssignment = AssignableType<PlayerSettings.PS4.PS4EnterButtonAssignment>.Create(PlayerSettings.PS4.enterButtonAssignment),
-            };
-        }
-
-        void AppendConfigKeyValue(StringBuilder sb, string key, object value) {
-            sb.AppendFormat("{0}={1}, ", key, value);
-        }
-
-        void AppendConfigKeyValue<T>(StringBuilder sb, string key, AssignableType<T> value) {
-            if (value.Flag) {
-                sb.AppendFormat("{0}={1}, ", key, value);
             };
         }
 

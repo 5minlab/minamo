@@ -36,11 +36,9 @@ namespace Assets.Minamo.Editor {
         }
 
         public string GetConfigText() {
-            var sb = new StringBuilder();
-            if (runInBackground.Flag) {
-                sb.AppendFormat("RunInBackground={0}, ", runInBackground);
-            }
-            return sb.ToString();
+            var cb = new ConfigTextBuilder();
+            cb.Append("runInBackground", runInBackground);
+            return cb.ToString();
         }
 
         public void Reload(AnyDictionary dict) {
