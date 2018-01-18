@@ -1,0 +1,52 @@
+{
+  "unityPath": "C:\\Program Files\\Unity 2017.3.0f3",
+  "projectPath": "./UnityProject_Minamo",
+
+  "buildBasePath": "./output",
+  "buildPath": "{{.ConfigName}}-{{.Year}}-{{.Month}}-{{.Day}}-{{.ShortRevision}}",
+
+  "method": "Assets.Minamo.Editor.EntryPoint.Build",
+
+  "build": {
+    "targetGroup": "android",
+    "target": "android",
+
+    "options": {
+      "development": true,
+      "allowDebugging": true,
+      "acceptExternalModificationsToPlayer": true
+    }
+  },
+
+  "identification": {
+    "packageName": "com.fiveminlab.minamo",
+    "versionName": "0.0.1",
+    "versionCode": 1
+  },
+
+  "xr": {
+    "enabled": false,
+    "devices": [],
+    "stereoRenderingPath": "single-pass"
+  },
+
+  "androidSdk": {
+    "min": 24,
+    "target": 0
+  },
+  
+  "resolutionAndPresentation": {
+    "runInBackground": true
+  },
+
+  "editorUserBuild": {
+    "androidBuildSystem": "gradle"
+  },
+
+  "keystore": {
+    "keystoreName": "",
+    "keystorePass": "",
+    "keyaliasName": "",
+    "keyaliasPass": ""
+  }
+}

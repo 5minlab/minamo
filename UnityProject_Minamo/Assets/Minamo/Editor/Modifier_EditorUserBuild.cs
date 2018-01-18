@@ -21,6 +21,8 @@ namespace Assets.Minamo.Editor {
         AssignableType<bool> explicitNullChecks;
         AssignableType<bool> explicitDivideByZeroChecks;
 
+        AssignableType<AndroidBuildSystem> androidBuildSystem;
+
         public void Apply() {
             if(wsaSubtarget.Flag) {
                 EditorUserBuildSettings.wsaSubtarget = wsaSubtarget;
@@ -43,6 +45,10 @@ namespace Assets.Minamo.Editor {
             }
             if(ps4HardwareTarget.Flag) {
                 EditorUserBuildSettings.ps4HardwareTarget = ps4HardwareTarget;
+            }
+
+            if (androidBuildSystem.Flag) {
+                EditorUserBuildSettings.androidBuildSystem = androidBuildSystem;
             }
 
             if (compressWithPsArc.Flag) {
@@ -71,6 +77,8 @@ namespace Assets.Minamo.Editor {
             cb.Append("ps4BuildSubtarget", ps4BuildSubtarget);
             cb.Append("ps4HardwareTarget", ps4HardwareTarget);
 
+            cb.Append("androidBuildSystem", androidBuildSystem);
+
             cb.Append("compressWithPsArc", compressWithPsArc);
             cb.Append("compressFilesInPackage", compressFilesInPackage);
             cb.Append("explicitNullChecks", explicitNullChecks);
@@ -89,6 +97,8 @@ namespace Assets.Minamo.Editor {
             ps4BuildSubtarget = AssignableType<PS4BuildSubtarget>.FromEnumDict(dict, "ps4BuildSubtarget");
             ps4HardwareTarget = AssignableType<PS4HardwareTarget>.FromEnumDict(dict, "ps4HardwareTarget");
 
+            androidBuildSystem = AssignableType<AndroidBuildSystem>.FromEnumDict(dict, "androidBuildSystem");
+
             compressWithPsArc = AssignableType<bool>.FromDict(dict, "compressWithPsArc");
             compressFilesInPackage = AssignableType<bool>.FromDict(dict, "compressFilesInPackage");
             explicitNullChecks = AssignableType<bool>.FromDict(dict, "explicitNullChecks");
@@ -106,6 +116,8 @@ namespace Assets.Minamo.Editor {
 
                 ps4BuildSubtarget = AssignableType<PS4BuildSubtarget>.Create(EditorUserBuildSettings.ps4BuildSubtarget),
                 ps4HardwareTarget = AssignableType<PS4HardwareTarget>.Create(EditorUserBuildSettings.ps4HardwareTarget),
+
+                androidBuildSystem = AssignableType<AndroidBuildSystem>.Create(EditorUserBuildSettings.androidBuildSystem),
 
                 compressWithPsArc = AssignableType<bool>.Create(EditorUserBuildSettings.compressWithPsArc),
                 compressFilesInPackage = AssignableType<bool>.Create(EditorUserBuildSettings.compressFilesInPackage),
