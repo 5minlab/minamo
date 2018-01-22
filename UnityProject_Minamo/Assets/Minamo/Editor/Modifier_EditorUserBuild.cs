@@ -88,7 +88,7 @@ namespace Assets.Minamo.Editor {
         }
 
         public void Reload(AnyDictionary dict) {
-            wsaSubtarget = AssignableType<WSASubtarget>.FromEnumDict(dict, "compressWithPsArc");
+            wsaSubtarget = AssignableType<WSASubtarget>.FromEnumDict(dict, "wsaSubtarget");
             wsaUWPBuildType = AssignableType<WSAUWPBuildType>.FromEnumDict(dict, "wsaUWPBuildType");
             wsaUWPSDK = AssignableType<string>.FromDict(dict, "wsaUWPSDK");
             wsaBuildAndRunDeployTarget = AssignableType<WSABuildAndRunDeployTarget>.FromEnumDict(dict, "wsaBuildAndRunDeployTarget");

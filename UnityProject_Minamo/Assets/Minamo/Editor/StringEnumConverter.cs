@@ -18,7 +18,7 @@ namespace Assets.Minamo.Editor {
                 { typeof(ScriptingImplementation), ForScriptingImplementation() },
                 { typeof(ScriptingRuntimeVersion), ForScriptingRuntimeVersion() },
                 { typeof(PlayerSettings.WSACapability), ForWSACapability() },
-                { typeof(WSASubtarget), ForStringEnumDictionary() },
+                { typeof(WSASubtarget), ForWSASubtarget() },
                 { typeof(WSAUWPBuildType), ForWSAUWPBuildType() },
                 { typeof(WSABuildAndRunDeployTarget), ForWSABuildAndRunDeployTarget() },
                 { typeof(PS4BuildSubtarget), ForPS4BuildSubtarget() },
@@ -141,7 +141,7 @@ namespace Assets.Minamo.Editor {
             return new StringEnumDictionary<ScriptingRuntimeVersion>(dict, ScriptingRuntimeVersion.Legacy);
         }
 
-        static StringEnumDictionary<WSASubtarget> ForStringEnumDictionary() {
+        static StringEnumDictionary<WSASubtarget> ForWSASubtarget() {
             var dict = new Dictionary<string, WSASubtarget>()
             {
                 { "AnyDevice", WSASubtarget.AnyDevice },
