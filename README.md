@@ -105,7 +105,6 @@ sample files
   "buildBasePath": "./output",
   "buildPath": "{{.ConfigName}}-{{.Year}}-{{.Month}}-{{.Day}}-{{.Platform}}",
   "method": "Assets.Minamo.Editor.EntryPoint.Build",
-  ...
 }
 ```
 
@@ -114,7 +113,6 @@ sample files
 
 ```json
 {
-  ...
   "build": {
     "targetGroup": "wsa",
     "target": "wsa",
@@ -123,7 +121,6 @@ sample files
       "allowDebugging": true
     }
   },
-  ...
 }
 ```
 
@@ -137,12 +134,10 @@ see [Modifier_DefineSymbol.cs][Modifier_DefineSymbol.cs]
 
 ```json
 {
-  ...
   "defines": [
     "HELLO_WORLD",
     "PLATFORM_UWP"
   ],
-  ...
 }
 ```
 
@@ -152,7 +147,6 @@ see [Modifier_XR.cs][Modifier_XR.cs]
 
 ```json
 {
-  ...
   "xr": {
     "enabled": true,
     "devices": [
@@ -160,7 +154,6 @@ see [Modifier_XR.cs][Modifier_XR.cs]
     ],
     "stereoRenderingPath": "instancing"
   },
-  ...
 }
 ```
 
@@ -179,13 +172,11 @@ see [Modifier_Identification.cs][Modifier_Identification.cs]
 
 ```json
 {
-  ...
   "identification": {
     "packageName": "com.fiveminlab.minamo.localdev",
     "versionName": "0.0.1",
     "versionCode": 1
   },
-  ...
 }
 ```
 
@@ -195,12 +186,10 @@ see [Modifier_AndroidSdkVersion.cs][Modifier_AndroidSdkVersion.cs]
 
 ```json
 {
-  ...
   "androidSdk": {
     "min": 24,
     "target": 0
   },
-  ...
 }
 ```
 
@@ -210,14 +199,12 @@ see [Modifier_Keystore.cs][Modifier_Keystore.cs]
 
 ```json
 {
-  ...
   "keystore": {
     "keystoreName": "C:/devel/minamo/UnitySecret/user.keystore",
     "keystorePass": "asdf1234",
     "keyaliasName": "dev",
     "keyaliasPass": "zxcvasdf"
   }
-  ...
 }
 ```
 
@@ -227,7 +214,6 @@ see [Modifier_Publishing.cs][Modifier_Publishing.cs]
 
 ```json
 {
-  ...
   "publishing": {
     "android_useApkExpansion": true,
 
@@ -248,7 +234,6 @@ see [Modifier_Publishing.cs][Modifier_Publishing.cs]
     "ps4_applicationParameter4": 0,
     "ps4_enterButtonAssignment": "CrossButton"
   },
-  ...
 }
 ```
 
@@ -262,13 +247,11 @@ see [Modifier_Scripting.cs][Modifier_Scripting.cs]
 
 ```json
 {
-  ...
   "scripting": {
     "backend": "Mono2x",
     "scriptingRuntimeVersion": "latest",
     "apiCompatibilityLevel": "NET_4_6"
   },
-  ...
 }
 ```
 
@@ -282,7 +265,6 @@ see [Modifier_EditorUserBuild.cs][Modifier_EditorUserBuild.cs]
 
 ```json
 {
-  ...
   "editorUserBuild": {
     "wsaSubtarget": "HoloLens",
     "wsaUWPBuildType": "XAML",
@@ -290,7 +272,6 @@ see [Modifier_EditorUserBuild.cs][Modifier_EditorUserBuild.cs]
     "wsaBuildAndRunDeployTarget": "LocalMachine",
     "wsaGenerateReferenceProjects": false
   },
-  ...
 }
 ```
 
@@ -304,11 +285,9 @@ see [Modifier_ResolutionAndPresentation.cs][Modifier_ResolutionAndPresentation.c
 
 ```json
 {
-  ...
   "resolutionAndPresentation": {
     "runInBackground": false
   }
-  ...
 }
 ````
 
@@ -323,3 +302,17 @@ see [Modifier_ResolutionAndPresentation.cs][Modifier_ResolutionAndPresentation.c
 [Modifier_Scripting.cs]: https://github.com/5minlab/minamo/blob/master/UnityProject_Minamo/Assets/Minamo/Editor/Modifier_Scripting.cs
 [Modifier_XR.cs]: https://github.com/5minlab/minamo/blob/master/UnityProject_Minamo/Assets/Minamo/Editor/Modifier_XR.cs
 
+
+## development note
+
+### run unit test
+1. modify `run_test.bat` or `run_test.sh`. write correct unity path
+2. modify `configs_dev/local.json`. write correct unity path
+3. execute `run_test.bat` or `run_test.sh`
+4. read `results.xml`
+
+### export package
+1. modify `export_package.bat` or `export_package.sh`. write correct unity path
+2. modify `configs_dev/local.json`. write correct unity path
+3. execute `export_package.bat` or `export_package.sh`
+4. `/dist/minamo-x.y.z.unitypackage` is generated
